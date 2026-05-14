@@ -130,10 +130,7 @@
   <div id="topbar-search">
     <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
   </div>
-  <div class="topbar-stats">
-    <span id="stat-courses"></span>
-    <span id="stat-cards"></span>
-  </div>
+    <div id="live-clock" style="font-size:13px;color:var(--text-muted);text-align:left;line-height:1.4;margin-right:auto;"></div>
 </div>
 
 <div id="layout">
@@ -235,21 +232,6 @@ const COURSES = {
         <p class="formula">([T]<sub>B</sub><sup>C</sup>)<sup>-1</sup> = [T<sup>-1</sup>]<sub>C</sub><sup>B</sup></p>`
       },
       {
-        title: "ערכים ווקטורים עצמיים",
-        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
-        text: `<p>λ ערך עצמי של A אם קיים v≠0: Av = λv.</p>
-        <p class="formula">det(A - λI) = 0   ← הפולינום האופייני</p>
-        <p>הווקטורים העצמיים של λ = Ker(A - λI)</p>
-        <p class="principle">⚡ וקטורים עצמיים של ערכים עצמיים שונים תמיד ב"ת!</p>`
-      },
-      {
-        title: "אלכסון מטריצה",
-        tags: [{ label: "מבחן", color: "green" }],
-        text: `<p>A אלכסונית אם קיים בסיס של וקטורים עצמיים.</p>
-        <p class="formula">A = PDP<sup>-1</sup>   (D אלכסונית, P עמודות = וקטורים עצמיים)</p>
-        <p class="principle">⚡ A אלכסונית ↔ לכל ע"ע λ: ריבוי גיאומטרי = ריבוי אלגברי.</p>`
-      },
-      {
         title: "משפט המימדים",
         tags: [{ label: "עיקרון", color: "purple" }],
         text: `<p>לתתי-מרחבים U,W של V:</p>
@@ -307,12 +289,10 @@ const COURSES = {
         <p class="principle">⚡ את 4 הגבולות האלה שווה לשנן בעל-פה.</p>`
       },
       {
-        title: "רציפות ומשפטי ויירשטראס",
+        title: "רציפות",
         tags: [{ label: "הגדרה", color: "blue" }, { label: "חשוב", color: "amber" }],
         text: `<p>f <strong>רציפה</strong> בנקודה a אם lim<sub>x→a</sub>f(x) = f(a).</p>
-        <p><strong>EVT (1+2):</strong> f רציפה על [a,b] → חסומה + מגיעה למינ' ולמקס'.</p>
-        <p><strong>IVT (3):</strong> f רציפה על [a,b], f(a)<0<f(b) → קיים c∈(a,b): f(c)=0.</p>
-        <p class="principle">⚡ IVT = בדיקת קיום שורשים. EVT = קיום מינ'/מקס' מוחלט.</p>`
+        <p class="principle">⚡ גבול קיים + שווה לערך הפונקציה = רציפות.</p>`
       },
       {
         title: "נקודות אי-רציפות",
@@ -368,7 +348,7 @@ const COURSES = {
 
   ds: {
     name: "מבני נתונים", icon: "🌳",
-    pdfs: [{ label: "סיכום", file: "ds-summary" }],
+    pdfs: [{ label: "סיכום", file: "ds-summary.pdf" }],
     cards: [
       {
         title: "סיבוכיות — O, Ω, Θ",
@@ -472,7 +452,7 @@ const COURSES = {
 
   oop: {
     name: "מונחי עצמים", icon: "☕",
-    pdfs: [{ label: "סיכום", file: "oop-summary" }],
+    pdfs: [{ label: "סיכום", file: "oop-summary.pdf" }],
     cards: [
       {
         title: "4 עמודי OOP",
@@ -618,8 +598,8 @@ function renderSidebar() {
     item.onclick = () => selectCourse(id);
     list.appendChild(item);
   });
-  document.getElementById('stat-courses').textContent = `${n} קורסים`;
-  document.getElementById('stat-cards').textContent = `${totalCards()} כרטיסיות`;
+  document.getElementById('stat-courses') && (document.getElementById('stat-courses').textContent = `${n} קורסים`);
+  document.getElementById('stat-cards') && (document.getElementById('stat-cards').textContent = `${totalCards()} כרטיסיות`);
 }
 
 // ═══════════════════════════════════════
@@ -648,9 +628,10 @@ function renderMain() {
     tabsEl.innerHTML = '';
     contentEl.style.padding = '24px';
     contentEl.innerHTML = `<div id="empty-state">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
-      </svg><p>בחר קורס מהתפריט</p></div>`;
+      <div style="font-size:64px;margin-bottom:8px">📚</div>
+      <p>בחר קורס מהתפריט</p>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:4px">4 קורסים · ${totalCards()} כרטיסיות</p>
+    </div>`;
     return;
   }
 
@@ -750,10 +731,15 @@ function renderContent() {
 
   // FLASHCARDS
   if (viewMode === 'flashcards') {
-    contentEl.innerHTML = `<div class="flashcards-grid">` + cards.map(card => `
+    contentEl.innerHTML = `
+      <div style="text-align:center;margin-bottom:20px;color:var(--text-dim);font-size:13px">
+        🔁 לחצי על כרטיס לגילוי ההגדרה · ${cards.length} מושגים
+      </div>
+      <div class="flashcards-grid">` + cards.map(card => `
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
         <div class="flashcard-inner">
           <div class="flashcard-front">
+            <div style="font-size:28px;margin-bottom:8px">${COURSES[activeCourse].icon}</div>
             <div class="fc-term">${highlight(card.title)}</div>
             <div class="fc-hint">לחצי לגילוי ההגדרה 🔄</div>
           </div>
@@ -784,6 +770,18 @@ function renderContent() {
 // INIT
 // ═══════════════════════════════════════
 function render() { renderSidebar(); renderMain(); }
+
+function updateClock() {
+  const now = new Date();
+  const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+  const day = days[now.getDay()];
+  const date = now.toLocaleDateString('he-IL', { day:'2-digit', month:'2-digit', year:'numeric' });
+  const time = now.toLocaleTimeString('he-IL', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  const el = document.getElementById('live-clock');
+  if (el) el.innerHTML = `<span style="font-weight:600;color:var(--text)">${time}</span><br><span style="font-size:11px">יום ${day} · ${date}</span>`;
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 document.getElementById('search-input').addEventListener('input', e => {
   searchQuery = e.target.value.trim();

@@ -400,19 +400,40 @@
       renderContent();
     }
 
+    function highlight(text) {
+      if (!searchQuery) return text;
+      const re = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')})`, 'gi');
+      return text.replace(re, '<mark>$1</mark>');
+    }
+
     function renderContent() {
-      const contentEl = document.getElementById('content-area'), cards = COURSES[activeCourse].topics[activeTopic].content;
-      contentEl.innerHTML = viewMode === 'flashcards' ? `<div class="flashcards-container">` + cards.map(c => `
-        <div class="flashcard" onclick="this.classList.toggle('flipped')">
-          <div class="flashcard-inner">
-            <div class="flashcard-front">${c.title}</div>
-            <div class="flashcard-back"><div>${c.text}</div></div>
-          </div>
-        </div>`).join('') + `</div>` : cards.map(c => `
-        <div class="content-card">
-          <div class="card-title">${c.title}</div>
-          <div class="card-body">${c.text}</div>
-        </div>`).join('');
+      const contentEl = document.getElementById('content-area');
+      const allCards = COURSES[activeCourse].topics[activeTopic].content;
+      
+      const cards = allCards.filter(c => 
+        c.title.includes(searchQuery) || c.text.includes(searchQuery)
+      );
+
+      if (cards.length === 0) {
+        contentEl.innerHTML = `<div id="empty-state"><p>לא נמצאו תוצאות לחיפוש "${searchQuery}"</p></div>`;
+        return;
+      }
+
+      if (viewMode === 'flashcards') {
+        contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(c => `
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">${highlight(c.title)}</div>
+              <div class="flashcard-back"><div>${highlight(c.text)}</div></div>
+            </div>
+          </div>`).join('') + `</div>`;
+      } else {
+        contentEl.innerHTML = cards.map(c => `
+          <div class="content-card">
+            <div class="card-title">${highlight(c.title)}</div>
+            <div class="card-body">${highlight(c.text)}</div>
+          </div>`).join('');
+      }
     }
 
     function render() { renderSidebar(); renderMain(); }

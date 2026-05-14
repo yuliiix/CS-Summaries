@@ -311,20 +311,37 @@
     .tag-red    { background: var(--red-bg);     color: var(--red); }
     .tag-purple { background: var(--purple-bg);  color: var(--purple); }
 
-    .card-body { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
-    .card-body p { margin-bottom: 8px; }
+    .card-body { font-size: 15px; line-height: 1.85; color: var(--text-muted); }
+    .card-body p { margin-bottom: 10px; }
     .card-body p:last-child { margin-bottom: 0; }
 
     .card-body code {
       font-family: var(--font-mono);
-      font-size: 12px;
-      background: rgba(0,0,0,0.05);
-      padding: 1px 6px;
+      font-size: 13px;
+      background: rgba(109,40,217,0.07);
+      padding: 2px 7px;
       border-radius: 4px;
       color: var(--purple);
+      font-weight: 500;
     }
 
-    .card-body strong { color: var(--text); font-weight: 500; }
+    /* בלוק נוסחה — שורה עצמאית */
+    .card-body p.formula {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      text-align: center;
+      padding: 9px 16px;
+      background: rgba(109,40,217,0.06);
+      border-right: 3px solid var(--purple);
+      border-radius: 6px 0 0 6px;
+      color: var(--purple);
+      font-weight: 500;
+      margin: 6px 0;
+      letter-spacing: 0.01em;
+    }
+
+    .card-body sub, .card-body sup { font-size: 0.72em; }
+    .card-body strong { color: var(--text); font-weight: 600; }
 
     .card-divider { height: 1px; background: var(--border); margin: 12px 0; }
 
@@ -442,26 +459,26 @@
               {
                 title: "בסיס וקואורדינטות",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>קבוצה <strong>B = {v₁,...,vₙ}</strong> היא בסיס של מרחב V אם היא פורשת את V ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a₁,...,aₙ כך ש־v = a₁v₁+...+aₙvₙ.</p>
-                <p>וקטור הקואורדינטות: <code>[v]_B = (a₁,...,aₙ)ᵀ</code></p>`,
+                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של V אם היא פורשת ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a<sub>1</sub>,...,a<sub>n</sub> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
+                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>,...,a<sub>n</sub>)<sup>T</sup></p>`,
                 complexity: []
               },
               {
                 title: "תכונות ייצוג בבסיס",
                 tags: [{ label: "חשוב", color: "amber" }],
                 text: `<p>לכל u,v∈V וסקלר λ:</p>
-                <p><code>[u+v]_B = [u]_B + [v]_B</code></p>
-                <p><code>[λv]_B = λ·[v]_B</code></p>
-                <p><code>v = 0 ↔ [v]_B = 0</code></p>
-                <p><code>v = u ↔ [v]_B = [u]_B</code></p>`,
+                <p class="formula">[u+v]<sub>B</sub> = [u]<sub>B</sub> + [v]<sub>B</sub></p>
+                <p class="formula">[λv]<sub>B</sub> = λ·[v]<sub>B</sub></p>
+                <p class="formula">v = 0 ↔ [v]<sub>B</sub> = 0</p>
+                <p class="formula">v = u ↔ [v]<sub>B</sub> = [u]<sub>B</sub></p>`,
                 complexity: []
               },
               {
                 title: "שינוי בסיס — מטריצת המעבר",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר <code>[I]_B^C</code> ממירה קואורדינטות מ-B ל-C:</p>
-                <p><code>[v]_C = [I]_B^C · [v]_B</code></p>
-                <p>בנייה: עמודה j של <code>[I]_B^C</code> היא <code>[v_j]_C</code> (קואורדינטות של וקטור הבסיס ה-j של B ביחס ל-C).</p>`,
+                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר [I]<sub>B</sub><sup>C</sup> ממירה קואורדינטות מ-B ל-C:</p>
+                <p class="formula">[v]<sub>C</sub> = [I]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub></p>
+                <p>בנייה: עמודה j של [I]<sub>B</sub><sup>C</sup> היא [v<sub>j</sub>]<sub>C</sub> — קואורדינטות של וקטור הבסיס ה-j של B ביחס ל-C.</p>`,
                 complexity: []
               },
             ]
@@ -472,26 +489,26 @@
                 title: "הגדרה ותכונות",
                 tags: [{ label: "הגדרה", color: "blue" }],
                 text: `<p><strong>T: V→U</strong> היא העתקה לינארית אם לכל u,v∈V וסקלר λ:</p>
-                <p><code>T(u+v) = T(u) + T(v)</code></p>
-                <p><code>T(λv) = λ·T(v)</code></p>
-                <p>נובע: <code>T(0) = 0</code> ו-<code>T(Σaᵢvᵢ) = ΣaᵢT(vᵢ)</code></p>`,
+                <p class="formula">T(u+v) = T(u) + T(v)</p>
+                <p class="formula">T(λv) = λ·T(v)</p>
+                <p>נובע: T(0) = 0 ו-T(Σa<sub>i</sub>v<sub>i</sub>) = Σa<sub>i</sub>T(v<sub>i</sub>)</p>`,
                 complexity: []
               },
               {
                 title: "שימור תכונות",
                 tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U העתקה לינארית ו-{v₁,...,vₖ}⊆V:</p>
-                <p><strong>1.</strong> T חד-חד-ערכית ↔ <code>{v₁,...,vₖ}</code> ב"ת לינארית ↔ <code>{T(v₁),...,T(vₖ)}</code> ב"ת לינארית</p>
-                <p><strong>2.</strong> T על ↔ <code>{v₁,...,vₖ}</code> פורשת ↔ <code>{T(v₁),...,T(vₖ)}</code> פורשת</p>
-                <p><strong>3.</strong> T איזומורפיזם ↔ <code>{v₁,...,vₖ}</code> בסיס ↔ <code>{T(v₁),...,T(vₖ)}</code> בסיס</p>`,
+                text: `<p>תהי T: V→U העתקה לינארית ו-{v<sub>1</sub>,...,v<sub>k</sub>}⊆V:</p>
+                <p><strong>1.</strong> T חד-חד-ערכית ↔ {v<sub>1</sub>,...,v<sub>k</sub>} ב"ת לינארית ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} ב"ת לינארית</p>
+                <p><strong>2.</strong> T על ↔ {v<sub>1</sub>,...,v<sub>k</sub>} פורשת ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} פורשת</p>
+                <p><strong>3.</strong> T איזומורפיזם ↔ {v<sub>1</sub>,...,v<sub>k</sub>} בסיס ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} בסיס</p>`,
                 complexity: []
               },
               {
                 title: "איזומורפיזם",
                 tags: [{ label: "הגדרה", color: "blue" }],
                 text: `<p>T: V→U היא <strong>איזומורפיזם</strong> אם היא לינארית, חד-חד-ערכית ועל (ביקציה לינארית).</p>
-                <p>תנאי הכרחי ומספיק: <code>dim V = dim U</code></p>
-                <p>אם T איזומורפיזם — <code>T⁻¹</code> קיימת ואיזומורפיזם גם היא.</p>`,
+                <p>תנאי הכרחי ומספיק: <strong>dim V = dim U</strong></p>
+                <p>אם T איזומורפיזם — T<sup>-1</sup> קיימת ואיזומורפיזם גם היא.</p>`,
                 complexity: []
               },
             ]
@@ -501,27 +518,26 @@
               {
                 title: "הגדרת המטריצה המייצגת",
                 tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U, B={v₁,...,vₙ} בסיס ל-V, C בסיס ל-U.</p>
-                <p>המטריצה המייצגת <code>[T]_B^C</code> היא המטריצה שעמודה j שלה = <code>[T(vⱼ)]_C</code>.</p>
-                <p>קיים: <code>[T]_B^C · [v]_B = [T(v)]_C</code> לכל v∈V</p>`,
+                text: `<p>תהי T: V→U, B={v<sub>1</sub>,...,v<sub>n</sub>} בסיס ל-V, C בסיס ל-U.</p>
+                <p>המטריצה המייצגת [T]<sub>B</sub><sup>C</sup> — עמודה j שלה = [T(v<sub>j</sub>)]<sub>C</sub>.</p>
+                <p class="formula">[T]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub> = [T(v)]<sub>C</sub></p>`,
                 complexity: []
               },
               {
                 title: "אלגברה של מטריצות מייצגות",
                 tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><code>[T+S]_B^C = [T]_B^C + [S]_B^C</code></p>
-                <p><code>[λT]_B^C = λ·[T]_B^C</code></p>
-                <p><code>[S∘T]_B^D = [S]_C^D · [T]_B^C</code> (הרכבה = כפל מטריצות)</p>
-                <p><code>([T]_B^C)⁻¹ = [T⁻¹]_C^B</code> (כאשר T הפיכה)</p>
-                <p><code>[I]_B^B = I</code> (מטריצת הזהות)</p>`,
+                text: `<p class="formula">[T+S]<sub>B</sub><sup>C</sup> = [T]<sub>B</sub><sup>C</sup> + [S]<sub>B</sub><sup>C</sup></p>
+                <p class="formula">[λT]<sub>B</sub><sup>C</sup> = λ·[T]<sub>B</sub><sup>C</sup></p>
+                <p class="formula">[S∘T]<sub>B</sub><sup>D</sup> = [S]<sub>C</sub><sup>D</sup> · [T]<sub>B</sub><sup>C</sup></p>
+                <p class="formula">([T]<sub>B</sub><sup>C</sup>)<sup>-1</sup> = [T<sup>-1</sup>]<sub>C</sub><sup>B</sup></p>`,
                 complexity: []
               },
               {
                 title: "נוסחת שינוי בסיס למטריצה",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B, C בסיסים ל-V ו-A = <code>[T]_B^B</code>, אז:</p>
-                <p><code>[T]_C^C = [I]_B^C · [T]_B^B · [I]_C^B = ([I]_B^C) · A · ([I]_B^C)⁻¹</code></p>
-                <p>כלומר: שתי מטריצות מייצגות לאותה T בבסיסים שונים הן <strong>דומות</strong> (similar).</p>`,
+                text: `<p>אם B, C בסיסים ל-V ו-A = [T]<sub>B</sub><sup>B</sup>, אז:</p>
+                <p class="formula">[T]<sub>C</sub><sup>C</sup> = [I]<sub>B</sub><sup>C</sup> · A · ([I]<sub>B</sub><sup>C</sup>)<sup>-1</sup></p>
+                <p>שתי מטריצות מייצגות לאותה T בבסיסים שונים הן <strong>דומות</strong> (similar).</p>`,
                 complexity: []
               },
             ]
@@ -539,33 +555,31 @@
               {
                 title: "הגדרת הגבול — ε-N",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>סדרה <code>(aₙ)</code> מתכנסת ל-L אם: לכל <strong>ε>0</strong> קיים <strong>N</strong> כך שלכל n>N מתקיים <code>|aₙ - L| &lt; ε</code>.</p>
-                <p>כתיב: <code>lim aₙ = L</code> או <code>aₙ → L</code></p>`,
+                text: `<p>סדרה (a<sub>n</sub>) מתכנסת ל-L אם: לכל <strong>ε>0</strong> קיים <strong>N</strong> כך שלכל n>N מתקיים |a<sub>n</sub> - L| &lt; ε.</p>
+                <p class="formula">lim a<sub>n</sub> = L &nbsp;·&nbsp; a<sub>n</sub> → L</p>`,
                 complexity: []
               },
               {
-                title: "כלל הסנדוויץ' ותכונות בסיסיות",
+                title: "כלל הסנדוויץ' ותכונות",
                 tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><strong>כלל הסנדוויץ':</strong> אם <code>aₙ ≤ bₙ ≤ cₙ</code> ו-<code>aₙ, cₙ → L</code> אז <code>bₙ → L</code>.</p>
-                <p><strong>תכונות אלגבריות:</strong> אם aₙ→L ו-bₙ→M אז: <code>aₙ+bₙ → L+M</code>, <code>aₙ·bₙ → L·M</code>, <code>aₙ/bₙ → L/M</code> (M≠0).</p>
-                <p>אם <code>aₙ → ∞</code> אז <code>1/aₙ → 0</code>. אם <code>aₙ → L≠0</code> אז <code>|aₙ| → |L|</code>.</p>`,
+                text: `<p><strong>כלל הסנדוויץ':</strong> אם a<sub>n</sub> ≤ b<sub>n</sub> ≤ c<sub>n</sub> ו-a<sub>n</sub>, c<sub>n</sub> → L אז b<sub>n</sub> → L.</p>
+                <p><strong>אלגברה:</strong> אם a<sub>n</sub>→L ו-b<sub>n</sub>→M: a<sub>n</sub>+b<sub>n</sub> → L+M, a<sub>n</sub>·b<sub>n</sub> → L·M, a<sub>n</sub>/b<sub>n</sub> → L/M (M≠0).</p>
+                <p>אם a<sub>n</sub> → ∞ אז 1/a<sub>n</sub> → 0.</p>`,
                 complexity: []
               },
               {
                 title: "המספר e וגבולות חשובים",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><code>e = lim(1 + 1/n)ⁿ</code> כאשר n→∞</p>
-                <p>הכללה: <code>lim(1 + a/n)ⁿ = eᵃ</code></p>
-                <p>שקילות: אם <code>aₙ → ∞</code> אז <code>(1 + 1/aₙ)^aₙ → e</code></p>
-                <p><code>lim b·(aₙ-1) = c</code> כאשר <code>aₙ → 1</code> ← ניתן להשתמש בהצבה</p>`,
+                text: `<p class="formula">e = lim (1 + 1/n)<sup>n</sup> &nbsp;כאשר n→∞</p>
+                <p>הכללה: lim(1 + a/n)<sup>n</sup> = e<sup>a</sup></p>
+                <p>שקילות: אם a<sub>n</sub> → ∞ אז (1 + 1/a<sub>n</sub>)<sup>a<sub>n</sub></sup> → e</p>`,
                 complexity: []
               },
               {
                 title: "קריטריון קושי לסדרות",
                 tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>סדרה <code>(aₙ)</code> מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי:</p>
-                <p>לכל ε>0 קיים N כך שלכל m,n>N: <code>|aₙ - aₘ| &lt; ε</code></p>
-                <p>שימושי להוכחת קיום גבול ללא ידיעת ערכו.</p>`,
+                text: `<p>סדרה (a<sub>n</sub>) מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי:</p>
+                <p>לכל ε>0 קיים N כך שלכל m,n>N: <strong>|a<sub>n</sub> - a<sub>m</sub>| &lt; ε</strong></p>`,
                 complexity: []
               },
             ]
@@ -575,32 +589,32 @@
               {
                 title: "הגדרה והתכנסות",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>הסכומים החלקיים: <code>Sₙ = Σₖ₌₁ⁿ aₖ</code></p>
-                <p>טור <code>Σaₙ</code> <strong>מתכנס</strong> אם סדרת הסכומים החלקיים (Sₙ) מתכנסת.</p>
-                <p><strong>תנאי הכרחי (לא מספיק!):</strong> אם Σaₙ מתכנס → <code>aₙ → 0</code>. ההיפך לא נכון (דוגמה: Σ1/n מתבדר).</p>`,
+                text: `<p>הסכומים החלקיים: S<sub>n</sub> = Σ<sub>k=1</sub><sup>n</sup> a<sub>k</sub></p>
+                <p>טור Σa<sub>n</sub> <strong>מתכנס</strong> אם סדרת S<sub>n</sub> מתכנסת.</p>
+                <p><strong>תנאי הכרחי (לא מספיק!):</strong> Σa<sub>n</sub> מתכנס → a<sub>n</sub> → 0. ההיפך לא נכון (דוגמה: Σ1/n מתבדר).</p>`,
                 complexity: []
               },
               {
-                title: "טור הנדסי ותכונות אלגבריות",
+                title: "טור הנדסי",
                 tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><strong>טור הנדסי:</strong> <code>Σqⁿ</code> מתכנס אם ורק אם |q|&lt;1, ואז <code>Σₙ₌₀^∞ qⁿ = 1/(1-q)</code>.</p>
-                <p><strong>אלגברה:</strong> אם Σaₙ וΣbₙ מתכנסים אז <code>Σ(aₙ+bₙ)</code> מתכנס, וכן <code>Σ(c·aₙ) = c·Σaₙ</code>.</p>`,
+                text: `<p>Σq<sup>n</sup> מתכנס אם ורק אם |q|&lt;1, ואז:</p>
+                <p class="formula">Σ<sub>n=0</sub><sup>∞</sup> q<sup>n</sup> = 1/(1-q)</p>`,
                 complexity: []
               },
               {
-                title: "מבחני התכנסות — השוואה ושורש",
+                title: "מבחני התכנסות",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><strong>מבחן השוואה:</strong> אם <code>0 ≤ aₙ ≤ bₙ</code>: Σbₙ מתכנס ← Σaₙ מתכנס; Σaₙ מתבדר ← Σbₙ מתבדר.</p>
-                <p><strong>מבחן שורש (קושי):</strong> <code>lim ⁿ√|aₙ| = q</code>: אם q&lt;1 — מתכנס בהחלט; q>1 — מתבדר; q=1 — אי-מסקנה.</p>
-                <p><strong>מבחן מנה (ד'אלמבר):</strong> <code>lim |aₙ₊₁/aₙ| = q</code>: אותן מסקנות כמו מבחן השורש.</p>`,
+                text: `<p><strong>מבחן שורש (קושי):</strong> lim <sup>n</sup>√|a<sub>n</sub>| = q: q&lt;1 מתכנס, q>1 מתבדר, q=1 אי-מסקנה.</p>
+                <p><strong>מבחן מנה (ד'אלמבר):</strong> lim |a<sub>n+1</sub>/a<sub>n</sub>| = q: אותן מסקנות.</p>
+                <p><strong>מבחן השוואה:</strong> 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>: Σb<sub>n</sub> מתכנס → Σa<sub>n</sub> מתכנס.</p>`,
                 complexity: []
               },
               {
-                title: "מבחן לייבניץ והתכנסות מוחלטת",
+                title: "לייבניץ והתכנסות מוחלטת",
                 tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>מבחן לייבניץ (טורים מתחלפים):</strong> <code>Σ(-1)ⁿaₙ</code> מתכנס אם <code>aₙ</code> מונוטון יורד ו-<code>aₙ → 0</code>.</p>
-                <p><strong>התכנסות מוחלטת:</strong> Σ|aₙ| מתכנס → Σaₙ מתכנס (ההיפך לא בהכרח).</p>
-                <p><strong>התכנסות מותנית:</strong> Σaₙ מתכנס אך Σ|aₙ| מתבדר (דוגמה: Σ(-1)ⁿ/n).</p>`,
+                text: `<p><strong>לייבניץ:</strong> Σ(-1)<sup>n</sup>a<sub>n</sub> מתכנס אם a<sub>n</sub> מונוטון יורד ו-a<sub>n</sub> → 0.</p>
+                <p><strong>התכנסות מוחלטת:</strong> Σ|a<sub>n</sub>| מתכנס → Σa<sub>n</sub> מתכנס.</p>
+                <p><strong>התכנסות מותנית:</strong> מתכנס אך לא בהחלט (דוגמה: Σ(-1)<sup>n</sup>/n).</p>`,
                 complexity: []
               },
             ]
@@ -610,34 +624,33 @@
               {
                 title: "גבול פונקציה — ε-δ",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><code>lim_{x→a} f(x) = L</code> אם: לכל ε>0 קיים δ>0 כך שלכל x עם <code>0 &lt; |x-a| &lt; δ</code> מתקיים <code>|f(x)-L| &lt; ε</code>.</p>
-                <p><strong>גבולות חד-צדדיים:</strong> <code>lim_{x→a} f(x) = L ↔ lim_{x→a⁻} f(x) = lim_{x→a⁺} f(x) = L</code></p>`,
+                text: `<p>lim<sub>x→a</sub> f(x) = L אם: לכל ε>0 קיים δ>0 כך ש-0 &lt; |x-a| &lt; δ → |f(x)-L| &lt; ε.</p>
+                <p><strong>גבול קיים ↔</strong> lim<sub>x→a⁻</sub> f(x) = lim<sub>x→a⁺</sub> f(x) = L</p>`,
                 complexity: []
               },
               {
                 title: "גבולות חשובים",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><code>lim_{x→0} sin(x)/x = 1</code></p>
-                <p><code>lim_{x→0} (1-cos(x))/x² = 1/2</code></p>
-                <p><code>lim_{x→0} (aˣ-1)/x = ln a</code> (בפרט: <code>(eˣ-1)/x → 1</code>)</p>
-                <p><code>lim_{x→0} ln(1+x)/x = 1</code></p>
-                <p><code>lim_{x→0} (1+x)^{1/x} = e</code></p>`,
+                text: `<p class="formula">lim<sub>x→0</sub> sin(x)/x = 1</p>
+                <p class="formula">lim<sub>x→0</sub> (1-cos x)/x<sup>2</sup> = 1/2</p>
+                <p class="formula">lim<sub>x→0</sub> (a<sup>x</sup>-1)/x = ln a</p>
+                <p class="formula">lim<sub>x→0</sub> ln(1+x)/x = 1</p>`,
                 complexity: []
               },
               {
-                title: "רציפות",
+                title: "רציפות ומשפטים",
                 tags: [{ label: "הגדרה", color: "blue" }, { label: "חשוב", color: "amber" }],
-                text: `<p>f <strong>רציפה</strong> בנקודה a אם <code>lim_{x→a} f(x) = f(a)</code> (הגבול קיים, f מוגדרת, ושווים).</p>
-                <p><strong>משפט ערך הביניים (IVT):</strong> f רציפה על [a,b], f(a)&lt;0&lt;f(b) → קיים c∈(a,b): f(c)=0.</p>
-                <p><strong>משפט קנטור (EVT):</strong> f רציפה על [a,b] — חסומה ומגיעה למקסימום ומינימום.</p>`,
+                text: `<p>f <strong>רציפה</strong> בנקודה a אם lim<sub>x→a</sub> f(x) = f(a).</p>
+                <p><strong>IVT:</strong> f רציפה על [a,b], f(a)&lt;0&lt;f(b) → קיים c∈(a,b): f(c)=0.</p>
+                <p><strong>קנטור (EVT):</strong> f רציפה על [a,b] → חסומה ומגיעה למקסימום ומינימום.</p>`,
                 complexity: []
               },
               {
                 title: "נקודות אי-רציפות",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>סילוק:</strong> הגבול קיים אך שונה מ-f(a) או f לא מוגדרת (ניתן "לתקן").</p>
+                text: `<p><strong>סילוק:</strong> הגבול קיים אך ≠ f(a) (ניתן לתקן).</p>
                 <p><strong>קפיצה:</strong> הגבולות החד-צדדיים קיימים אך שונים זה מזה.</p>
-                <p><strong>מהותית:</strong> לפחות אחד מהגבולות החד-צדדיים לא קיים (סופי).</p>`,
+                <p><strong>מהותית:</strong> לפחות גבול אחד לא קיים סופי.</p>`,
                 complexity: []
               },
             ]
@@ -647,36 +660,33 @@
               {
                 title: "הגדרת הנגזרת",
                 tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><code>f'(a) = lim_{h→0} [f(a+h) - f(a)] / h</code></p>
-                <p>גזירות ← רציפות (לא ההיפך! דוגמה: |x| רציף ב-0 אך לא גזיר).</p>
-                <p>פרשנות: שיפוע המשיק לגרף f בנקודה (a, f(a)).</p>`,
+                text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>
+                <p>גזירות → רציפות (לא ההיפך: |x| רציף ב-0 אך לא גזיר).</p>`,
                 complexity: []
               },
               {
                 title: "כללי נגזרות",
                 tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><code>(f+g)' = f'+g'</code>, <code>(cf)' = cf'</code></p>
-                <p><code>(fg)' = f'g + fg'</code> (כלל המכפלה)</p>
-                <p><code>(f/g)' = (f'g - fg') / g²</code> (כלל המנה)</p>
-                <p><code>(f(g(x)))' = f'(g(x))·g'(x)</code> (כלל השרשרת)</p>
-                <p><strong>נגזרת הפונקציה ההפוכה:</strong> <code>(f⁻¹)'(y) = 1 / f'(f⁻¹(y))</code></p>`,
+                text: `<p class="formula">(fg)' = f'g + fg' &nbsp;&nbsp; (f/g)' = (f'g − fg') / g<sup>2</sup></p>
+                <p class="formula">(f∘g)'(x) = f'(g(x))·g'(x) &nbsp; (כלל השרשרת)</p>
+                <p><strong>פונקציה הפוכה:</strong> (f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>`,
                 complexity: []
               },
               {
                 title: "נגזרות בסיסיות",
                 tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><code>(xⁿ)' = nxⁿ⁻¹</code> · <code>(eˣ)' = eˣ</code> · <code>(ln x)' = 1/x</code></p>
-                <p><code>(sin x)' = cos x</code> · <code>(cos x)' = -sin x</code> · <code>(tan x)' = 1/cos²x</code></p>
-                <p><code>(arcsin x)' = 1/√(1-x²)</code> · <code>(arccos x)' = -1/√(1-x²)</code> · <code>(arctan x)' = 1/(1+x²)</code></p>
-                <p><code>(aˣ)' = aˣ·ln a</code></p>`,
+                text: `<p>(x<sup>n</sup>)' = nx<sup>n-1</sup> &nbsp;·&nbsp; (e<sup>x</sup>)' = e<sup>x</sup> &nbsp;·&nbsp; (ln x)' = 1/x</p>
+                <p>(sin x)' = cos x &nbsp;·&nbsp; (cos x)' = −sin x &nbsp;·&nbsp; (tan x)' = 1/cos<sup>2</sup>x</p>
+                <p>(arcsin x)' = 1/√(1−x<sup>2</sup>) &nbsp;·&nbsp; (arctan x)' = 1/(1+x<sup>2</sup>)</p>`,
                 complexity: []
               },
               {
-                title: "משפט לגראנז' ולופיטל",
+                title: "לגראנז' ולופיטל",
                 tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>משפט ערך הממוצע (MVT/לגראנז'):</strong> f רציפה על [a,b], גזירה על (a,b) → קיים c: <code>f'(c) = [f(b)-f(a)]/(b-a)</code>.</p>
-                <p><strong>כלל לופיטל:</strong> אם <code>lim f(x) = lim g(x) = 0</code> (או ±∞) ו-g'(x)≠0 בסביבה → <code>lim f/g = lim f'/g'</code>.</p>
-                <p><strong>סדר גודל:</strong> <code>ln x ≪ xᵃ ≪ eˣ</code> לכל a>0 (כאשר x→∞).</p>`,
+                text: `<p><strong>MVT (לגראנז'):</strong> f רציפה על [a,b], גזירה על (a,b) → קיים c:</p>
+                <p class="formula">f'(c) = [f(b) − f(a)] / (b−a)</p>
+                <p><strong>לופיטל:</strong> אם lim f = lim g = 0 (או ±∞) → lim f/g = lim f'/g'.</p>
+                <p><strong>סדר גודל:</strong> ln x ≪ x<sup>a</sup> ≪ e<sup>x</sup> לכל a>0 כאשר x→∞.</p>`,
                 complexity: []
               },
             ]
@@ -685,7 +695,6 @@
       },
 
     };
-
     // ================================================================
     // STATE
     // ================================================================

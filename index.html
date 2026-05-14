@@ -76,12 +76,6 @@
       gap: 1px;
     }
 
-    .logo span {
-      color: var(--text-muted);
-      font-weight: 400;
-      font-size: 13px;
-    }
-
     .logo small {
       font-family: var(--font-ui);
       font-size: 10px;
@@ -130,8 +124,6 @@
       gap: 16px;
     }
 
-    .topbar-stats span { white-space: nowrap; }
-
     /* ========== LAYOUT ========== */
     #layout {
       display: flex;
@@ -139,7 +131,6 @@
       overflow: hidden;
     }
 
-    /* ========== SIDEBAR ========== */
     #sidebar {
       width: var(--sidebar-w);
       background: var(--bg-panel);
@@ -177,14 +168,7 @@
     }
 
     .course-item:hover { background: var(--bg-hover); color: var(--text); }
-
-    .course-item.active {
-      background: var(--accent-bg);
-      color: var(--accent);
-      border-color: rgba(88,166,255,0.2);
-    }
-
-    .course-icon { font-size: 16px; flex-shrink: 0; }
+    .course-item.active { background: var(--accent-bg); color: var(--accent); border-color: rgba(88,166,255,0.2); }
 
     .course-count {
       margin-right: auto;
@@ -193,11 +177,6 @@
       padding: 1px 6px;
       border-radius: 10px;
       color: var(--text-dim);
-    }
-
-    .course-item.active .course-count {
-      background: rgba(88,166,255,0.15);
-      color: var(--accent);
     }
 
     /* ========== MAIN AREA ========== */
@@ -209,7 +188,6 @@
       background: var(--bg);
     }
 
-    /* ========== COURSE HEADER ========== */
     #course-header {
       background: var(--bg-panel);
       border-bottom: 1px solid var(--border);
@@ -217,35 +195,20 @@
       flex-shrink: 0;
     }
 
-    #course-title-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
     #course-title {
       font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 600;
       color: var(--text);
+      margin-bottom: 12px;
     }
 
-    #course-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-right: auto;
-    }
-
-    /* ========== TOPIC TABS ========== */
     #topic-tabs {
       display: flex;
       gap: 2px;
       overflow-x: auto;
       scrollbar-width: none;
     }
-
-    #topic-tabs::-webkit-scrollbar { display: none; }
 
     .topic-tab {
       padding: 8px 16px;
@@ -257,30 +220,14 @@
       color: var(--text-muted);
       border-bottom: 2px solid transparent;
       white-space: nowrap;
-      transition: color 0.15s, border-color 0.15s;
+      transition: all 0.15s;
     }
 
-    .topic-tab:hover { color: var(--text); }
-
-    .topic-tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      font-weight: 500;
-    }
+    .topic-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
 
     /* ========== CONTENT AREA ========== */
-    #content-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border-strong) transparent;
-    }
+    #content-area { flex: 1; overflow-y: auto; padding: 24px; }
 
-    #content-area::-webkit-scrollbar { width: 6px; }
-    #content-area::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
-
-    /* ========== CONTENT CARDS ========== */
     .content-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -292,183 +239,40 @@
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-    .card-title { font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--text); }
-    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
-
-    .tag {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .tag-blue   { background: var(--accent-bg);  color: var(--accent); }
-    .tag-green  { background: var(--green-bg);   color: var(--green); }
-    .tag-amber  { background: var(--amber-bg);   color: var(--amber); }
-    .tag-red    { background: var(--red-bg);     color: var(--red); }
-    .tag-purple { background: var(--purple-bg);  color: var(--purple); }
-
-    .card-body { font-size: 15px; line-height: 1.85; color: var(--text-muted); }
-    .card-body p { margin-bottom: 10px; }
-    .card-body p:last-child { margin-bottom: 0; }
-
-    .card-body code {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      background: rgba(109,40,217,0.07);
-      padding: 2px 7px;
-      border-radius: 4px;
-      color: var(--purple);
-      font-weight: 500;
-    }
-
+    .card-title { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .card-body { font-size: 15px; line-height: 1.8; color: var(--text-muted); }
     .card-body p.formula {
       font-family: var(--font-mono);
       font-size: 15px;
       text-align: center;
-      padding: 9px 16px;
+      padding: 10px;
       background: #fff0e4;
       border-right: 3px solid #e8894a;
       border-radius: 6px 0 0 6px;
       color: #c2601a;
-      font-weight: 500;
-      margin: 6px 0;
-      letter-spacing: 0.01em;
+      margin: 10px 0;
       direction: ltr;
     }
 
-    .card-body sub, .card-body sup { font-size: 0.72em; }
-    .card-body strong { color: var(--text); font-weight: 600; }
-
-    .card-divider { height: 1px; background: var(--border); margin: 12px 0; }
-
-    .complexity-row { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    .complexity-pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      background: var(--bg-hover);
-    }
-
-    /* ========== FLASHCARDS STYLE ========== */
-    .flashcards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .flashcard {
-      background: transparent;
-      height: 240px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .flashcard-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-
+    /* ========== FLASHCARDS ========== */
+    .flashcards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .flashcard { background: transparent; height: 240px; perspective: 1000px; cursor: pointer; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+      border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
+    .flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-family: var(--font-serif); font-size: 18px; font-weight: 600; }
+    .flashcard-back { background: var(--bg-panel); border: 2px solid var(--accent); color: var(--text); transform: rotateY(180deg); font-size: 14px; text-align: right; overflow-y: auto; justify-content: flex-start; }
 
-    .flashcard-front {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--accent);
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .flashcard-back {
-      background-color: var(--bg-panel);
-      border: 2px solid var(--accent);
-      color: var(--text);
-      transform: rotateY(180deg);
-      font-size: 14px;
-      line-height: 1.6;
-      text-align: right;
-      overflow-y: auto;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .flashcard-back::-webkit-scrollbar { width: 4px; }
-    .flashcard-back::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-
-    /* ========== EMPTY STATE ========== */
-    #empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      gap: 12px;
-      color: var(--text-dim);
-    }
-
-    #empty-state svg { opacity: 0.3; }
-    #empty-state p { font-size: 14px; }
-
-    /* ========== VIEW TOGGLE ========== */
-    .view-toggle { 
-      display: flex; 
-      gap: 2px; 
-      background: var(--bg-card); 
-      border: 1px solid var(--border); 
-      border-radius: var(--radius); 
-      padding: 3px; 
-      margin-right: auto; 
-      margin-bottom: 10px; 
-      flex-shrink: 0; 
-    }
-    .view-toggle-btn { 
-      padding: 4px 12px; 
-      border: none; 
-      background: transparent; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      font-size: 12px; 
-      font-family: var(--font-ui); 
-      color: var(--text-muted); 
-      transition: all 0.15s; 
-      white-space: nowrap; 
-    }
+    /* ========== TOGGLE ========== */
+    .view-toggle { display: flex; gap: 2px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3px; margin-right: auto; margin-bottom: 10px; }
+    .view-toggle-btn { padding: 4px 12px; border: none; background: transparent; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text-muted); }
     .view-toggle-btn.active { background: var(--bg-hover); color: var(--text); }
 
-    /* ========== PDF VIEWER ========== */
-    #pdf-frame { width: 100%; height: 100%; border: none; display: block; background: #525659; }
-
-    /* ========== SEARCH HIGHLIGHT ========== */
-    mark { background: rgba(210,153,34,0.25); color: var(--amber); border-radius: 2px; }
+    #empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-dim); }
+    mark { background: rgba(210,153,34,0.25); color: var(--amber); }
   </style>
 </head>
 <body>
@@ -476,12 +280,10 @@
   <div id="topbar">
     <div class="logo">CS Summaries<small>by Yuli Ittah</small></div>
     <div id="topbar-search">
-      <span class="search-icon">⌕</span>
       <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
     </div>
     <div class="topbar-stats">
       <span id="stat-courses"></span>
-      <span id="stat-topics"></span>
     </div>
   </div>
 
@@ -493,19 +295,11 @@
 
     <div id="main">
       <div id="course-header">
-        <div id="course-title-bar">
-          <div id="course-title">בחר קורס</div>
-          <div id="course-subtitle"></div>
-        </div>
+        <div id="course-title">בחר קורס</div>
         <div id="topic-tabs"></div>
       </div>
       <div id="content-area">
-        <div id="empty-state">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-          </svg>
-          <p>בחר קורס מהתפריט הצדדי</p>
-        </div>
+        <div id="empty-state"><p>בחר קורס מהתפריט הצדדי</p></div>
       </div>
     </div>
   </div>
@@ -515,132 +309,71 @@
       linear1: {
         name: "אלגברה לינארית 1",
         icon: "📐",
-        pdfs: [
-          { label: "סיכום 1", file: "linear-note1.pdf" },
-          { label: "סיכום 2", file: "linear-note2.pdf" },
-        ],
         topics: {
-          "מרחב וקטורי ובסיס": {
+          "הגדרות ומשפטים": {
             content: [
-              {
-                title: "בסיס וקואורדינטות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של V אם היא פורשת ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a<sub>1</sub>,...,a<sub>n</sub> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
-                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>,...,a<sub>n</sub>)<sup>T</sup></p>`
-              },
-              {
-                title: "שינוי בסיס — מטריצת המעבר",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר [I]<sub>B</sub><sup>C</sup> ממירה קואורדינטות מ-B ל-C:</p>
-                <p class="formula">[v]<sub>C</sub> = [I]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub></p>`
-              }
+              { title: "העתקה לינארית", text: `<p>T(u+v)=T(u)+T(v) וגם T(λv)=λT(v).</p>` },
+              { title: "משפט המימדים", text: `<p class="formula">dim(U+W) = dim(U) + dim(W) - dim(U∩W)</p>` },
+              { title: "משפט הדרגה", text: `<p>לכל מטריצה, דרגת השורות שווה לדרגת העמודות.</p>` },
+              { title: "משפט הדרגה להעתקות", text: `<p class="formula">dim(Ker(T)) + dim(Im(T)) = dim(V)</p>` },
+              { title: "תת מרחב", text: `<p>תת קבוצה הסגורה לחיבור וכפל בסקלר ומכילה את וקטור האפס.</p>` },
+              { title: "וקטור קואורדינטות", text: `<p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>, ..., a<sub>n</sub>)<sup>T</sup></p>` },
+              { title: "מטריצה מייצגת העתקה", text: `<p>מטריצה שעמודותיה הן קואורדינטות תמונות איברי הבסיס.</p>` },
+              { title: "משפט ההגדרה", text: `<p>העתקה לינארית נקבעת ביחידות על ידי ערכיה על בסיס.</p>` },
+              { title: "מרחב וקטורי", text: `<p>קבוצה המקיימת 8 אקסיומות לגבי חיבור וכפל בסקלר.</p>` },
+              { title: "הגדרה של בסיס", text: `<p>קבוצה פורשת ובלתי תלויה לינארית.</p>` },
+              { title: "משפט שלישי חינם", text: `<p>במרחב ממימד n, קבוצה בגודל n שהיא בת"ל היא בסיס.</p>` }
             ]
           },
-          "העתקה לינארית": {
+          "מרחב וקטורי ובסיס": {
             content: [
-              {
-                title: "הגדרה ותכונות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>T: V→U</strong> היא העתקה לינארית אם לכל u,v∈V וסקלר λ:</p>
-                <p class="formula">T(u+v) = T(u) + T(v)</p>
-                <p class="formula">T(λv) = λ·T(v)</p>`
-              }
+              { title: "בסיס וקואורדינטות", text: `<p>קבוצה B היא בסיס אם היא פורשת ובת"ל.</p>` }
             ]
           }
         }
       },
-
       infi1: {
         name: "חשבון אינפיניטסימלי 1",
         icon: "∞",
-        pdf: "infi-1.pdf",
         topics: {
-          "סדרות": {
+          "הגדרות ומשפטים": {
             content: [
-              {
-                title: "הגדרת הגבול — ε-N",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>סדרה (a<sub>n</sub>) מתכנסת ל-L אם: לכל <strong>ε>0</strong> קיים <strong>N</strong> כך שלכל n>N מתקיים |a<sub>n</sub> - L| &lt; ε.</p>
-                <p class="formula">lim a<sub>n</sub> = L &nbsp;·&nbsp; a<sub>n</sub> → L</p>`
-              }
+              { title: "התכנסות סדרה לפי קושי", text: `<p>סדרה מתכנסת אם ורק אם היא סדרת קושי: לכל ε>0 קיים N כך שלכל n,m>N מתקיים |a<sub>n</sub>-a<sub>m</sub>|<ε.</p>` },
+              { title: "נגזרת של פונקציה", text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) - f(a)] / h</p>` },
+              { title: "נגזרת של פונקציה הפיכה", text: `<p class="formula">(f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>` },
+              { title: "התכנסות סדרה לאינסוף", text: `<p>לכל M>0 קיים N כך שלכל n>N: a<sub>n</sub>>M.</p>` },
+              { title: "משפט ערך הביניים", text: `<p>פונקציה רציפה בקטע סגור מקבלת כל ערך בין קצותיו.</p>` },
+              { title: "משפט ויירשטראס 1", text: `<p>פונקציה רציפה בקטע סגור וחסום היא חסומה בו.</p>` },
+              { title: "משפט ויירשטראס 2", text: `<p>פונקציה רציפה בקטע סגור וחסום מקבלת בו מקסימום ומינימום.</p>` },
+              { title: "התכנסות בהחלט", text: `<p>טור מתכנס בהחלט אם טור הערכים המוחלטים שלו מתכנס.</p>` },
+              { title: "רציפות", text: `<p>f רציפה ב-a אם הגבול בנקודה שווה לערכה בנקודה.</p>` },
+              { title: "גזירות", text: `<p>f גזירה אם קיים גבול מנת ההפרשים. גזירות גוררת רציפות.</p>` }
             ]
           },
-          "נגזרות": {
+          "סדרות": {
             content: [
-              {
-                title: "הגדרת הנגזרת",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>`
-              }
-            ]
-          }
-        }
-      },
-
-      mixed_defs: {
-        name: "מרתון הגדרות",
-        icon: "🧠",
-        topics: {
-          "מיקס: לינארית ואינפי": {
-            content: [
-              // --- הגדרות אינפי ---
-              { title: "התכנסות סדרה לפי קושי", tags: [{ label: "אינפי", color: "purple" }], text: `<p>סדרה (a<sub>n</sub>) מתכנסת במובן הצר אם ורק אם היא סדרת קושי.</p><p class="formula">|a<sub>n</sub> - a<sub>m</sub>| &lt; ε</p>` },
-              { title: "נגזרת של פונקציה", tags: [{ label: "אינפי", color: "purple" }], text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>` },
-              { title: "נגזרת של פונקציה הפיכה", tags: [{ label: "אינפי", color: "purple" }], text: `<p class="formula">(f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>` },
-              { title: "התכנסות סדרה לאינסוף", tags: [{ label: "אינפי", color: "purple" }], text: `<p>לכל M > 0 קיים N כך שלכל n > N: a<sub>n</sub> > M</p>` },
-              { title: "משפט ערך הביניים", tags: [{ label: "אינפי", color: "purple" }], text: `<p>אם f רציפה ב-[a,b], אז היא מקבלת כל ערך בין f(a) ל-f(b).</p>` },
-              { title: "משפט ויירשטראס 1", tags: [{ label: "אינפי", color: "purple" }], text: `<p>פונקציה רציפה בקטע סגור וחסום היא חסומה בו.</p>` },
-              { title: "משפט ויירשטראס 2", tags: [{ label: "אינפי", color: "purple" }], text: `<p>פונקציה רציפה בקטע סגור וחסום מקבלת בו מקסימום ומינימום מוחלטים.</p>` },
-              { title: "התכנסות בהחלט", tags: [{ label: "אינפי", color: "purple" }], text: `<p>טור Σa<sub>n</sub> מתכנס בהחלט אם Σ|a<sub>n</sub>| מתכנס.</p>` },
-              { title: "רציפות", tags: [{ label: "אינפי", color: "purple" }], text: `<p>f רציפה ב-a אם lim<sub>x→a</sub> f(x) = f(a).</p>` },
-              { title: "גזירות", tags: [{ label: "אינפי", color: "purple" }], text: `<p>f גזירה ב-a אם קיים הגבול הסופי של מנת ההפרשים. גזירות גוררת רציפות.</p>` },
-              // --- הגדרות לינארית ---
-              { title: "העתקה לינארית", tags: [{ label: "לינארית", color: "blue" }], text: `<p>T(u+v)=T(u)+T(v) וגם T(λv)=λT(v).</p>` },
-              { title: "משפט המימדים", tags: [{ label: "לינארית", color: "blue" }], text: `<p class="formula">dim(U+W) = dim(U) + dim(W) - dim(U∩W)</p>` },
-              { title: "משפט הדרגה", tags: [{ label: "לינארית", color: "blue" }], text: `<p>לכל מטריצה, דרגת השורות שווה לדרגת העמודות.</p>` },
-              { title: "משפט הדרגה להעתקות", tags: [{ label: "לינארית", color: "blue" }], text: `<p class="formula">dim(Ker(T)) + dim(Im(T)) = dim(V)</p>` },
-              { title: "תת מרחב", tags: [{ label: "לינארית", color: "blue" }], text: `<p>תת קבוצה הסגורה לחיבור וכפל בסקלר ומכילה את וקטור האפס.</p>` },
-              { title: "וקטור קואורדינטות", tags: [{ label: "לינארית", color: "blue" }], text: `<p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>, ..., a<sub>n</sub>)<sup>T</sup></p>` },
-              { title: "מטריצה מייצגת העתקה", tags: [{ label: "לינארית", color: "blue" }], text: `<p>מטריצה שעמודותיה הן קואורדינטות תמונות איברי הבסיס.</p>` },
-              { title: "משפט ההגדרה", tags: [{ label: "לינארית", color: "blue" }], text: `<p>העתקה לינארית נקבעת ביחידות על ידי ערכיה על בסיס.</p>` },
-              { title: "מרחב וקטורי", tags: [{ label: "לינארית", color: "blue" }], text: `<p>קבוצה המקיימת 8 אקסיומות לגבי חיבור וכפל בסקלר.</p>` },
-              { title: "הגדרה של בסיס", tags: [{ label: "לינארית", color: "blue" }], text: `<p>קבוצה פורשת ובלתי תלויה לינארית.</p>` },
-              { title: "משפט שלישי חינם", tags: [{ label: "לינארית", color: "blue" }], text: `<p>במרחב ממימד n, קבוצה בגודל n שהיא בת"ל היא בסיס (ופורשת אוטומטית).</p>` }
+              { title: "הגדרת הגבול", text: `<p class="formula">lim a<sub>n</sub> = L</p>` }
             ]
           }
         }
       }
     };
 
-    let activeCourse = null;
-    let activeTopic = null;
-    let searchQuery = '';
-    let viewMode = 'cards'; 
-    let activePdfIndex = 0;
-    const pdfBlobUrls = {};
+    let activeCourse = null, activeTopic = null, viewMode = 'cards', searchQuery = '';
 
     function selectCourse(id) {
       activeCourse = id;
       activeTopic = Object.keys(COURSES[id].topics)[0];
-      activePdfIndex = 0;
-      const c = COURSES[id];
-      viewMode = (c.pdfs || c.pdf) ? 'pdf' : 'cards';
       render();
-    }
-
-    function highlight(text) {
-      if (!searchQuery) return text;
-      const re = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      return text.replace(re, '<mark>$1</mark>');
     }
 
     function renderSidebar() {
       const list = document.getElementById('course-list');
       list.innerHTML = '';
-      Object.entries(COURSES).forEach(([id, course]) => {
+      Object.entries(COURSES).forEach(([id, c]) => {
         const item = document.createElement('div');
         item.className = 'course-item' + (activeCourse === id ? ' active' : '');
-        item.innerHTML = `<span class="course-icon">${course.icon}</span>${course.name}<span class="course-count">${Object.keys(course.topics).length}</span>`;
+        item.innerHTML = `<span>${c.icon}</span>${c.name}<span class="course-count">${Object.keys(c.topics).length}</span>`;
         item.onclick = () => selectCourse(id);
         list.appendChild(item);
       });
@@ -648,77 +381,42 @@
     }
 
     function renderMain() {
-      const titleEl = document.getElementById('course-title');
-      const tabsEl = document.getElementById('topic-tabs');
-      const contentEl = document.getElementById('content-area');
-
+      const titleEl = document.getElementById('course-title'), tabsEl = document.getElementById('topic-tabs'), contentEl = document.getElementById('content-area');
       if (!activeCourse) return;
-
       const course = COURSES[activeCourse];
       titleEl.textContent = `${course.icon} ${course.name}`;
-
-      tabsEl.innerHTML = '';
-      const hasPdfs = course.pdfs || course.pdf;
-
-      const toggle = document.createElement('div');
-      toggle.className = 'view-toggle';
-      toggle.innerHTML = `
-        ${hasPdfs ? `<button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" id="btn-pdf">📄 PDF</button>` : ''}
-        <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" id="btn-cards">🗂 סיכומים</button>
-        <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" id="btn-flashcards">🔁 Flashcards</button>
-      `;
-      if(hasPdfs) toggle.querySelector('#btn-pdf').onclick = () => { viewMode = 'pdf'; renderMain(); };
-      toggle.querySelector('#btn-cards').onclick = () => { viewMode = 'cards'; renderMain(); };
-      toggle.querySelector('#btn-flashcards').onclick = () => { viewMode = 'flashcards'; renderMain(); };
-      tabsEl.appendChild(toggle);
-
-      if (viewMode !== 'pdf') {
-        Object.keys(course.topics).forEach(topic => {
-          const tab = document.createElement('button');
-          tab.className = 'topic-tab' + (activeTopic === topic ? ' active' : '');
-          tab.textContent = topic;
-          tab.onclick = () => { activeTopic = topic; renderContent(); renderMain(); };
-          tabsEl.appendChild(tab);
-        });
-      }
-
+      tabsEl.innerHTML = `
+        <div class="view-toggle">
+          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" onclick="viewMode='cards';renderMain()">🗂 סיכומים</button>
+          <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" onclick="viewMode='flashcards';renderMain()">🔁 Flashcards</button>
+        </div>`;
+      Object.keys(course.topics).forEach(t => {
+        const tab = document.createElement('button');
+        tab.className = 'topic-tab' + (activeTopic === t ? ' active' : '');
+        tab.textContent = t;
+        tab.onclick = () => { activeTopic = t; renderContent(); renderMain(); };
+        tabsEl.appendChild(tab);
+      });
       renderContent();
     }
 
     function renderContent() {
-      const contentEl = document.getElementById('content-area');
-      const course = COURSES[activeCourse];
-      const topicData = course.topics[activeTopic] || {};
-      const cards = topicData.content || [];
-
-      if (viewMode === 'pdf') {
-        contentEl.style.padding = '0';
-        contentEl.innerHTML = `<div id="empty-state"><p>צפה ב-PDF בלשונית המתאימה</p></div>`;
-        return;
-      }
-
-      contentEl.style.padding = '24px';
-      if (viewMode === 'flashcards') {
-        contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(card => `
-          <div class="flashcard" onclick="this.classList.toggle('flipped')">
-            <div class="flashcard-inner">
-              <div class="flashcard-front">${highlight(card.title)}</div>
-              <div class="flashcard-back"><div>${card.text}</div></div>
-            </div>
+      const contentEl = document.getElementById('content-area'), cards = COURSES[activeCourse].topics[activeTopic].content;
+      contentEl.innerHTML = viewMode === 'flashcards' ? `<div class="flashcards-container">` + cards.map(c => `
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">${c.title}</div>
+            <div class="flashcard-back"><div>${c.text}</div></div>
           </div>
-        `).join('') + `</div>`;
-      } else {
-        contentEl.innerHTML = cards.map(card => `
-          <div class="content-card">
-            <div class="card-header"><div class="card-title">${highlight(card.title)}</div></div>
-            <div class="card-body">${card.text}</div>
-          </div>
-        `).join('');
-      }
+        </div>`).join('') + `</div>` : cards.map(c => `
+        <div class="content-card">
+          <div class="card-title">${c.title}</div>
+          <div class="card-body">${c.text}</div>
+        </div>`).join('');
     }
 
     function render() { renderSidebar(); renderMain(); }
-    document.getElementById('search-input').addEventListener('input', e => { searchQuery = e.target.value; render(); });
+    document.getElementById('search-input').oninput = (e) => { searchQuery = e.target.value; render(); };
     render();
   </script>
 </body>

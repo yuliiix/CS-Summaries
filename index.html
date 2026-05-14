@@ -305,43 +305,45 @@ const COURSES = {
         title: "נגזרת — הגדרה",
         tags: [{ label: "הגדרה", color: "blue" }],
         text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) - f(a)] / h</p>
-        <p>גזירות → רציפות. ההיפך לא נכון: |x| רציף ב-0 אך לא גזיר.</p>
+        <p>גזירות ב-a גוררת רציפות ב-a. ההיפך לא נכון: |x| רציף ב-0 אך לא גזיר.</p>
         <p class="principle">⚡ הנגזרת = שיפוע המשיק לגרף. פרשנות פיזית = מהירות רגעית.</p>`
       },
       {
         title: "כללי נגזרות",
         tags: [{ label: "מבחן", color: "green" }],
-        text: `<p class="formula">(fg)' = f'g + fg'   &nbsp;&nbsp;   (f/g)' = (f'g - fg') / g<sup>2</sup></p>
-        <p class="formula">(f∘g)'(x) = f'(g(x))·g'(x)    (כלל השרשרת)</p>
-        <p>(f<sup>-1</sup>)'(y) = 1/f'(f<sup>-1</sup>(y))    (פונקציה הפוכה)</p>`
+        text: `<p class="formula">(fg)' = f'g + fg'</p>
+        <p class="formula">(f/g)' = (f'g − fg') / g<sup>2</sup></p>
+        <p class="formula">(f∘g)'(x) = f'(g(x)) · g'(x)   ← כלל השרשרת</p>
+        <p class="formula">(f<sup>−1</sup>)'(y) = 1 / f'(f<sup>−1</sup>(y))   ← פונקציה הפוכה</p>`
       },
       {
         title: "נגזרות בסיסיות",
         tags: [{ label: "מבחן", color: "green" }],
-        text: `<p>(x<sup>n</sup>)' = nx<sup>n-1</sup> &nbsp;·&nbsp; (e<sup>x</sup>)' = e<sup>x</sup> &nbsp;·&nbsp; (ln x)' = 1/x</p>
-        <p>(sin x)' = cos x &nbsp;·&nbsp; (cos x)' = −sin x &nbsp;·&nbsp; (tan x)' = 1/cos<sup>2</sup>x</p>
-        <p>(arcsin x)' = 1/√(1−x<sup>2</sup>) &nbsp;·&nbsp; (arctan x)' = 1/(1+x<sup>2</sup>)</p>
-        <p>(a<sup>x</sup>)' = a<sup>x</sup>·ln a</p>`
+        text: `<p class="formula">(x<sup>n</sup>)' = n·x<sup>n−1</sup></p>
+        <p class="formula">(e<sup>x</sup>)' = e<sup>x</sup> &nbsp;&nbsp; (ln x)' = 1/x &nbsp;&nbsp; (a<sup>x</sup>)' = a<sup>x</sup>·ln a</p>
+        <p class="formula">(sin x)' = cos x &nbsp;&nbsp; (cos x)' = −sin x</p>
+        <p class="formula">(tan x)' = 1/cos<sup>2</sup>x</p>
+        <p class="formula">(arcsin x)' = 1/√(1−x<sup>2</sup>) &nbsp;&nbsp; (arctan x)' = 1/(1+x<sup>2</sup>)</p>`
       },
       {
         title: "משפט לגראנז' וכלל לופיטל",
         tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
         text: `<p><strong>MVT (לגראנז'):</strong> f רציפה על [a,b], גזירה על (a,b) → קיים c:</p>
-        <p class="formula">f'(c) = [f(b) - f(a)] / (b-a)</p>
-        <p><strong>לופיטל:</strong> אם lim f = lim g = 0 (או ±∞):</p>
-        <p class="formula">lim f/g = lim f'/g'</p>
-        <p><strong>סדר גודל:</strong> ln x ≪ x<sup>a</sup> ≪ e<sup>x</sup> לכל a>0 כשx→∞</p>`
+        <p class="formula">f'(c) = [f(b) − f(a)] / (b−a)</p>
+        <p><strong>לופיטל:</strong> אם lim f = lim g = 0 (או ±∞) → lim f/g = lim f'/g'</p>
+        <p><strong>סדר גודל כשx שואף לאינסוף:</strong></p>
+        <p class="formula">ln(x) ≪ x<sup>a</sup> ≪ e<sup>x</sup>   לכל a &gt; 0</p>`
       },
       {
         title: "טורים — הגדרה ומבחנים",
         tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
-        text: `<p>S<sub>n</sub> = Σ<sub>k=1</sub><sup>n</sup>a<sub>k</sub>. טור מתכנס ← (S<sub>n</sub>) מתכנסת.</p>
-        <p><strong>תנאי הכרחי:</strong> Σa<sub>n</sub> מתכנס → a<sub>n</sub>→0 (ההיפך לא נכון!).</p>
-        <p class="formula">טור הנדסי:  Σq<sup>n</sup> = 1/(1-q)   אם |q|&lt;1</p>
-        <p><strong>שורש:</strong> lim<sup>n</sup>√|a<sub>n</sub>|=q. <strong>מנה:</strong> lim|a<sub>n+1</sub>/a<sub>n</sub>|=q.</p>
-        <p>q&lt;1: מתכנס · q>1: מתבדר · q=1: אי-מסקנה.</p>
-        <p><strong>לייבניץ:</strong> Σ(-1)<sup>n</sup>a<sub>n</sub> מתכנס אם a<sub>n</sub>↘0.</p>
-        <p class="principle">⚡ n! או a<sup>n</sup> → מנה. שורשים → שורש.</p>`
+        text: `<p>S<sub>n</sub> = Σ<sub>k=1</sub><sup>n</sup> a<sub>k</sub>. טור מתכנס אם סדרת (S<sub>n</sub>) מתכנסת.</p>
+        <p><strong>תנאי הכרחי (לא מספיק!):</strong> Σa<sub>n</sub> מתכנס ← a<sub>n</sub> שואף ל-0.</p>
+        <p class="formula">טור הנדסי:  Σq<sup>n</sup> = 1/(1−q)   כאשר |q| &lt; 1</p>
+        <p><strong>מבחן שורש:</strong> lim <sup>n</sup>√|a<sub>n</sub>| = q &nbsp;·&nbsp; <strong>מבחן מנה:</strong> lim |a<sub>n+1</sub>/a<sub>n</sub>| = q</p>
+        <p>q &lt; 1: מתכנס &nbsp;·&nbsp; q &gt; 1: מתבדר &nbsp;·&nbsp; q = 1: אי-מסקנה</p>
+        <p><strong>מבחן לייבניץ (טורים מתחלפים):</strong> הטור Σ(−1)<sup>n</sup>·a<sub>n</sub> מתכנס אם a<sub>n</sub> מונוטון יורד ושואף ל-0.</p>
+        <p class="principle">⚡ יש n! או a<sup>n</sup>: נסי מבחן מנה. יש שורשים: נסי מבחן שורש.</p>`
       },
     ]
   },

@@ -507,254 +507,172 @@
     // ================================================================
 
     const COURSES = {
-      linear1: {
-        name: "אלגברה לינארית 1",
-        icon: "📐",
-        pdfs: [
-          { label: "סיכום 1", file: "linear-note1.pdf" },
-          { label: "סיכום 2", file: "linear-note2.pdf" },
-        ],
+      mixed_defs: {
+        name: "מרתון הגדרות",
+        icon: "🧠",
         topics: {
-          "מרחב וקטורי ובסיס": {
+          "מיקס: לינארית ואינפי": {
             content: [
+              // ==========================================
+              // הגדרות אינפי 1
+              // ==========================================
               {
-                title: "בסיס וקואורדינטות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של V אם היא פורשת ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a<sub>1</sub>,...,a<sub>n</sub> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
-                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>,...,a<sub>n</sub>)<sup>T</sup></p>`,
-                complexity: []
+                title: "התכנסות סדרה לפי קושי",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "משפט", color: "amber" }],
+                text: `<p>סדרה (a<sub>n</sub>) מתכנסת במובן הצר <strong>אם ורק אם</strong> היא סדרת קושי.</p>
+                <p>הגדרה לסדרת קושי: לכל ε&gt;0 קיים N כך שלכל m,n&gt;N מתקיים:</p>
+                <p class="formula">|a<sub>n</sub> - a<sub>m</sub>| &lt; ε</p>`
               },
               {
-                title: "תכונות ייצוג בבסיס",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>לכל u,v∈V וסקלר λ:</p>
-                <p class="formula">[u+v]<sub>B</sub> = [u]<sub>B</sub> + [v]<sub>B</sub></p>
-                <p class="formula">[λv]<sub>B</sub> = λ·[v]<sub>B</sub></p>
-                <p class="formula">v = 0 ↔ [v]<sub>B</sub> = 0</p>
-                <p class="formula">v = u ↔ [v]<sub>B</sub> = [u]<sub>B</sub></p>`,
-                complexity: []
+                title: "נגזרת של פונקציה",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>הנגזרת של פונקציה f בנקודה a היא הגבול של קצב השינוי:</p>
+                <p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>
+                <p>אם הגבול קיים וסופי, הפונקציה <strong>גזירה</strong> ב-a (וזה גם גורר רציפות בנקודה).</p>`
               },
               {
-                title: "שינוי בסיס — מטריצת המעבר",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר [I]<sub>B</sub><sup>C</sup> ממירה קואורדינטות מ-B ל-C:</p>
-                <p class="formula">[v]<sub>C</sub> = [I]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub></p>
-                <p>בנייה: עמודה j של [I]<sub>B</sub><sup>C</sup> היא [v<sub>j</sub>]<sub>C</sub> — קואורדינטות של וקטור הבסיס ה-j של B ביחס ל-C.</p>`,
-                complexity: []
+                title: "נגזרת של פונקציה הפיכה",
+                tags: [{ label: "אינפי", color: "purple" }],
+                text: `<p>תהי f פונקציה גזירה והפיכה, ונניח ש- f'(x) ≠ 0. אזי הפונקציה ההפוכה f<sup>-1</sup> גזירה, ומתקיים:</p>
+                <p class="formula">(f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>
+                <p>כלומר, הנגזרת של ההפוכה היא ההופכי של הנגזרת (בערך המתאים).</p>`
               },
-            ]
-          },
-          "העתקה לינארית": {
-            content: [
               {
-                title: "הגדרה ותכונות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>T: V→U</strong> היא העתקה לינארית אם לכל u,v∈V וסקלר λ:</p>
+                title: "התכנסות סדרה לאינסוף",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>סדרה (a<sub>n</sub>) שואפת לאינסוף אם לכל חסם שנקבע, הסדרה תעבור אותו בשלב מסוים. פורמלית:</p>
+                <p>לכל M &gt; 0 (גדול ככל שיהיה), קיים N כך שלכל n &gt; N מתקיים:</p>
+                <p class="formula">a<sub>n</sub> &gt; M</p>`
+              },
+              {
+                title: "משפט ערך הביניים",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "משפט", color: "amber" }],
+                text: `<p>אם פונקציה f <strong>רציפה</strong> בקטע סגור [a,b], אז היא מקבלת כל ערך בין f(a) ל-f(b).</p>
+                <p>בפרט (למציאת שורשים): אם f(a) ו-f(b) בעלי סימנים מנוגדים (למשל f(a)&lt;0 ו-f(b)&gt;0), אז קיים c∈(a,b) כך ש- f(c)=0.</p>`
+              },
+              {
+                title: "משפט ויירשטראס 1 (חסימות)",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "משפט", color: "amber" }],
+                text: `<p>תהי f פונקציה <strong>רציפה</strong> בקטע סגור וחסום [a,b].</p>
+                <p>אזי f <strong>חסומה</strong> בקטע זה.</p>`
+              },
+              {
+                title: "משפט ויירשטראס 2 (ערך קיצון)",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "משפט", color: "amber" }],
+                text: `<p>תהי f פונקציה <strong>רציפה</strong> בקטע סגור וחסום [a,b].</p>
+                <p>אזי קיימות נקודות c,d בקטע [a,b] כך ש- f(c) הוא מקסימום מוחלט ו- f(d) מינימום מוחלט של f בקטע.</p>`
+              },
+              {
+                title: "התכנסות בהחלט",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>נאמר שטור Σa<sub>n</sub> מתכנס בהחלט, אם הטור של הערכים המוחלטים שלו מתכנס:</p>
+                <p class="formula">Σ|a<sub>n</sub>| &lt; ∞</p>
+                <p><strong>משפט:</strong> התכנסות בהחלט גוררת התכנסות (כלומר, אם Σ|a<sub>n</sub>| מתכנס, אז גם Σa<sub>n</sub> מתכנס).</p>`
+              },
+              {
+                title: "רציפות בנקודה",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>פונקציה f נקראת <strong>רציפה</strong> בנקודה a (בסביבת הגדרתה) אם הגבול של הפונקציה בנקודה שווה לערך הפונקציה בנקודה:</p>
+                <p class="formula">lim<sub>x→a</sub> f(x) = f(a)</p>
+                <p>זה אומר שגם הגבול הימני וגם השמאלי שווים ל-f(a).</p>`
+              },
+              {
+                title: "גזירות בנקודה",
+                tags: [{ label: "אינפי", color: "purple" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>פונקציה f נקראת <strong>גזירה</strong> בנקודה a אם הגבול של מנת ההפרשים (הנגזרת) בנקודה קיים וסופי.</p>
+                <p><strong>משפט חשוב:</strong> גזירות בנקודה גוררת רציפות באותה נקודה. (ההיפך אינו נכון, למשל הפונקציה |x| רציפה באפס אך אינה גזירה שם).</p>`
+              },
+
+              // ==========================================
+              // הגדרות לינארית 1
+              // ==========================================
+              {
+                title: "העתקה לינארית",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>פונקציה <strong>T: V→U</strong> (ממרחב וקטורי V ל-U) היא העתקה לינארית אם היא שומרת על פעולות המרחב (לכל u,v∈V וסקלר λ):</p>
                 <p class="formula">T(u+v) = T(u) + T(v)</p>
-                <p class="formula">T(λv) = λ·T(v)</p>
-                <p>נובע: T(0) = 0 ו-T(Σa<sub>i</sub>v<sub>i</sub>) = Σa<sub>i</sub>T(v<sub>i</sub>)</p>`,
-                complexity: []
+                <p class="formula">T(λv) = λ·T(v)</p>`
               },
               {
-                title: "שימור תכונות",
-                tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U העתקה לינארית ו-{v<sub>1</sub>,...,v<sub>k</sub>}⊆V:</p>
-                <p><strong>1.</strong> T חד-חד-ערכית ↔ {v<sub>1</sub>,...,v<sub>k</sub>} ב"ת לינארית ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} ב"ת לינארית</p>
-                <p><strong>2.</strong> T על ↔ {v<sub>1</sub>,...,v<sub>k</sub>} פורשת ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} פורשת</p>
-                <p><strong>3.</strong> T איזומורפיזם ↔ {v<sub>1</sub>,...,v<sub>k</sub>} בסיס ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} בסיס</p>`,
-                complexity: []
+                title: "משפט המימדים (לתת-מרחבים)",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "משפט", color: "amber" }],
+                text: `<p>יהיו U,W תתי-מרחבים של מרחב וקטורי V מממד סופי. אזי:</p>
+                <p class="formula">dim(U+W) = dim(U) + dim(W) − dim(U ∩ W)</p>`
               },
               {
-                title: "איזומורפיזם",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>T: V→U היא <strong>איזומורפיזם</strong> אם היא לינארית, חד-חד-ערכית ועל (ביקציה לינארית).</p>
-                <p>תנאי הכרחי ומספיק: <strong>dim V = dim U</strong></p>
-                <p>אם T איזומורפיזם — T<sup>-1</sup> קיימת ואיזומורפיזם גם היא.</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "מטריצה מייצגת": {
-            content: [
-              {
-                title: "הגדרת המטריצה המייצגת",
-                tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U, B={v<sub>1</sub>,...,v<sub>n</sub>} בסיס ל-V, C בסיס ל-U.</p>
-                <p>המטריצה המייצגת [T]<sub>B</sub><sup>C</sup> — עמודה j שלה = [T(v<sub>j</sub>)]<sub>C</sub>.</p>
-                <p class="formula">[T]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub> = [T(v)]<sub>C</sub></p>`,
-                complexity: []
+                title: "משפט הדרגה (מטריצות)",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "משפט", color: "amber" }],
+                text: `<p>לכל מטריצה A, <strong>דרגת השורות שווה לדרגת העמודות</strong>.</p>
+                <p>במילים אחרות: הממד של מרחב השורות שווה לממד של מרחב העמודות, ומסומן כ- Rank(A).</p>
+                <p class="formula">rank(A) = rank(A<sup>T</sup>)</p>`
               },
               {
-                title: "אלגברה של מטריצות מייצגות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p class="formula">[T+S]<sub>B</sub><sup>C</sup> = [T]<sub>B</sub><sup>C</sup> + [S]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">[λT]<sub>B</sub><sup>C</sup> = λ·[T]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">[S∘T]<sub>B</sub><sup>D</sup> = [S]<sub>C</sub><sup>D</sup> · [T]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">([T]<sub>B</sub><sup>C</sup>)<sup>-1</sup> = [T<sup>-1</sup>]<sub>C</sub><sup>B</sup></p>`,
-                complexity: []
+                title: "משפט הדרגה להעתקות לינאריות",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "משפט", color: "amber" }],
+                text: `<p>תהי T: V→U העתקה לינארית, ו-V בעל ממד סופי. אזי, סכום ממדי הגרעין (Ker) והתמונה (Im) שווה לממד תחום ההגדרה (V):</p>
+                <p class="formula">dim(Ker(T)) + dim(Im(T)) = dim(V)</p>`
               },
               {
-                title: "נוסחת שינוי בסיס למטריצה",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B, C בסיסים ל-V ו-A = [T]<sub>B</sub><sup>B</sup>, אז:</p>
-                <p class="formula">[T]<sub>C</sub><sup>C</sup> = [I]<sub>B</sub><sup>C</sup> · A · ([I]<sub>B</sub><sup>C</sup>)<sup>-1</sup></p>
-                <p>שתי מטריצות מייצגות לאותה T בבסיסים שונים הן <strong>דומות</strong> (similar).</p>`,
-                complexity: []
-              },
-            ]
-          }
-        }
-      },
-
-      infi1: {
-        name: "חשבון אינפיניטסימלי 1",
-        icon: "∞",
-        pdf: "infi-1.pdf",
-        topics: {
-          "סדרות": {
-            content: [
-              {
-                title: "הגדרת הגבול — ε-N",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>סדרה (a<sub>n</sub>) מתכנסת ל-L אם: לכל <strong>ε>0</strong> קיים <strong>N</strong> כך שלכל n>N מתקיים |a<sub>n</sub> - L| &lt; ε.</p>
-                <p class="formula">lim a<sub>n</sub> = L &nbsp;·&nbsp; a<sub>n</sub> → L</p>`,
-                complexity: []
+                title: "תת-מרחב של מרחב וקטורי",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>קבוצה W שהיא תת-קבוצה של מרחב וקטורי V, תקרא תת-מרחב שלו אם מתקיימים 3 תנאים (קריטריון תת-מרחב):</p>
+                <ol style="padding-right: 20px;">
+                  <li>W אינה ריקה (לרוב בודקים שוקטור ה-0 שייך אליה).</li>
+                  <li>סגירות לחיבור: לכל u,w ∈ W גם u+w ∈ W.</li>
+                  <li>סגירות לכפל בסקלר: לכל w ∈ W וסקלר λ, גם λw ∈ W.</li>
+                </ol>`
               },
               {
-                title: "כלל הסנדוויץ' ותכונות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><strong>כלל הסנדוויץ':</strong> אם a<sub>n</sub> ≤ b<sub>n</sub> ≤ c<sub>n</sub> ו-a<sub>n</sub>, c<sub>n</sub> → L אז b<sub>n</sub> → L.</p>
-                <p><strong>אלגברה:</strong> אם a<sub>n</sub>→L ו-b<sub>n</sub>→M: a<sub>n</sub>+b<sub>n</sub> → L+M, a<sub>n</sub>·b<sub>n</sub> → L·M, a<sub>n</sub>/b<sub>n</sub> → L/M (M≠0).</p>
-                <p>אם a<sub>n</sub> → ∞ אז 1/a<sub>n</sub> → 0.</p>`,
-                complexity: []
+                title: "וקטור קואורדינטות",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>יהי B={v<sub>1</sub>,...,v<sub>n</sub>} בסיס ל-V. לכל v∈V קיימים סקלרים <strong>יחידים</strong> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
+                <p>וקטור הקואורדינטות של v לפי הבסיס B הוא וקטור עמודה ב- F<sup>n</sup> שאיבריו הם הסקלרים הללו:</p>
+                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub>)<sup>T</sup></p>`
               },
               {
-                title: "המספר e וגבולות חשובים",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">e = lim (1 + 1/n)<sup>n</sup> , n→∞</p>
-                <p>הכללה: lim(1 + a/n)<sup>n</sup> = e<sup>a</sup></p>
-                <p>שקילות: אם a<sub>n</sub> → ∞ אז (1 + 1/a<sub>n</sub>)<sup>a<sub>n</sub></sup> → e</p>`,
-                complexity: []
+                title: "מטריצה מייצגת העתקה",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>תהי T: V→U, יהי B={v<sub>1</sub>,...,v<sub>n</sub>} בסיס ל-V, ו-C בסיס ל-U.</p>
+                <p>המטריצה המייצגת [T]<sub>B</sub><sup>C</sup> נבנית כך: עמודה j שלה היא וקטור הקואורדינטות של מופעלת T על איבר הבסיס ה-j, לפי בסיס C:</p>
+                <p class="formula">Col<sub>j</sub> = [T(v<sub>j</sub>)]<sub>C</sub></p>`
               },
               {
-                title: "קריטריון קושי לסדרות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>סדרה (a<sub>n</sub>) מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי:</p>
-                <p>לכל ε>0 קיים N כך שלכל m,n>N: <strong>|a<sub>n</sub> - a<sub>m</sub>| &lt; ε</strong></p>`,
-                complexity: []
-              },
-            ]
-          },
-          "טורים": {
-            content: [
-              {
-                title: "הגדרה והתכנסות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>הסכומים החלקיים: S<sub>n</sub> = Σ<sub>k=1</sub><sup>n</sup> a<sub>k</sub></p>
-                <p>טור Σa<sub>n</sub> <strong>מתכנס</strong> אם סדרת S<sub>n</sub> מתכנסת.</p>
-                <p><strong>תנאי הכרחי (לא מספיק!):</strong> Σa<sub>n</sub> מתכנס → a<sub>n</sub> → 0. ההיפך לא נכון (דוגמה: Σ1/n מתבדר).</p>`,
-                complexity: []
+                title: "משפט ההגדרה להעתקות לינאריות",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "משפט", color: "amber" }],
+                text: `<p>כדי להגדיר העתקה לינארית, מספיק לדעת מה היא עושה לאיברי בסיס.</p>
+                <p>אם B={v<sub>1</sub>,...,v<sub>n</sub>} הוא בסיס ל-V, ו- {w<sub>1</sub>,...,w<sub>n</sub>} הם וקטורים <strong>כלשהם</strong> ב-U, קיימת העתקה לינארית <strong>אחת ויחידה</strong> המקיימת:</p>
+                <p class="formula">T(v<sub>i</sub>) = w<sub>i</sub> לכל i</p>`
               },
               {
-                title: "טור הנדסי",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>Σq<sup>n</sup> מתכנס אם ורק אם |q|&lt;1, ואז:</p>
-                <p class="formula">Σ<sub>n=0</sub><sup>∞</sup> q<sup>n</sup> = 1/(1-q)</p>`,
-                complexity: []
+                title: "מרחב וקטורי",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>קבוצה V מעל שדה סקלרים F, יחד עם פעולת חיבור ופעולת כפל בסקלר, המקיימת 8 אקסיומות:</p>
+                <p>סגירות לחיבור וכפל בסקלר, קיבוציות (אסוציאטיביות), חילופיות (קומוטטיביות) בחיבור, קיום איבר ניטרלי (0), קיום איבר נגדי (-v), וכללי פילוג (דיסטריבוטיביות).</p>`
               },
               {
-                title: "מבחני התכנסות",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><strong>מבחן שורש (קושי):</strong> lim <sup>n</sup>√|a<sub>n</sub>| = q: q&lt;1 מתכנס, q>1 מתבדר, q=1 אי-מסקנה.</p>
-                <p><strong>מבחן מנה (ד'אלמבר):</strong> lim |a<sub>n+1</sub>/a<sub>n</sub>| = q: אותן מסקנות.</p>
-                <p><strong>מבחן השוואה:</strong> 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>: Σb<sub>n</sub> מתכנס → Σa<sub>n</sub> מתכנס.</p>`,
-                complexity: []
+                title: "הגדרה של בסיס",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "הגדרה", color: "blue" }],
+                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של מרחב וקטורי V אם היא מקיימת שני תנאים:</p>
+                <ol style="padding-right: 20px;">
+                  <li>היא <strong>פורשת</strong> את המרחב (כל וקטור במרחב ניתן להצגה כצירוף לינארי שלה).</li>
+                  <li>היא <strong>בלתי תלויה לינארית</strong> (בת"ל).</li>
+                </ol>`
               },
               {
-                title: "לייבניץ והתכנסות מוחלטת",
-                tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>לייבניץ:</strong> Σ(-1)<sup>n</sup>a<sub>n</sub> מתכנס אם a<sub>n</sub> מונוטון יורד ו-a<sub>n</sub> → 0.</p>
-                <p><strong>התכנסות מוחלטת:</strong> Σ|a<sub>n</sub>| מתכנס → Σa<sub>n</sub> מתכנס.</p>
-                <p><strong>התכנסות מותנית:</strong> מתכנס אך לא בהחלט (דוגמה: Σ(-1)<sup>n</sup>/n).</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "פונקציות ורציפות": {
-            content: [
-              {
-                title: "גבול פונקציה — ε-δ",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>lim<sub>x→a</sub> f(x) = L אם: לכל ε>0 קיים δ>0 כך ש-0 &lt; |x-a| &lt; δ → |f(x)-L| &lt; ε.</p>
-                <p><strong>גבול קיים ↔</strong> lim<sub>x→a⁻</sub> f(x) = lim<sub>x→a⁺</sub> f(x) = L</p>`,
-                complexity: []
-              },
-              {
-                title: "גבולות חשובים",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">lim<sub>x→0</sub> sin(x)/x = 1</p>
-                <p class="formula">lim<sub>x→0</sub> (1-cos x)/x<sup>2</sup> = 1/2</p>
-                <p class="formula">lim<sub>x→0</sub> (a<sup>x</sup>-1)/x = ln a</p>
-                <p class="formula">lim<sub>x→0</sub> ln(1+x)/x = 1</p>`,
-                complexity: []
-              },
-              {
-                title: "רציפות ומשפטים",
-                tags: [{ label: "הגדרה", color: "blue" }, { label: "חשוב", color: "amber" }],
-                text: `<p>f <strong>רציפה</strong> בנקודה a אם lim<sub>x→a</sub> f(x) = f(a).</p>
-                <p><strong>IVT:</strong> f רציפה על [a,b], f(a)&lt;0&lt;f(b) → קיים c∈(a,b): f(c)=0.</p>
-                <p><strong>קנטור (EVT):</strong> f רציפה על [a,b] → חסומה ומגיעה למקסימום ומינימום.</p>`,
-                complexity: []
-              },
-              {
-                title: "נקודות אי-רציפות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>סילוק:</strong> הגבול קיים אך ≠ f(a) (ניתן לתקן).</p>
-                <p><strong>קפיצה:</strong> הגבולות החד-צדדיים קיימים אך שונים זה מזה.</p>
-                <p><strong>מהותית:</strong> לפחות גבול אחד לא קיים סופי.</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "נגזרות": {
-            content: [
-              {
-                title: "הגדרת הנגזרת",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>
-                <p>גזירות → רציפות (לא ההיפך: |x| רציף ב-0 אך לא גזיר).</p>`,
-                complexity: []
-              },
-              {
-                title: "כללי נגזרות",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">(fg)' = f'g + fg' &nbsp;&nbsp; (f/g)' = (f'g − fg') / g<sup>2</sup></p>
-                <p class="formula">(f∘g)'(x) = f'(g(x))·g'(x) &nbsp; (כלל השרשרת)</p>
-                <p><strong>פונקציה הפוכה:</strong> (f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>`,
-                complexity: []
-              },
-              {
-                title: "נגזרות בסיסיות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>(x<sup>n</sup>)' = nx<sup>n-1</sup> &nbsp;·&nbsp; (e<sup>x</sup>)' = e<sup>x</sup> &nbsp;·&nbsp; (ln x)' = 1/x</p>
-                <p>(sin x)' = cos x &nbsp;·&nbsp; (cos x)' = −sin x &nbsp;·&nbsp; (tan x)' = 1/cos<sup>2</sup>x</p>
-                <p>(arcsin x)' = 1/√(1−x<sup>2</sup>) &nbsp;·&nbsp; (arctan x)' = 1/(1+x<sup>2</sup>)</p>`,
-                complexity: []
-              },
-              {
-                title: "לגראנז' ולופיטל",
-                tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>MVT (לגראנז'):</strong> f רציפה על [a,b], גזירה על (a,b) → קיים c:</p>
-                <p class="formula">f'(c) = [f(b) − f(a)] / (b−a)</p>
-                <p><strong>לופיטל:</strong> אם lim f = lim g = 0 (או ±∞) → lim f/g = lim f'/g'.</p>
-                <p><strong>סדר גודל:</strong> ln x ≪ x<sup>a</sup> ≪ e<sup>x</sup> לכל a>0 כאשר x→∞.</p>`,
-                complexity: []
-              },
+                title: "משפט שלישי חינם",
+                tags: [{ label: "לינארית", color: "blue" }, { label: "משפט", color: "amber" }],
+                text: `<p>יהי V מרחב ממימד n, ותהי S תת-קבוצה של V בעלת n איברים בדיוק (|S|=n).</p>
+                <p>אז שני תנאים שקולים (וכל אחד מהם גורר ש-S בסיס):</p>
+                <ol style="padding-right: 20px;">
+                  <li>S קבוצה בלתי תלויה לינארית (בת"ל).</li>
+                  <li>S פורשת את המרחב V.</li>
+                </ol>
+                <p>כלומר: מספיק לבדוק תנאי אחד (בת"ל <strong>או</strong> פורשת) אם ידוע שהגודל נכון!</p>`
+              }
             ]
           }
         }
       },
-
     };
     // ================================================================
     // STATE

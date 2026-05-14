@@ -861,10 +861,12 @@
         toggle.className = 'view-toggle';
         toggle.innerHTML = `
           <button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" id="btn-pdf">📄 PDF</button>
-          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" id="btn-cards">🗂 כרטיסיות</button>
+          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" id="btn-cards">🗂 סיכומים</button>
+          <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" id="btn-flashcards">🔁 Flashcards</button>
         `;
         toggle.querySelector('#btn-pdf').onclick = () => { viewMode = 'pdf'; renderMain(); };
         toggle.querySelector('#btn-cards').onclick = () => { viewMode = 'cards'; renderMain(); };
+        toggle.querySelector('#btn-flashcards').onclick = () => { viewMode = 'flashcards'; renderMain(); };
         tabsEl.appendChild(toggle);
       }
 
@@ -877,7 +879,7 @@
           tab.onclick = () => { activePdfIndex = i; renderContent(); updatePdfTabs(); };
           tabsEl.appendChild(tab);
         });
-      } else if (viewMode === 'cards') {
+      } else if (viewMode === 'cards' || viewMode === 'flashcards') {
         Object.keys(course.topics).forEach(topic => {
           const tab = document.createElement('button');
           tab.className = 'topic-tab' + (activeTopic === topic ? ' active' : '');
@@ -953,7 +955,29 @@
         }
         return;
       }
+      // Flashcards mode
+      if (viewMode === 'flashcards') {
+        contentEl.style.padding = '24px';
+        const topicData = course.topics[activeTopic] || {};
+        const cards = (topicData.content || []);
 
+        if (cards.length === 0) {
+          contentEl.innerHTML = `<div id="empty-state"><p>אין עדיין פלאשקארדס בנושא זה</p></div>`;
+          return;
+        }
+
+        contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(card => `
+          <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">${highlight(card.title)}</div>
+              <div class="flashcard-back">
+                <div style="padding-top: 10px;">${searchQuery ? highlightBody(card.text) : card.text}</div>
+              </div>
+            </div>
+          </div>
+        `).join('') + `</div>`;
+        return;
+      }
       contentEl.style.padding = '24px';
       const topicData = course.topics[activeTopic] || {};
       const cards = (topicData.content || []);
@@ -990,6 +1014,70 @@
     // ================================================================
     document.getElementById('search-input').addEventListener('input', e => handleSearch(e.target.value));
     render();
+
+    /* ========== FLASHCARDS ========== */
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .flashcard {
+      background: transparent;
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .flashcard-front {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flashcard-back {
+      background-color: var(--bg-panel);
+      border: 2px solid var(--accent);
+      color: var(--text);
+      transform: rotateY(180deg);
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: right;
+      overflow-y: auto;
+    }
+    
+    .flashcard-back::-webkit-scrollbar { width: 4px; }
+    .flashcard-back::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
   </script>
 </body>
 </html>

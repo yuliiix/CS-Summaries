@@ -271,8 +271,11 @@
     .view-toggle-btn { padding: 4px 12px; border: none; background: transparent; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text-muted); }
     .view-toggle-btn.active { background: var(--bg-hover); color: var(--text); }
 
+    /* ========== PDF VIEWER ========== */
+    #pdf-frame { width: 100%; height: 100%; border: none; display: block; background: #525659; }
+
     #empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-dim); }
-    mark { background: rgba(210,153,34,0.25); color: var(--amber); }
+    mark { background: rgba(210,153,34,0.25); color: var(--amber); border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -309,6 +312,10 @@
       linear1: {
         name: "אלגברה לינארית 1",
         icon: "📐",
+        pdfs: [
+          { label: "סיכום 1", file: "linear-note1.pdf" },
+          { label: "סיכום 2", file: "linear-note2.pdf" }
+        ],
         topics: {
           "הגדרות ומשפטים": {
             content: [
@@ -332,9 +339,11 @@
           }
         }
       },
+      
       infi1: {
         name: "חשבון אינפיניטסימלי 1",
         icon: "∞",
+        pdfs: [{ label: "סיכום", file: "infi-1.pdf" }],
         topics: {
           "הגדרות ומשפטים": {
             content: [
@@ -356,14 +365,95 @@
             ]
           }
         }
+      },
+
+      ds: {
+        name: "מבני נתונים",
+        icon: "🌳",
+        pdfs: [{ label: "סיכום הקורס", file: "ds-summary.pdf" }],
+        topics: {
+          "סיבוכיות ומשפט האב": {
+            content: [
+              { title: "סיבוכיות זמן (O, Ω, Θ)", text: `<p><strong>O(f(n))</strong>: חסם עליון (המקרה הגרוע).<br><strong>Ω(f(n))</strong>: חסם תחתון.<br><strong>Θ(f(n))</strong>: חסם הדוק (גם עליון וגם תחתון).</p>` },
+              { title: "משפט האב (Master Theorem)", text: `<p>משמש לפתרון נוסחאות נסיגה מהצורה:</p><p class="formula">T(n) = aT(n/b) + f(n)</p><p>משווים את f(n) לעומת n<sup>log<sub>b</sub>a</sup> כדי למצוא מי דומיננטי.</p>` },
+              { title: "פתרון עץ רקורסיה", text: `<p>שיטה למציאת סיבוכיות על ידי ציור עץ הרקורסיה, חישוב העלות בכל רמה, וסכימת כל הרמות (למשל סכום סדרה הנדסית).</p>` }
+            ]
+          },
+          "ניתוח לשיעורין (Amortized)": {
+            content: [
+              { title: "שיטת האגרגציה (Aggregate)", text: `<p>מחשבים חסם עליון T(n) לביצוע של n פעולות ברצף, והעלות המשוערכת לכל פעולה היא פשוט הממוצע:</p><p class="formula">T(n) / n</p>` },
+              { title: "שיטת החשבונאות (Accounting)", text: `<p>הקצאת "אסימונים" / "מטבעות" לפעולות. פעולות זולות מקבלות מטבעות עודפים שנשמרים ב"בנק", ופעולות יקרות משתמשות במטבעות שנחסכו כדי לשלם על עצמן (למשל במערך דינמי).</p>` },
+              { title: "שיטת הפוטנציאל (Potential)", text: `<p>מגדירים פונקציית פוטנציאל Φ(D) שמייצגת את ה"אנרגיה האגורה" במבנה הנתונים. העלות המשוערכת מוגדרת כך:</p><p class="formula">ĉ<sub>i</sub> = c<sub>i</sub> + Φ(D<sub>i</sub>) - Φ(D<sub>i-1</sub>)</p>` }
+            ]
+          },
+          "עצים בסיסיים ו-AVL": {
+            content: [
+              { title: "סריקות עץ (Traversals)", text: `<p><strong>Pre-order</strong>: קודם שורש, אח"כ ילדים.<br><strong>In-order</strong>: שמאלי, שורש, ימני (בעץ חיפוש נותן מיון).<br><strong>Post-order</strong>: ילדים, ובסוף השורש.</p>` },
+              { title: "עץ חיפוש בינארי (BST)", text: `<p>לכל צומת: כל הערכים בתת-העץ השמאלי קטנים ממנו, וכל הערכים בתת-העץ הימני גדולים ממנו.</p>` },
+              { title: "עץ AVL - איזון (BF)", text: `<p>עץ חיפוש בינארי מאוזן גבהים. לכל צומת מחשבים גורם איזון (Balance Factor):</p><p class="formula">BF = h(Left) - h(Right)</p><p>העץ חוקי רק אם ה-BF הוא 1, 0 או -1.</p>` }
+            ]
+          },
+          "מבני נתונים אלמנטריים": {
+            content: [
+              { title: "מחסנית (Stack)", text: `<p>פועלת בשיטת <strong>LIFO</strong> (Last In First Out).<br>פעולות עיקריות: <code>Push</code> (הכנסה) ו-<code>Pop</code> (הוצאה). O(1).</p>` },
+              { title: "תור (Queue)", text: `<p>פועל בשיטת <strong>FIFO</strong> (First In First Out).<br>פעולות עיקריות: <code>Enqueue</code> (הכנסה לסוף) ו-<code>Dequeue</code> (הוצאה מההתחלה).</p>` }
+            ]
+          }
+        }
+      },
+
+      oop: {
+        name: "תכנות מונחה עצמים",
+        icon: "☕",
+        pdfs: [{ label: "סיכום הקורס", file: "oop-summary.pdf" }],
+        topics: {
+          "עקרונות ומבנה": {
+            content: [
+              { title: "כימוס (Encapsulation)", text: `<p>הסתרת המידע הפנימי של המחלקה. מתבצע לרוב על ידי הגדרת שדות כ-<code>private</code> וחשיפתם דרך מתודות <code>Getters</code> ו-<code>Setters</code>.</p>` },
+              { title: "הורשה (Inheritance)", text: `<p>מחלקה אחת יורשת מאחרת באמצעות המילה <code>extends</code>. מחלקת הבן יורשת את כל השדות והמתודות (בהתאם להרשאות), ויכולה לדרוס מתודות (<code>@Override</code>).</p>` },
+              { title: "מילה שמורה this ו-super", text: `<p><code>this</code> מצביע לאובייקט הנוכחי (משמש למניעת התנגשות שמות).<br><code>super</code> משמש לקריאה לבנאי של מחלקת האב או למתודות שלה.</p>` },
+              { title: "הרשאות גישה (Access Modifiers)", text: `<p><strong>Private</strong>: גישה רק מהמחלקה.<br><strong>Default</strong>: גישה מכל החבילה (Package).<br><strong>Protected</strong>: גישה מהחבילה וממחלקות יורשות.<br><strong>Public</strong>: גישה חופשית מכולם.</p>` }
+            ]
+          },
+          "זיכרון ב-Java": {
+            content: [
+              { title: "Heap vs Stack", text: `<p><strong>Stack (מחסנית)</strong>: שומר משתנים פרימיטיביים (כמו int) ורפרנסים לאובייקטים. מתנקה אוטומטית כשהפונקציה מסתיימת.<br><strong>Heap (ערימה)</strong>: שומר את האובייקטים עצמם (אלו שנוצרו עם <code>new</code>).</p>` },
+              { title: "משתנה ומתודה סטטיים (static)", text: `<p>שייכים <strong>למחלקה עצמה</strong> ולא לאובייקט (מופע) ספציפי. הקומפיילר ניגש אליהם דרך שם המחלקה, גם אם הרפרנס הוא null.</p>` },
+              { title: "String Pool", text: `<p>מחרוזות הן Immutable (לא ניתנות לשינוי). אם ניצור <code>String s = "Hello"</code>, Java תשמור אותו ב-Pool. אם ניצור עוד מחרוזת זהה, היא תצביע לאותו מקום בזיכרון.</p>` }
+            ]
+          },
+          "פולימורפיזם וממשקים": {
+            content: [
+              { title: "Upcasting ו-Downcasting", text: `<p><strong>Upcasting</strong>: השמת אובייקט מסוג בן לרפרנס מסוג אב (בטוח ותמיד עובד).<br><strong>Downcasting</strong>: המרה הפוכה, דורשת Casting מפורש ויכולה לזרוק <code>ClassCastException</code>. רצוי לבדוק קודם עם <code>instanceof</code>.</p>` },
+              { title: "מחלקה מופשטת (Abstract Class)", text: `<p>מחלקה שלא ניתן ליצור ממנה מופעים (<code>new</code>). נועדה להיות מחלקת אב. יכולה להכיל שדות רגילים, מתודות רגילות ומתודות אבסטרקטית שהבנים חייבים לממש.</p>` },
+              { title: "ממשק (Interface)", text: `<p>חוזה שמגדיר התנהגות. מחלקה מממשת ממשק בעזרת <code>implements</code>. בממשק כל השדות הם <code>public static final</code> ואין בו שמירת מצב (State).</p>` }
+            ]
+          },
+          "Generics & Collections": {
+            content: [
+              { title: "ג'נריקס (Generics <T>)", text: `<p>מאפשר כתיבת קוד גמיש שמתאים למספר סוגי טיפוסים (כמו <code>ArrayList&lt;String&gt;</code>). מונע שגיאות של Casting בזמן ריצה.</p>` },
+              { title: "Iterable ו-Iterator", text: `<p>מחלקה שמממשת <code>Iterable</code> (שיש לה מתודת <code>iterator()</code>) מאפשרת לעבור על איבריה בלולאת <code>for-each</code>.<br>ה-<code>Iterator</code> עצמו ממש את הפונקציות <code>hasNext()</code> ו-<code>next()</code>.</p>` },
+              { title: "Collections", text: `<p><strong>ArrayList</strong>: מערך דינמי (טוב לגישה באינדקס).<br><strong>LinkedList</strong>: רשימה מקושרת (טוב להכנסות/הוצאות בקצוות).<br><strong>HashSet</strong>: סט ללא כפילויות, לא שומר על סדר.<br><strong>HashMap</strong>: מילון של מפתח-ערך (Key-Value).</p>` }
+            ]
+          }
+        }
       }
+
     };
 
     let activeCourse = null, activeTopic = null, viewMode = 'cards', searchQuery = '';
+    let activePdfIndex = 0;
+    const pdfBlobUrls = {};
 
     function selectCourse(id) {
       activeCourse = id;
       activeTopic = Object.keys(COURSES[id].topics)[0];
+      activePdfIndex = 0;
+      
+      const c = COURSES[id];
+      // אם למשתמש יש PDF והוא לחץ על הקורס, אפשר להחליט שזה יפתח את לשונית ה-PDF כברירת מחדל
+      // אבל מכיוון שאתה רוצה לראות את הכרטיסיות, נשאיר כברירת מחדל 'cards'
+      viewMode = 'cards'; 
       render();
     }
 
@@ -373,7 +463,7 @@
       Object.entries(COURSES).forEach(([id, c]) => {
         const item = document.createElement('div');
         item.className = 'course-item' + (activeCourse === id ? ' active' : '');
-        item.innerHTML = `<span>${c.icon}</span>${c.name}<span class="course-count">${Object.keys(c.topics).length}</span>`;
+        item.innerHTML = `<span class="course-icon">${c.icon}</span>${c.name}<span class="course-count">${Object.keys(c.topics).length}</span>`;
         item.onclick = () => selectCourse(id);
         list.appendChild(item);
       });
@@ -381,22 +471,46 @@
     }
 
     function renderMain() {
-      const titleEl = document.getElementById('course-title'), tabsEl = document.getElementById('topic-tabs'), contentEl = document.getElementById('content-area');
+      const titleEl = document.getElementById('course-title');
+      const tabsEl = document.getElementById('topic-tabs');
+      
       if (!activeCourse) return;
+      
       const course = COURSES[activeCourse];
       titleEl.textContent = `${course.icon} ${course.name}`;
-      tabsEl.innerHTML = `
-        <div class="view-toggle">
-          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" onclick="viewMode='cards';renderMain()">🗂 סיכומים</button>
-          <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" onclick="viewMode='flashcards';renderMain()">🔁 Flashcards</button>
-        </div>`;
-      Object.keys(course.topics).forEach(t => {
-        const tab = document.createElement('button');
-        tab.className = 'topic-tab' + (activeTopic === t ? ' active' : '');
-        tab.textContent = t;
-        tab.onclick = () => { activeTopic = t; renderContent(); renderMain(); };
-        tabsEl.appendChild(tab);
-      });
+      
+      tabsEl.innerHTML = '';
+      const hasPdfs = course.pdfs && course.pdfs.length > 0;
+
+      // כפתורי השליטה הראשיים (תצוגות)
+      const toggle = document.createElement('div');
+      toggle.className = 'view-toggle';
+      toggle.innerHTML = `
+        ${hasPdfs ? `<button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" onclick="viewMode='pdf';renderMain()">📄 PDF</button>` : ''}
+        <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" onclick="viewMode='cards';renderMain()">🗂 סיכומים</button>
+        <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" onclick="viewMode='flashcards';renderMain()">🔁 Flashcards</button>
+      `;
+      tabsEl.appendChild(toggle);
+
+      // כפתורי הניווט הפנימיים (הנושאים השונים של הקורס)
+      if (viewMode === 'pdf') {
+        course.pdfs.forEach((p, i) => {
+          const tab = document.createElement('button');
+          tab.className = 'topic-tab' + (activePdfIndex === i ? ' active' : '');
+          tab.textContent = p.label;
+          tab.onclick = () => { activePdfIndex = i; renderContent(); renderMain(); };
+          tabsEl.appendChild(tab);
+        });
+      } else {
+        Object.keys(course.topics).forEach(t => {
+          const tab = document.createElement('button');
+          tab.className = 'topic-tab' + (activeTopic === t ? ' active' : '');
+          tab.textContent = t;
+          tab.onclick = () => { activeTopic = t; renderContent(); renderMain(); };
+          tabsEl.appendChild(tab);
+        });
+      }
+      
       renderContent();
     }
 
@@ -408,17 +522,32 @@
 
     function renderContent() {
       const contentEl = document.getElementById('content-area');
-      const allCards = COURSES[activeCourse].topics[activeTopic].content;
-      
+      const course = COURSES[activeCourse];
+
+      if (viewMode === 'pdf') {
+        const entry = course.pdfs[activePdfIndex];
+        contentEl.style.padding = '0';
+        
+        // טעינת ה-PDF מאותו התיקייה
+        contentEl.innerHTML = `<iframe id="pdf-frame" src="${entry.file}" title="${entry.label}"></iframe>`;
+        return;
+      }
+
+      contentEl.style.padding = '24px';
+      const topicData = course.topics[activeTopic] || {};
+      const allCards = topicData.content || [];
+
+      // סינון לפי חיפוש
       const cards = allCards.filter(c => 
         c.title.includes(searchQuery) || c.text.includes(searchQuery)
       );
 
       if (cards.length === 0) {
-        contentEl.innerHTML = `<div id="empty-state"><p>לא נמצאו תוצאות לחיפוש "${searchQuery}"</p></div>`;
+        contentEl.innerHTML = `<div id="empty-state"><p>לא נמצאו תוצאות לחיפוש או שאין כרטיסיות בנושא.</p></div>`;
         return;
       }
 
+      // רינדור כרטיסיות
       if (viewMode === 'flashcards') {
         contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(c => `
           <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -437,7 +566,12 @@
     }
 
     function render() { renderSidebar(); renderMain(); }
-    document.getElementById('search-input').oninput = (e) => { searchQuery = e.target.value; render(); };
+    
+    document.getElementById('search-input').oninput = (e) => { 
+      searchQuery = e.target.value; 
+      render(); 
+    };
+
     render();
   </script>
 </body>

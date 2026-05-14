@@ -735,7 +735,7 @@ function renderContent() {
   if (viewMode === 'flashcards') {
     contentEl.innerHTML = `
       <div style="text-align:center;margin-bottom:20px;color:var(--text-dim);font-size:13px">
-        🔁 לחצי על כרטיס לגילוי ההגדרה · ${cards.length} מושגים
+        🔁 לחץ על כרטיס לגילוי ההגדרה · ${cards.length} מושגים
       </div>
       <div class="flashcards-grid">` + cards.map(card => `
       <div class="flashcard" onclick="this.classList.toggle('flipped')">

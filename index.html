@@ -7,78 +7,148 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;600&family=JetBrains+Mono:wght@400;500&family=Assistant:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ========== RESET & TOKENS ========== */
+    /* ========== RESET & TOKENS (RESORED FROM ORIGINAL) ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #fdfbf0; --bg-panel: #faf6e0; --bg-card: #ffffff; --bg-hover: #f5eecc;
-      --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.15);
-      --text: #1c1917; --text-muted: #78716c; --text-dim: #b5a98e;
-      --accent: #1d4ed8; --accent-bg: rgba(29,78,216,0.08);
-      --sidebar-w: 240px; --topbar-h: 64px; --radius: 8px; --radius-lg: 12px;
-      --font-ui: 'Assistant', sans-serif; --font-mono: 'JetBrains Mono', monospace; --font-serif: 'Noto Serif Hebrew', serif;
+      --bg:        #fdfbf0;
+      --bg-panel:  #faf6e0;
+      --bg-card:   #ffffff;
+      --bg-hover:  #f5eecc;
+      --border:    rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+      --text:      #1c1917;
+      --text-muted:#78716c;
+      --text-dim:  #b5a98e;
+      --accent:    #1d4ed8;
+      --accent-bg: rgba(29,78,216,0.08);
+      --sidebar-w: 240px;
+      --topbar-h:  64px;
+      --radius:    8px;
+      --radius-lg: 12px;
+      --font-ui:   'Assistant', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif:'Noto Serif Hebrew', serif;
     }
-    body { font-family: var(--font-ui); background: var(--bg); color: var(--text); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-    
-    /* TOP BAR UPDATED */
-    #topbar { 
-      height: var(--topbar-h); 
-      background: var(--bg-panel); 
-      border-bottom: 1px solid var(--border); 
-      display: flex; 
-      align-items: center; 
-      padding: 0 20px; 
-      gap: 20px; 
-      flex-shrink: 0; 
-      z-index: 10; 
+
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
     }
-    .logo { font-family: var(--font-serif); font-size: 18px; font-weight: 600; white-space: nowrap; }
-    #search-input { width: 100%; max-width: 340px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 14px; font-size: 14px; outline: none; }
-    .emoji-row { display: flex; gap: 20px; font-size: 22px; margin-right: auto; padding-left: 10px; }
-    
+
+    /* ========== TOP BAR (RESTORED + EMOJIS) ========== */
+    #topbar {
+      height: var(--topbar-h);
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .logo small { font-family: var(--font-ui); font-size: 10px; color: var(--text-dim); }
+
+    #topbar-search { flex: 1; max-width: 340px; position: relative; }
+    #search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 7px 14px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .emoji-row { display: flex; gap: 15px; font-size: 20px; margin-right: auto; padding-left: 10px; }
+
+    /* ========== LAYOUT ========== */
     #layout { display: flex; flex: 1; overflow: hidden; }
-    #sidebar { width: var(--sidebar-w); background: var(--bg-panel); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+
+    #sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-panel);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
     .sidebar-section-label { padding: 14px 14px 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--text-dim); }
     #course-list { overflow-y: auto; flex: 1; padding: 4px 8px; }
-    .course-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius); cursor: pointer; color: var(--text-muted); font-size: 14px; margin-bottom: 2px; transition: 0.2s; }
-    .course-item:hover { background: var(--bg-hover); }
-    .course-item.active { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
-    
+
+    .course-item {
+      display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--radius);
+      cursor: pointer; color: var(--text-muted); font-size: 13px; margin-bottom: 2px;
+    }
+    .course-item.active { background: var(--accent-bg); color: var(--accent); }
+
+    /* ========== MAIN & CONTENT ========== */
     #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
-    #course-header { background: var(--bg-panel); border-bottom: 1px solid var(--border); padding: 16px 24px 0; }
-    #course-title { font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    #course-header { background: var(--bg-panel); border-bottom: 1px solid var(--border); padding: 14px 24px 0; flex-shrink: 0; }
+    #course-title { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+
+    #topic-tabs { display: flex; gap: 2px; }
     #content-area { flex: 1; overflow-y: auto; padding: 24px; }
-    
-    .content-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .card-title { font-family: var(--font-mono); font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .card-body { font-size: 15px; line-height: 1.8; color: var(--text-muted); }
-    .card-body p.formula { font-family: var(--font-mono); text-align: center; padding: 12px; background: #fff0e4; border-right: 4px solid #e8894a; border-radius: 6px 0 0 6px; color: #c2601a; margin: 12px 0; direction: ltr; }
-    
-    .flashcards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-    .flashcard { height: 260px; perspective: 1000px; cursor: pointer; }
+
+    /* FLASHCARDS */
+    .flashcards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .flashcard { background: transparent; height: 220px; perspective: 1000px; cursor: pointer; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-family: var(--font-serif); font-size: 20px; font-weight: 600; }
-    .flashcard-back { background: var(--bg-panel); border: 2px solid var(--accent); transform: rotateY(180deg); font-size: 15px; text-align: right; overflow-y: auto; justify-content: flex-start; }
-    
-    .view-toggle { display: flex; gap: 4px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 12px; width: fit-content; }
-    .view-toggle-btn { padding: 6px 16px; border: none; background: transparent; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-muted); transition: 0.2s; font-family: var(--font-ui); }
-    .view-toggle-btn.active { background: var(--bg-hover); color: var(--text); font-weight: 600; }
-    #pdf-frame { width: 100%; height: 100%; border: none; }
-    mark { background: rgba(210,153,34,0.25); color: var(--amber); border-radius: 3px; padding: 0 2px; }
+    .flashcard-front, .flashcard-back {
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-lg);
+      padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-family: var(--font-serif); font-size: 18px; font-weight: 600; }
+    .flashcard-back { background: var(--bg-panel); border: 2px solid var(--accent); transform: rotateY(180deg); text-align: right; overflow-y: auto; justify-content: flex-start; align-items: flex-start; }
+
+    /* CARDS */
+    .content-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 14px; }
+    .card-title { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .card-body { font-size: 15px; line-height: 1.85; color: var(--text-muted); }
+    .card-body p.formula { font-family: var(--font-mono); text-align: center; padding: 10px; background: #fff0e4; border-right: 3px solid #e8894a; border-radius: 6px 0 0 6px; color: #c2601a; margin: 10px 0; direction: ltr; }
+
+    /* TOGGLE & PDF */
+    .view-toggle { display: flex; gap: 2px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3px; margin-right: auto; margin-bottom: 10px; width: fit-content; }
+    .view-toggle-btn { padding: 4px 12px; border: none; background: transparent; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text-muted); }
+    .view-toggle-btn.active { background: var(--bg-hover); color: var(--text); }
+    #pdf-frame { width: 100%; height: 100%; border: none; background: #525659; }
+
+    #empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-dim); }
+    mark { background: rgba(210,153,34,0.25); color: var(--amber); }
   </style>
 </head>
 <body>
+
   <div id="topbar">
-    <div class="logo">📚 CS Summaries</div>
-    <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
+    <div class="logo">📚 CS Summaries<small>by Yuli Ittah</small></div>
+    <div id="topbar-search">
+      <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
+    </div>
     <div class="emoji-row">
-      <span>🎓</span>
-      <span>📝</span>
-      <span>💻</span>
-      <span>🧠</span>
-      <span>💡</span>
-      <span>📖</span>
+      <span>🎓</span><span>📝</span><span>💻</span><span>🧠</span><span>💡</span><span>📖</span>
     </div>
   </div>
 
@@ -92,7 +162,9 @@
         <div id="course-title">בחר קורס</div>
         <div id="topic-tabs"></div>
       </div>
-      <div id="content-area"></div>
+      <div id="content-area">
+        <div id="empty-state"><p>בחר קורס מהתפריט הצדדי</p></div>
+      </div>
     </div>
   </div>
 
@@ -103,28 +175,25 @@
         icon: "🌳",
         pdfs: [{ label: "סיכום הקורס", file: "סיכום מבני נתונים.pdf" }],
         content: [
-          { title: "חסם עליון (Big O)", text: "מייצג את קצב הגידול המקסימלי של הפונקציה (המקרה הגרוע ביותר). f(n) = O(g(n)) אם קיים c כך ש-f(n) ≤ c*g(n)." },
-          { title: "חסם תחתון (Omega)", text: "מייצג את קצב הגידול המינימלי. f(n) = Ω(g(n)) אם קיים c כך ש-f(n) ≥ c*g(n)." },
-          { title: "חסם הדוק (Theta)", text: "כאשר הפונקציה חסומה גם מלמעלה וגם מלמטה ע\"י אותה פונקציה g(n)." },
-          { title: "מחסנית (Stack)", text: "מבנה נתונים LIFO (נכנס אחרון יוצא ראשון). פעולות Push/Pop ב-O(1)." },
-          { title: "תור (Queue)", text: "מבנה נתונים FIFO (נכנס ראשון יוצא ראשון). פעולות Enqueue/Dequeue ב-O(1)." },
-          { title: "שורש (Root)", text: "הצומת העליון בעץ ממנו הכל מתחיל. אין לו הורה." },
+          { title: "חסם עליון (O)", text: "חסם עליון לקצב הגידול של פונקציה. f(n) = O(g(n)) אם f חסומה מלמעלה ע\"י g החל מ-n מסוים." },
+          { title: "חסם תחתון (Ω)", text: "חסם תחתון לקצב הגידול. f(n) = Ω(g(n)) אם f חסומה מלמטה ע\"י g החל מ-n מסוים." },
+          { title: "חסם הדוק (Θ)", text: "כאשר פונקציה חסומה גם מלמעלה וגם מלמטה על ידי אותה פונקציית ייחוס g(n)." },
+          { title: "מחסנית (Stack)", text: "מבנה נתונים מסוג LIFO (אחרון נכנס ראשון יוצא). פעולות Push/Pop." },
+          { title: "תור (Queue)", text: "מבנה נתונים מסוג FIFO (ראשון נכנס ראשון יוצא). פעולות Enqueue/Dequeue." },
+          { title: "שורש (Root)", text: "הצומת היחיד בעץ שאין לו הורה." },
           { title: "עלה (Leaf)", text: "צומת בעץ שאין לו ילדים." },
-          { title: "דרגת צומת (Degree)", text: "מספר הילדים הישירים של צומת מסוים." },
-          { title: "אבות קדמונים (Ancestors)", text: "כל הצמתים במסלול מהשורש ועד לצומת המסוים." },
-          { title: "צאצאים (Descendants)", text: "כל הצמתים בתת-העצים של צומת מסוים." },
-          { title: "עומק צומת (Depth)", text: "מספר הקשתות מהשורש ועד לצומת." },
-          { title: "גובה עץ (Height)", text: "המרחק הארוך ביותר מהשורש ועד לעלה הרחוק ביותר." },
-          { title: "רמה (Level)", text: "קבוצת כל הצמתים הנמצאים באותו עומק." },
-          { title: "עץ שלם (Complete)", text: "כל הרמות מלאות פרט אולי לאחרונה, שממולאת משמאל לימין." },
-          { title: "עץ מלא (Full)", text: "כל צומת הוא או עלה או בעל מספר הילדים המקסימלי המותר (למשל 2 בבינארי)." },
-          { title: "DFS (סריקה לעומק)", text: "סריקה שמתקדמת כמה שיותר עמוק בכל ענף לפני חזרה אחורה." },
-          { title: "BFS (סריקה לרוחב)", text: "סריקה שעוברת קודם על כל השכנים (רמה רמה) בעזרת תור." },
-          { title: "עץ B", text: "עץ חיפוש רב-דרכי מאוזן המשמש בעיקר למסדי נתונים וזיכרון חיצוני." },
-          { title: "סיבוכיות - מערך לא ממוין", text: "חיפוש: O(n), הכנסה: O(1), מחיקה: O(n)." },
-          { title: "סיבוכיות - מערך ממוין", text: "חיפוש: O(log n), הכנסה: O(n), מחיקה: O(n)." },
-          { title: "סיבוכיות - רשימה מקושרת", text: "חיפוש: O(n), הכנסה/מחיקה: O(1) (אם יש רפרנס למיקום)." },
-          { title: "סיבוכיות - עץ AVL", text: "חיפוש, הכנסה ומחיקה כולם ב-O(log n) בזכות האיזון." }
+          { title: "דרגת צומת", text: "מספר הילדים שיש לצומת מסוים." },
+          { title: "אבות קדמונים", text: "כל הצמתים במסלול מהשורש ועד לצומת המסוים." },
+          { title: "צאצאים", text: "כל הצמתים הנמצאים בתתי-העצים שמתחת לצומת מסוים." },
+          { title: "עומק צומת", text: "מספר הקשתות מהשורש ועד לצומת." },
+          { title: "גובה עץ", text: "אורך המסלול הארוך ביותר מצומת כלשהו ועד לעלה." },
+          { title: "רמה (Level)", text: "קבוצת הצמתים הנמצאים באותו עומק בעץ." },
+          { title: "עץ מלא (Full)", text: "עץ שבו לכל צומת יש או 0 או 2 ילדים." },
+          { title: "עץ שלם (Complete)", text: "עץ שבו כל הרמות מלאות פרט לאחרונה, הממולאת משמאל לימין." },
+          { title: "DFS", text: "סריקה לעומק - הולכים הכי עמוק שאפשר בכל ענף לפני שחוזרים." },
+          { title: "BFS", text: "סריקה לרוחב - עוברים על העץ רמה אחר רמה בעזרת תור." },
+          { title: "עץ B", text: "עץ חיפוש רב-דרכי מאוזן שנועד לזיכרון חיצוני/מסדי נתונים." },
+          { title: "סיבוכיות חיפוש", text: "מערך לא ממוין: O(n). מערך ממוין: O(log n). רשימה: O(n). עץ AVL: O(log n)." }
         ]
       },
       oop: {
@@ -132,32 +201,37 @@
         icon: "☕",
         pdfs: [{ label: "סיכום הקורס", file: "סיכום מונחי עצמים.pdf" }],
         content: [
-          { title: "מחלקה (Class)", text: "התבנית (Blueprint) המגדירה שדות והתנהגות." },
-          { title: "אובייקט (Object)", text: "מופע (Instance) ספציפי של המחלקה שנוצר בזיכרון ה-Heap." },
-          { title: "בנאי (Constructor)", text: "מתודה מיוחדת לאתחול האובייקט בעת יצירתו עם 'new'." },
-          { title: "זיכרון Heap", text: "האזור בו נשמרים כל האובייקטים והמערכים ב-Java." },
-          { title: "זיכרון Stack", text: "שומר רפרנסים, משתנים פרימיטיביים וקריאות לפונקציות." },
-          { title: "המילה Final", text: "ערך קבוע שלא ניתן לשינוי, או מחלקה/מתודה שלא ניתן להוריש/לדרוס." },
-          { title: "המילה Super", text: "רפרנס למחלקת האב - משמש לקריאה לבנאי או למתודות של האב." },
-          { title: "הרשאת Protected", text: "גישה מותרת לאותה חבילה (Package) וגם למחלקות יורשות." },
-          { title: "ממשק (Interface)", text: "חוזה המגדיר סט מתודות שמחלקה חייבת לממש." },
-          { title: "המילה Static", text: "שייך למחלקה עצמה ולא לאובייקט ספציפי. משותף לכל המופעים." },
-          { title: "איטרטור (Iterator)", text: "אובייקט המאפשר לעבור על אוסף נתונים בצורה גנרית." },
-          { title: "Abstract (מופשט)", text: "מחלקה שלא ניתן ליצור ממנה מופע, משמשת רק כבסיס להורשה." },
-          { title: "Binding (קישור)", text: "התהליך שבו הקומפיילר או זמן הריצה משייכים קריאה למתודה למימוש שלה." },
-          { title: "פולימורפיזם (רב-צורתיות)", text: "היכולת להשתמש ברפרנס מסוג אב כדי להפעיל מימושים שונים של בנים." },
-          { title: "Casting (המרה)", text: "שינוי סוג הרפרנס (Upcasting לאב, Downcasting לבן עם בדיקת instanceof)." },
-          { title: "גנריות (Generics)", text: "שימוש בפרמטר טיפוס (כמו <T>) לכתיבת קוד גמיש ובטוח יותר." }
+          { title: "מחלקה (Class)", text: "תבנית המגדירה שדות (מצב) ומתודות (התנהגות) לאובייקטים." },
+          { title: "אובייקט (Object)", text: "מופע ספציפי של מחלקה שנוצר בזיכרון ה-Heap." },
+          { title: "בנאי (Constructor)", text: "מתודה מיוחדת שנקראת עם 'new' לאתחול האובייקט." },
+          { title: "זיכרון Heap", text: "אזור בזיכרון בו נשמרים כל האובייקטים. מנוהל ע\"י ה-GC." },
+          { title: "זיכרון Stack", text: "אזור לניהול קריאות לפונקציות, משתנים מקומיים ורפרנסים." },
+          { title: "המילה Final", text: "משתנה: קבוע. מתודה: לא ניתנת לדריסה. מחלקה: לא ניתנת להורשה." },
+          { title: "המילה Super", text: "רפרנס למחלקת האב לצורך קריאה לבנאי או למתודות שלה." },
+          { title: "הרשאת Protected", text: "גישה מותרת באותה חבילה ובמחלקות יורשות." },
+          { title: "ממשק (Interface)", text: "חוזה שמגדיר מתודות שמחלקה חייבת לממש (implements)." },
+          { title: "המילה Static", text: "שייך למחלקה עצמה ולא למופע ספציפי. משותף לכל האובייקטים." },
+          { title: "Iterator", text: "אובייקט המאפשר מעבר גנרי על אוספי נתונים (כמו רשימות)." },
+          { title: "Abstract", text: "מחלקה שלא ניתן ליצור ממנה מופע, משמשת רק כבסיס." },
+          { title: "Binding", text: "קישור קריאה למתודה למימוש שלה (סטטי בזמן קומפילציה, דינמי בזמן ריצה)." },
+          { title: "פולימורפיזם", text: "היכולת להשתמש ברפרנס מסוג אב כדי להפעיל מימושים של בנים." },
+          { title: "Casting", text: "שינוי סוג הרפרנס (Upcasting בטוח, Downcasting דורש instanceof)." },
+          { title: "גנריות (Generics)", text: "שימוש בפרמטר טיפוס <T> לכתיבת קוד בטוח וגמיש." }
         ]
       },
-      linear1: { name: "אלגברה לינארית 1", icon: "📐", content: [{ title: "העתקה לינארית", text: "פונקציה בין מרחבים וקטוריים השומרת על חיבור וכפל בסקלר." }] },
-      infi1: { name: "אינפי 1", icon: "∞", content: [{ title: "סדרת קושי", text: "סדרה שבה המרחק בין כל שני איברים הולך וקטן ככל שמתקדמים." }] }
+      linear1: { name: "אלגברה לינארית 1", icon: "📐", content: [{ title: "העתקה לינארית", text: "פונקציה בין מרחבים שומרת חיבור וכפל בסקלר." }] },
+      infi1: { name: "אינפי 1", icon: "∞", content: [{ title: "סדרת קושי", text: "סדרה שבה המרחק בין האיברים שואף ל-0." }] }
     };
 
     let activeCourse = null, viewMode = 'cards', searchQuery = '';
+    const pdfBlobUrls = {};
 
-    function selectCourse(id) { activeCourse = id; viewMode = 'cards'; render(); }
-    
+    function selectCourse(id) {
+      activeCourse = id;
+      viewMode = 'cards'; 
+      render();
+    }
+
     function highlight(text) {
       if (!searchQuery) return text;
       const re = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')})`, 'gi');
@@ -180,6 +254,7 @@
       if (!activeCourse) return;
       const course = COURSES[activeCourse];
       titleEl.textContent = `${course.icon} ${course.name}`;
+      
       tabsEl.innerHTML = `
         <div class="view-toggle">
           ${course.pdfs ? `<button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" onclick="viewMode='pdf';renderMain()">📄 PDF</button>` : ''}
@@ -191,14 +266,37 @@
 
     function renderContent() {
       const contentEl = document.getElementById('content-area'), course = COURSES[activeCourse];
+      
       if (viewMode === 'pdf') {
+        const entry = course.pdfs[0];
         contentEl.style.padding = '0';
-        contentEl.innerHTML = `<iframe id="pdf-frame" src="${course.pdfs[0].file}"></iframe>`;
+        const key = `${activeCourse}:0`;
+
+        if (pdfBlobUrls[key]) {
+          contentEl.innerHTML = `<iframe id="pdf-frame" src="${pdfBlobUrls[key]}" title="${entry.label}"></iframe>`;
+        } else if (location.protocol !== 'file:') {
+          contentEl.innerHTML = `<iframe id="pdf-frame" src="${entry.file}" title="${entry.label}"></iframe>`;
+        } else {
+          contentEl.innerHTML = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;">
+              <button id="pick-pdf-btn" style="padding:10px 20px; border-radius:8px; border:none; background:var(--accent); color:#fff; cursor:pointer;">📂 בחר קובץ PDF מהמחשב</button>
+              <input type="file" id="pdf-file-input" accept=".pdf" style="display:none" />
+              <p style="font-size:12px; color:var(--text-dim);">בשל מגבלות דפדפן בהרצה מקומית, יש לבחור את הקובץ ידנית</p>
+            </div>`;
+          document.getElementById('pick-pdf-btn').onclick = () => document.getElementById('pdf-file-input').click();
+          document.getElementById('pdf-file-input').onchange = (e) => {
+            const file = e.target.files[0]; if (!file) return;
+            const url = URL.createObjectURL(file); pdfBlobUrls[key] = url;
+            contentEl.innerHTML = `<iframe id="pdf-frame" src="${url}" title="${entry.label}"></iframe>`;
+          };
+        }
         return;
       }
-      const cards = course.content.filter(c => c.title.includes(searchQuery) || c.text.includes(searchQuery));
+
+      const allCards = course.content || [];
+      const cards = allCards.filter(c => c.title.includes(searchQuery) || c.text.includes(searchQuery));
       contentEl.style.padding = '24px';
-      
+
       if (viewMode === 'flashcards') {
         contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(c => `
           <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -208,12 +306,16 @@
             </div>
           </div>`).join('') + `</div>`;
       } else {
-        contentEl.innerHTML = cards.map(c => `<div class="content-card"><div class="card-title">${highlight(c.title)}</div><div class="card-body">${highlight(c.text)}</div></div>`).join('');
+        contentEl.innerHTML = cards.map(c => `
+          <div class="content-card">
+            <div class="card-title">${highlight(c.title)}</div>
+            <div class="card-body">${highlight(c.text)}</div>
+          </div>`).join('');
       }
     }
 
     function render() { renderSidebar(); renderMain(); }
-    document.getElementById('search-input').oninput = (e) => { searchQuery = e.target.value; render(); };
+    document.getElementById('search-input').oninput = (e) => { searchQuery = e.target.value; renderContent(); };
     render();
   </script>
 </body>

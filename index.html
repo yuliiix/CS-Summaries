@@ -18,52 +18,36 @@
       --font-ui: 'Assistant', sans-serif; --font-mono: 'JetBrains Mono', monospace; --font-serif: 'Noto Serif Hebrew', serif;
     }
     body { font-family: var(--font-ui); background: var(--bg); color: var(--text); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-
-    /* TOP BAR */
     #topbar { height: var(--topbar-h); background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 16px; flex-shrink: 0; z-index: 10; }
     .logo { font-family: var(--font-serif); font-size: 15px; font-weight: 600; white-space: nowrap; display: flex; flex-direction: column; }
-    .logo small { font-size: 10px; color: var(--text-dim); }
-    #topbar-search { flex: 1; max-width: 340px; }
-    #search-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 14px; outline: none; }
+    #search-input { width: 100%; max-width: 340px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 14px; font-size: 13px; outline: none; }
     .emoji-row { display: flex; gap: 15px; font-size: 20px; margin-right: auto; padding-left: 10px; }
-
     #layout { display: flex; flex: 1; overflow: hidden; }
     #sidebar { width: var(--sidebar-w); background: var(--bg-panel); border-left: 1px solid var(--border); display: flex; flex-direction: column; }
     #course-list { overflow-y: auto; flex: 1; padding: 10px 8px; }
     .course-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius); cursor: pointer; color: var(--text-muted); font-size: 13px; margin-bottom: 2px; }
     .course-item.active { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
-    .course-count { margin-right: auto; font-size: 10px; background: var(--bg-card); padding: 1px 6px; border-radius: 10px; }
-
     #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-    #course-header { background: var(--bg-panel); border-bottom: 1px solid var(--border); padding: 14px 24px 0; }
+    #course-header { background: var(--bg-panel); border-bottom: 1px solid var(--border); padding: 14px 24px 0; flex-shrink: 0; }
     #course-title { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-
-    /* CONTENT AREA */
     #content-area { flex: 1; overflow-y: auto; padding: 24px; }
     .content-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .card-title { font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
     .card-body { font-size: 15px; line-height: 1.85; color: var(--text-muted); }
-    .card-body p.formula {
-      font-family: var(--font-mono); font-size: 15px; text-align: center; padding: 12px;
-      background: #fff0e4; border-right: 4px solid #e8894a; border-radius: 6px 0 0 6px;
-      color: #c2601a; font-weight: 500; margin: 12px 0; direction: ltr;
-    }
-
-    /* FLASHCARDS */
+    .card-body p.formula { font-family: var(--font-mono); font-size: 15px; text-align: center; padding: 12px; background: #fff0e4; border-right: 4px solid #e8894a; border-radius: 6px 0 0 6px; color: #c2601a; margin: 12px 0; direction: ltr; }
     .flashcards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
     .flashcard { height: 260px; perspective: 1000px; cursor: pointer; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .flashcard-front, .flashcard-back {
-      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-lg); padding: 25px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-family: var(--font-serif); font-size: 19px; font-weight: 600; text-align: center; }
-    .flashcard-back { background: var(--bg-panel); border: 2px solid var(--accent); transform: rotateY(180deg); font-size: 14px; text-align: right; overflow-y: auto; justify-content: flex-start; align-items: flex-start; }
-
+    .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-family: var(--font-serif); font-size: 20px; font-weight: 600; text-align: center; }
+    .flashcard-back { background: var(--bg-panel); border: 2px solid var(--accent); transform: rotateY(180deg); font-size: 15px; text-align: right; overflow-y: auto; justify-content: flex-start; align-items: flex-start; }
     .view-toggle { display: flex; gap: 2px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3px; margin-right: auto; margin-bottom: 10px; width: fit-content; }
-    .view-toggle-btn { padding: 4px 12px; border: none; background: transparent; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text-muted); }
+    .view-toggle-btn { padding: 4px 12px; border: none; background: transparent; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text-muted); font-family: var(--font-ui); }
     .view-toggle-btn.active { background: var(--bg-hover); color: var(--text); font-weight: 600; }
+    .topic-tabs { display: flex; gap: 2px; margin-bottom: 10px; }
+    .topic-tab { padding: 8px 16px; border: none; background: transparent; cursor: pointer; font-size: 13px; color: var(--text-muted); border-bottom: 2px solid transparent; }
+    .topic-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
     #pdf-frame { width: 100%; height: 100%; border: none; background: #525659; }
     mark { background: rgba(210,153,34,0.25); color: var(--amber); }
   </style>
@@ -71,85 +55,71 @@
 <body>
   <div id="topbar">
     <div class="logo">📚 CS Summaries<small>by Yuli Ittah</small></div>
-    <div id="topbar-search"><input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." /></div>
+    <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
     <div class="emoji-row"><span>🎓</span><span>📝</span><span>💻</span><span>🧠</span><span>💡</span><span>📖</span></div>
   </div>
-
   <div id="layout">
     <div id="sidebar"><div id="course-list"></div></div>
     <div id="main">
       <div id="course-header">
         <div id="course-title">בחר קורס</div>
-        <div id="topic-tabs"></div>
+        <div id="course-controls"></div>
       </div>
-      <div id="content-area"></div>
+      <div id="content-area"><div id="empty-state"><p>בחר קורס מהתפריט הצדדי</p></div></div>
     </div>
   </div>
 
   <script>
     const COURSES = {
-      ds: {
-        name: "מבני נתונים", icon: "🌳", pdfs: [{label: "סיכום", file: "סיכום מבני נתונים.pdf"}],
+      linear1: {
+        name: "לינארית 1", icon: "📐",
+        pdfs: [{ label: "סיכום 1", file: "linear-note1.pdf" }, { label: "סיכום 2", file: "linear-note2.pdf" }],
         content: [
-          { title: "חסמים אסימפטוטיים (O, Ω, Θ)", text: `<p><strong>חסם עליון (O):</strong> פונקציה f היא ב-O(g) אם קצב הגידול שלה אינו עולה על זה של g. מייצג את המקרה הגרוע ביותר.</p>
-          <p><strong>חסם תחתון (Ω):</strong> קצב הגידול המינימלי של הפונקציה (מקרה אופטימי).</p>
-          <p><strong>חסם הדוק (Θ):</strong> כאשר הפונקציה מתנהגת בדיוק כמו פונקציית הייחוס g (עד כדי קבוע).</p>` },
-          { title: "מחסנית ותור (Stack & Queue)", text: `<p><strong>מחסנית:</strong> מבנה נתונים מסוג LIFO (Last In First Out). פעולות ב-O(1).</p>
-          <p><strong>תור:</strong> מבנה נתונים מסוג FIFO (First In First Out). הכנסה לסוף והוצאה מההתחלה ב-O(1).</p>` },
-          { title: "עצים - הגדרות יסוד", text: `<p><strong>שורש:</strong> הצומת היחיד ללא הורה. <strong>עלה:</strong> צומת ללא ילדים. <strong>דרגה:</strong> מספר הילדים של צומת.</p>
-          <p><strong>אבות קדמונים:</strong> מסלול מהשורש לצומת. <strong>צאצאים:</strong> כל הצמתים בתתי-העצים תחת הצומת.</p>` },
-          { title: "גובה, עומק ורמה", text: `<p><strong>עומק:</strong> מספר הקשתות מהשורש לצומת. <strong>גובה:</strong> מספר הקשתות במסלול הארוך ביותר לעלה. <strong>רמה:</strong> קבוצת כל הצמתים באותו עומק.</p>` },
-          { title: "עץ מלא, שלם ו-B-Tree", text: `<p><strong>עץ מלא:</strong> לכל צומת יש בדיוק 0 או 2 ילדים. <strong>עץ שלם:</strong> כל הרמות מלאות פרט לאחרונה שממולאת משמאל.</p>
-          <p><strong>עץ B:</strong> עץ חיפוש רב-דרכי מאוזן שנועד לעבודה עם זיכרון חיצוני (דיסקים).</p>` },
-          { title: "סריקות וחיפוש (DFS/BFS)", text: `<p><strong>DFS:</strong> סריקה לעומק (Pre/In/Post Order). <strong>BFS:</strong> סריקה לרוחב רמה אחר רמה בעזרת תור.</p>
-          <p><strong>AVL:</strong> עץ חיפוש מאוזן בו גורם האיזון (BF) הוא בין 1 ל-(-1). כל הפעולות ב-O(log n).</p>` },
-          { title: "סיבוכיות פעולות במבנים", text: `<p><strong>מערך לא ממוין:</strong> חיפוש O(n). <strong>מערך ממוין:</strong> חיפוש O(log n) בינארי.</p>
-          <p><strong>רשימה מקושרת:</strong> חיפוש O(n). <strong>עץ AVL:</strong> הכל ב-O(log n).</p>` }
-        ]
-      },
-      oop: {
-        name: "מונחי עצמים", icon: "☕", pdfs: [{label: "סיכום", file: "סיכום מונחי עצמים.pdf"}],
-        content: [
-          { title: "מחלקה, אובייקט ובנאי", text: `<p><strong>מחלקה (Class):</strong> התבנית (Blueprint). <strong>אובייקט:</strong> המופע בזיכרון ה-Heap שנוצר עם new.</p>
-          <p><strong>בנאי (Constructor):</strong> מתודה מיוחדת לאתחול האובייקט בעת יצירתו.</p>` },
-          { title: "ניהול זיכרון (Heap vs Stack)", text: `<p><strong>Stack:</strong> משתנים פרימיטיביים, רפרנסים וקריאות לפונקציות. <strong>Heap:</strong> האובייקטים עצמם.</p>` },
-          { title: "מילים שמורות (Final, Super, Static)", text: `<p><strong>Final:</strong> קבוע (לא ניתן לשינוי/דריסה). <strong>Super:</strong> רפרנס למחלקת האב. <strong>Static:</strong> שייך למחלקה ולא למופע.</p>` },
-          { title: "הרשאות וממשקים", text: `<p><strong>Protected:</strong> גישה לחבילה וליורשים. <strong>Interface:</strong> חוזה שמגדיר "מה" האובייקט עושה בלי "איך". <strong>Abstract:</strong> מחלקה ללא מימוש מלא שלא ניתן ליצור לה מופע.</p>` },
-          { title: "פולימורפיזם (Polymorphism)", text: `<p>היכולת של רפרנס מסוג אב להצביע על אובייקט מסוג בן ולהפעיל את המימושים של הבן (Override). מאפשר כתיבת קוד גנרי וגמיש.</p>` },
-          { title: "קישור (Binding)", text: `<p>תהליך קישור הקריאה למתודה למימוש שלה. ב-Java קיים קישור סטטי (Compile-time) וקישור דינמי (Runtime).</p>` },
-          { title: "Casting וגנריות", text: `<p><strong>Casting:</strong> המרה בין סוגי רפרנסים (Upcasting בטוח, Downcasting מסוכן). <strong>Generics:</strong> שימוש בפרמטר טיפוס <T> לבטיחות בזמן קומפילציה.</p>` },
-          { title: "איטרטור (Iterator)", text: `<p>אובייקט המאפשר לעבור על אוסף של נתונים (כמו רשימה) בלי לחשוף את המבנה הפנימי שלה.</p>` }
+          { title: "העתקה לינארית", text: "<p>פונקציה $T: V \to U$ היא העתקה לינארית אם היא שומרת על פעולות החיבור והכפל בסקלר:</p><p class='formula'>T(u+v) = T(u) + T(v), \quad T(cv) = cT(v)</p>" },
+          { title: "משפט המימדים", text: "<p>יהיו $U, W$ תתי מרחבים של $V$ ממימד סופי, אזי:</p><p class='formula'>\dim(U+W) = \dim(U) + \dim(W) - \dim(U \cap W)</p>" },
+          { title: "משפט הדרגה להעתקות", text: "<p>עבור העתקה לינארית $T: V \to U$, מתקיים הקשר בין מימד הגרעין (Ker) למימד התמונה (Im):</p><p class='formula'>\dim(\text{Ker}(T)) + \dim(\text{Im}(T)) = \dim(V)</p>" },
+          { title: "בסיס", text: "<p>קבוצת וקטורים היא בסיס אם היא גם פורשת את המרחב וגם בלתי תלויה לינארית (בת\"ל).</p>" },
+          { title: "וקטור קואורדינטות", text: "<p>ייצוג ייחודי של וקטור $v$ כצירוף לינארי של איברי הבסיס. המקדמים של הצירוף הם הקואורדינטות.</p>" },
+          { title: "משפט שלישי חינם", text: "<p>במרחב ממימד $n$, כל קבוצה בת $n$ איברים שהיא בת\"ל היא בהכרח בסיס (ופורשת אוטומטית).</p>" }
         ]
       },
       infi1: {
-        name: "חשבון אינפי 1", icon: "∞", pdfs: [{label: "סיכום", file: "infi-summary.pdf"}],
+        name: "חשבון אינפי 1", icon: "∞",
+        pdfs: [{ label: "סיכום", file: "infi-1.pdf" }],
         content: [
-          { title: "סדרת קושי", text: `<p>סדרה מתכנסת אם ורק אם המרחק בין איבריה שואף ל-0:</p><p class='formula'>\forall \epsilon > 0, \exists N: \forall n, m > N \implies |a_n - a_m| < \epsilon</p>` },
-          { title: "הגדרת הנגזרת", text: `<p>הנגזרת בנקודה a מוגדרת כגבול מנת ההפרשים:</p><p class='formula'>f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}</p>` },
-          { title: "נגזרת פונקציה הפוכה", text: `<p class='formula'>(f^{-1})'(y) = \frac{1}{f'(x)}</p>` },
-          { title: "משפטי ערך ורציפות", text: `<p><strong>ערך הביניים:</strong> פונקציה רציפה בסגור מקבלת כל ערך בין f(a) ל-f(b).</p>
-          <p><strong>ויירשטראס 1:</strong> רציפה בקטע סגור וחסום היא חסומה בו.</p>
-          <p><strong>ויירשטראס 2:</strong> רציפה בקטע סגור מקבלת בו מקסימום ומינימום.</p>` },
-          { title: "התכנסות בהחלט וגזירות", text: `<p><strong>התכנסות בהחלט:</strong> הטור של הערכים המוחלטים מתכנס. <strong>גזירות:</strong> גוררת רציפות (אך לא להיפך).</p>` }
+          { title: "סדרת קושי", text: "<p>סדרה מתכנסת אם ורק אם המרחק בין כל שני איברים הולך וקטן ככל שמתקדמים בסדרה:</p><p class='formula'>\forall \epsilon > 0, \exists N: \forall n, m > N \implies |a_n - a_m| < \epsilon</p>" },
+          { title: "הגדרת הנגזרת", text: "<p>הנגזרת של $f$ בנקודה $a$ היא גבול מנת ההפרשים כאשר המרחק $h$ שואף ל-0:</p><p class='formula'>f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}</p>" },
+          { title: "נגזרת פונקציה הפוכה", text: "<p>אם $f$ גזירה והפיכה, הנגזרת של הפונקציה ההפוכה בנקודה $y$ היא:</p><p class='formula'>(f^{-1})'(y) = \frac{1}{f'(x)}</p>" },
+          { title: "משפטי ויירשטראס", text: "<p><strong>ויירשטראס 1:</strong> פונקציה רציפה בקטע סגור וחסום היא חסומה בו. <strong>ויירשטראס 2:</strong> פונקציה כזו גם מקבלת בו ערך מקסימלי ומינימלי.</p>" },
+          { title: "רציפות וגזירות", text: "<p><strong>רציפות:</strong> הגבול בנקודה שווה לערך הפונקציה. <strong>גזירות:</strong> קיום הנגזרת בנקודה גורר רציפות בנקודה זו.</p>" }
         ]
       },
-      linear1: {
-        name: "לינארית 1", icon: "📐", pdfs: [{label: "סיכום", file: "linear-summary.pdf"}],
+      ds: {
+        name: "מבני נתונים", icon: "🌳", pdfs: [{label: "סיכום", file: "ds-summary.pdf"}],
         content: [
-          { title: "העתקה לינארית", text: `<p>פונקציה T השומרת על פעולות המרחב:</p><p class='formula'>T(u+v) = T(u) + T(v), \quad T(cv) = cT(v)</p>` },
-          { title: "משפטי דרגה ומימד", text: `<p><strong>משפט המימדים:</strong> $\dim(U+W) = \dim(U) + \dim(W) - \dim(U \cap W)$</p>
-          <p><strong>משפט הדרגה:</strong> $\dim(\text{Ker}(T)) + \dim(\text{Im}(T)) = \dim(V)$</p>` },
-          { title: "בסיס ווקטור קואורדינטות", text: `<p><strong>בסיס:</strong> קבוצה פורשת ובת"ל. <strong>וקטור קואורדינטות:</strong> וקטור הסקלרים הייחודי שמייצג את v לפי הבסיס.</p>` },
-          { title: "משפט שלישי חינם", text: `<p>במרחב ממימד n, קבוצה בגודל n שהיא בת"ל היא בסיס (ופורשת אוטומטית).</p>` },
-          { title: "תת מרחב ומטריצה מייצגת", text: `<p><strong>תת מרחב:</strong> קבוצה הסגורה לחיבור וכפל בסקלר. <strong>מטריצה מייצגת:</strong> מטריצה שעמודותיה הן קואורדינטות תמונות איברי הבסיס.</p>` }
+          { title: "חסמים אסימפטוטיים (O, Ω, Θ)", text: "<p><strong>O (חסם עליון):</strong> המקרה הגרוע ביותר. <strong>Ω (חסם תחתון):</strong> המקרה האופטימי. <strong>Θ (חסם הדוק):</strong> התנהגות מדויקת.</p>" },
+          { title: "מחסנית ותור", text: "<p><strong>מחסנית:</strong> LIFO (כמו ערימת צלחות). <strong>תור:</strong> FIFO (כמו תור בסופר). שניהם תומכים בפעולות ב-O(1).</p>" },
+          { title: "עצים - מושגי יסוד", text: "<p><strong>שורש:</strong> הצומת היחיד ללא הורה. <strong>עלה:</strong> צומת ללא ילדים. <strong>דרגה:</strong> מספר ילדי הצומת. <strong>גובה:</strong> מסלול ארוך ביותר לעלה.</p>" },
+          { title: "DFS ו-BFS", text: "<p><strong>DFS:</strong> סריקה לעומק (שימוש במחסנית). <strong>BFS:</strong> סריקה לרוחב (שימוש בתור, רמה אחר רמה).</p>" },
+          { title: "עץ AVL וסיבוכיות", text: "<p>עץ חיפוש מאוזן בו כל הפעולות (חיפוש, הכנסה, מחיקה) הן ב-O(log n).</p>" }
+        ]
+      },
+      oop: {
+        name: "מונחי עצמים", icon: "☕", pdfs: [{label: "סיכום", file: "oop-summary.pdf"}],
+        content: [
+          { title: "מחלקה ואובייקט", text: "<p><strong>Class:</strong> התבנית. <strong>Object:</strong> המופע בזיכרון ה-Heap שנוצר עם new.</p>" },
+          { title: "Heap vs Stack", text: "<p><strong>Stack:</strong> משתנים מקומיים ורפרנסים. <strong>Heap:</strong> אובייקטים ומערכים (מנוהל ע\"י Garbage Collector).</p>" },
+          { title: "פולימורפיזם (Polymorphism)", text: "<p>היכולת להשתמש ברפרנס מסוג אב כדי להפעיל מימושים של מחלקות בנות שנדרסו (Override).</p>" },
+          { title: "קישור (Binding)", text: "<p>תהליך קישור הקריאה למתודה למימוש שלה. ב-Java הקישור הוא דינמי (בזמן ריצה) כברירת מחדל.</p>" },
+          { title: "Casting וגנריות", text: "<p><strong>Casting:</strong> המרה בין סוגי רפרנסים. <strong>Generics:</strong> שימוש ב-<T> לכתיבת קוד בטוח וגמיש לטיפוסים שונים.</p>" }
         ]
       }
     };
 
-    let activeCourse = null, viewMode = 'cards', searchQuery = '';
+    let activeCourse = null, viewMode = 'cards', searchQuery = '', activePdfIndex = 0;
     const pdfBlobUrls = {};
 
-    function selectCourse(id) { activeCourse = id; viewMode = 'cards'; render(); }
+    function selectCourse(id) { activeCourse = id; activePdfIndex = 0; viewMode = 'cards'; render(); }
     function highlight(text) { if (!searchQuery) return text; const re = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')})`, 'gi'); return text.replace(re, '<mark>$1</mark>'); }
 
     function renderSidebar() {
@@ -164,28 +134,37 @@
     }
 
     function renderMain() {
-      const titleEl = document.getElementById('course-title'), tabsEl = document.getElementById('topic-tabs');
+      const titleEl = document.getElementById('course-title'), controlsEl = document.getElementById('course-controls');
       if (!activeCourse) return;
       const course = COURSES[activeCourse];
       titleEl.textContent = `${course.icon} ${course.name}`;
-      tabsEl.innerHTML = `
-        <div class="view-toggle">
-          ${course.pdfs ? `<button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" onclick="viewMode='pdf';renderMain()">📄 PDF</button>` : ''}
-          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" onclick="viewMode='cards';renderMain()">🗂 הגדרות</button>
-          <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" onclick="viewMode='flashcards';renderMain()">🔁 Flashcards</button>
-        </div>`;
+      
+      let html = `<div class="view-toggle">
+        ${course.pdfs ? `<button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" onclick="viewMode='pdf';renderMain()">📄 PDF</button>` : ''}
+        <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" onclick="viewMode='cards';renderMain()">🗂 הגדרות</button>
+        <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" onclick="viewMode='flashcards';renderMain()">🔁 Flashcards</button>
+      </div>`;
+
+      if (viewMode === 'pdf' && course.pdfs.length > 1) {
+        html += `<div class="topic-tabs">`;
+        course.pdfs.forEach((p, i) => {
+          html += `<button class="topic-tab ${activePdfIndex === i ? 'active' : ''}" onclick="activePdfIndex=${i};renderContent();renderMain()">${p.label}</button>`;
+        });
+        html += `</div>`;
+      }
+      controlsEl.innerHTML = html;
       renderContent();
     }
 
     function renderContent() {
       const contentEl = document.getElementById('content-area'), course = COURSES[activeCourse];
       if (viewMode === 'pdf') {
-        const entry = course.pdfs[0]; contentEl.style.padding = '0'; const key = `${activeCourse}:0`;
+        const entry = course.pdfs[activePdfIndex]; contentEl.style.padding = '0'; const key = `${activeCourse}:${activePdfIndex}`;
         if (pdfBlobUrls[key]) { contentEl.innerHTML = `<iframe id="pdf-frame" src="${pdfBlobUrls[key]}"></iframe>`; }
         else if (location.protocol !== 'file:') { contentEl.innerHTML = `<iframe id="pdf-frame" src="${entry.file}"></iframe>`; }
         else {
           contentEl.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;">
-            <button onclick="document.getElementById('pdf-f').click()" style="padding:10px 20px; border-radius:8px; border:none; background:var(--accent); color:#fff; cursor:pointer;">📂 בחר קובץ PDF מהמחשב</button>
+            <button onclick="document.getElementById('pdf-f').click()" style="padding:10px 20px; border-radius:8px; border:none; background:var(--accent); color:#fff; cursor:pointer;">📂 בחר את "${entry.label}" מהמחשב</button>
             <input type="file" id="pdf-f" accept=".pdf" style="display:none" onchange="const f=this.files[0]; if(f){const u=URL.createObjectURL(f); pdfBlobUrls['${key}']=u; renderContent();}" />
           </div>`;
         }

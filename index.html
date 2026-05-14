@@ -325,7 +325,6 @@
       font-weight: 500;
     }
 
-    /* בלוק נוסחה — שורה עצמאית */
     .card-body p.formula {
       font-family: var(--font-mono);
       font-size: 15px;
@@ -391,629 +390,6 @@
       #course-title { font-size: 15px; }
       #content-area { padding: 16px; }
     }
-  </style>
-</head>
-<body>
-
-  <!-- TOP BAR -->
-  <div id="topbar">
-    <div class="logo">CS Summaries<small>by Yuli Ittah</small></div>
-    <div id="topbar-search">
-      <span class="search-icon">⌕</span>
-      <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
-    </div>
-    <div class="topbar-stats">
-      <span id="stat-courses"></span>
-      <span id="stat-topics"></span>
-    </div>
-  </div>
-
-  <!-- MAIN LAYOUT -->
-  <div id="layout">
-
-    <!-- SIDEBAR -->
-    <div id="sidebar">
-      <div class="sidebar-section-label">קורסים</div>
-      <div id="course-list"></div>
-    </div>
-
-    <!-- CONTENT -->
-    <div id="main">
-      <div id="course-header">
-        <div id="course-title-bar">
-          <div id="course-title">בחר קורס</div>
-          <div id="course-subtitle"></div>
-        </div>
-        <div id="topic-tabs"></div>
-      </div>
-      <div id="content-area">
-        <div id="empty-state">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-          </svg>
-          <p>בחר קורס מהתפריט הצדדי</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    // ================================================================
-    // DATA — ערוך כאן את הקורסים והסיכומים שלך
-    // כל קורס מכיל: name, icon (emoji), topics
-    // כל נושא מכיל מערך של content cards
-    // כל card: title, tags, text, complexity (אופציונלי)
-    // ================================================================
-
-    const COURSES = {
-      linear1: {
-        name: "אלגברה לינארית 1",
-        icon: "📐",
-        pdfs: [
-          { label: "סיכום 1", file: "linear-note1.pdf" },
-          { label: "סיכום 2", file: "linear-note2.pdf" },
-        ],
-        topics: {
-          "מרחב וקטורי ובסיס": {
-            content: [
-              {
-                title: "בסיס וקואורדינטות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של V אם היא פורשת ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a<sub>1</sub>,...,a<sub>n</sub> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
-                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>,...,a<sub>n</sub>)<sup>T</sup></p>`,
-                complexity: []
-              },
-              {
-                title: "תכונות ייצוג בבסיס",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>לכל u,v∈V וסקלר λ:</p>
-                <p class="formula">[u+v]<sub>B</sub> = [u]<sub>B</sub> + [v]<sub>B</sub></p>
-                <p class="formula">[λv]<sub>B</sub> = λ·[v]<sub>B</sub></p>
-                <p class="formula">v = 0 ↔ [v]<sub>B</sub> = 0</p>
-                <p class="formula">v = u ↔ [v]<sub>B</sub> = [u]<sub>B</sub></p>`,
-                complexity: []
-              },
-              {
-                title: "שינוי בסיס — מטריצת המעבר",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר [I]<sub>B</sub><sup>C</sup> ממירה קואורדינטות מ-B ל-C:</p>
-                <p class="formula">[v]<sub>C</sub> = [I]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub></p>
-                <p>בנייה: עמודה j של [I]<sub>B</sub><sup>C</sup> היא [v<sub>j</sub>]<sub>C</sub> — קואורדינטות של וקטור הבסיס ה-j של B ביחס ל-C.</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "העתקה לינארית": {
-            content: [
-              {
-                title: "הגדרה ותכונות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>T: V→U</strong> היא העתקה לינארית אם לכל u,v∈V וסקלר λ:</p>
-                <p class="formula">T(u+v) = T(u) + T(v)</p>
-                <p class="formula">T(λv) = λ·T(v)</p>
-                <p>נובע: T(0) = 0 ו-T(Σa<sub>i</sub>v<sub>i</sub>) = Σa<sub>i</sub>T(v<sub>i</sub>)</p>`,
-                complexity: []
-              },
-              {
-                title: "שימור תכונות",
-                tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U העתקה לינארית ו-{v<sub>1</sub>,...,v<sub>k</sub>}⊆V:</p>
-                <p><strong>1.</strong> T חד-חד-ערכית ↔ {v<sub>1</sub>,...,v<sub>k</sub>} ב"ת לינארית ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} ב"ת לינארית</p>
-                <p><strong>2.</strong> T על ↔ {v<sub>1</sub>,...,v<sub>k</sub>} פורשת ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} פורשת</p>
-                <p><strong>3.</strong> T איזומורפיזם ↔ {v<sub>1</sub>,...,v<sub>k</sub>} בסיס ↔ {T(v<sub>1</sub>),...,T(v<sub>k</sub>)} בסיס</p>`,
-                complexity: []
-              },
-              {
-                title: "איזומורפיזם",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>T: V→U היא <strong>איזומורפיזם</strong> אם היא לינארית, חד-חד-ערכית ועל (ביקציה לינארית).</p>
-                <p>תנאי הכרחי ומספיק: <strong>dim V = dim U</strong></p>
-                <p>אם T איזומורפיזם — T<sup>-1</sup> קיימת ואיזומורפיזם גם היא.</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "מטריצה מייצגת": {
-            content: [
-              {
-                title: "הגדרת המטריצה המייצגת",
-                tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
-                text: `<p>תהי T: V→U, B={v<sub>1</sub>,...,v<sub>n</sub>} בסיס ל-V, C בסיס ל-U.</p>
-                <p>המטריצה המייצגת [T]<sub>B</sub><sup>C</sup> — עמודה j שלה = [T(v<sub>j</sub>)]<sub>C</sub>.</p>
-                <p class="formula">[T]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub> = [T(v)]<sub>C</sub></p>`,
-                complexity: []
-              },
-              {
-                title: "אלגברה של מטריצות מייצגות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p class="formula">[T+S]<sub>B</sub><sup>C</sup> = [T]<sub>B</sub><sup>C</sup> + [S]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">[λT]<sub>B</sub><sup>C</sup> = λ·[T]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">[S∘T]<sub>B</sub><sup>D</sup> = [S]<sub>C</sub><sup>D</sup> · [T]<sub>B</sub><sup>C</sup></p>
-                <p class="formula">([T]<sub>B</sub><sup>C</sup>)<sup>-1</sup> = [T<sup>-1</sup>]<sub>C</sub><sup>B</sup></p>`,
-                complexity: []
-              },
-              {
-                title: "נוסחת שינוי בסיס למטריצה",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p>אם B, C בסיסים ל-V ו-A = [T]<sub>B</sub><sup>B</sup>, אז:</p>
-                <p class="formula">[T]<sub>C</sub><sup>C</sup> = [I]<sub>B</sub><sup>C</sup> · A · ([I]<sub>B</sub><sup>C</sup>)<sup>-1</sup></p>
-                <p>שתי מטריצות מייצגות לאותה T בבסיסים שונים הן <strong>דומות</strong> (similar).</p>`,
-                complexity: []
-              },
-            ]
-          }
-        }
-      },
-
-      infi1: {
-        name: "חשבון אינפיניטסימלי 1",
-        icon: "∞",
-        pdf: "infi-1.pdf",
-        topics: {
-          "סדרות": {
-            content: [
-              {
-                title: "הגדרת הגבול — ε-N",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>סדרה (a<sub>n</sub>) מתכנסת ל-L אם: לכל <strong>ε>0</strong> קיים <strong>N</strong> כך שלכל n>N מתקיים |a<sub>n</sub> - L| &lt; ε.</p>
-                <p class="formula">lim a<sub>n</sub> = L &nbsp;·&nbsp; a<sub>n</sub> → L</p>`,
-                complexity: []
-              },
-              {
-                title: "כלל הסנדוויץ' ותכונות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p><strong>כלל הסנדוויץ':</strong> אם a<sub>n</sub> ≤ b<sub>n</sub> ≤ c<sub>n</sub> ו-a<sub>n</sub>, c<sub>n</sub> → L אז b<sub>n</sub> → L.</p>
-                <p><strong>אלגברה:</strong> אם a<sub>n</sub>→L ו-b<sub>n</sub>→M: a<sub>n</sub>+b<sub>n</sub> → L+M, a<sub>n</sub>·b<sub>n</sub> → L·M, a<sub>n</sub>/b<sub>n</sub> → L/M (M≠0).</p>
-                <p>אם a<sub>n</sub> → ∞ אז 1/a<sub>n</sub> → 0.</p>`,
-                complexity: []
-              },
-              {
-                title: "המספר e וגבולות חשובים",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">e = lim (1 + 1/n)<sup>n</sup> , n→∞</p>
-                <p>הכללה: lim(1 + a/n)<sup>n</sup> = e<sup>a</sup></p>
-                <p>שקילות: אם a<sub>n</sub> → ∞ אז (1 + 1/a<sub>n</sub>)<sup>a<sub>n</sub></sup> → e</p>`,
-                complexity: []
-              },
-              {
-                title: "קריטריון קושי לסדרות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>סדרה (a<sub>n</sub>) מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי:</p>
-                <p>לכל ε>0 קיים N כך שלכל m,n>N: <strong>|a<sub>n</sub> - a<sub>m</sub>| &lt; ε</strong></p>`,
-                complexity: []
-              },
-            ]
-          },
-          "טורים": {
-            content: [
-              {
-                title: "הגדרה והתכנסות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>הסכומים החלקיים: S<sub>n</sub> = Σ<sub>k=1</sub><sup>n</sup> a<sub>k</sub></p>
-                <p>טור Σa<sub>n</sub> <strong>מתכנס</strong> אם סדרת S<sub>n</sub> מתכנסת.</p>
-                <p><strong>תנאי הכרחי (לא מספיק!):</strong> Σa<sub>n</sub> מתכנס → a<sub>n</sub> → 0. ההיפך לא נכון (דוגמה: Σ1/n מתבדר).</p>`,
-                complexity: []
-              },
-              {
-                title: "טור הנדסי",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>Σq<sup>n</sup> מתכנס אם ורק אם |q|&lt;1, ואז:</p>
-                <p class="formula">Σ<sub>n=0</sub><sup>∞</sup> q<sup>n</sup> = 1/(1-q)</p>`,
-                complexity: []
-              },
-              {
-                title: "מבחני התכנסות",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p><strong>מבחן שורש (קושי):</strong> lim <sup>n</sup>√|a<sub>n</sub>| = q: q&lt;1 מתכנס, q>1 מתבדר, q=1 אי-מסקנה.</p>
-                <p><strong>מבחן מנה (ד'אלמבר):</strong> lim |a<sub>n+1</sub>/a<sub>n</sub>| = q: אותן מסקנות.</p>
-                <p><strong>מבחן השוואה:</strong> 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>: Σb<sub>n</sub> מתכנס → Σa<sub>n</sub> מתכנס.</p>`,
-                complexity: []
-              },
-              {
-                title: "לייבניץ והתכנסות מוחלטת",
-                tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>לייבניץ:</strong> Σ(-1)<sup>n</sup>a<sub>n</sub> מתכנס אם a<sub>n</sub> מונוטון יורד ו-a<sub>n</sub> → 0.</p>
-                <p><strong>התכנסות מוחלטת:</strong> Σ|a<sub>n</sub>| מתכנס → Σa<sub>n</sub> מתכנס.</p>
-                <p><strong>התכנסות מותנית:</strong> מתכנס אך לא בהחלט (דוגמה: Σ(-1)<sup>n</sup>/n).</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "פונקציות ורציפות": {
-            content: [
-              {
-                title: "גבול פונקציה — ε-δ",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p>lim<sub>x→a</sub> f(x) = L אם: לכל ε>0 קיים δ>0 כך ש-0 &lt; |x-a| &lt; δ → |f(x)-L| &lt; ε.</p>
-                <p><strong>גבול קיים ↔</strong> lim<sub>x→a⁻</sub> f(x) = lim<sub>x→a⁺</sub> f(x) = L</p>`,
-                complexity: []
-              },
-              {
-                title: "גבולות חשובים",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">lim<sub>x→0</sub> sin(x)/x = 1</p>
-                <p class="formula">lim<sub>x→0</sub> (1-cos x)/x<sup>2</sup> = 1/2</p>
-                <p class="formula">lim<sub>x→0</sub> (a<sup>x</sup>-1)/x = ln a</p>
-                <p class="formula">lim<sub>x→0</sub> ln(1+x)/x = 1</p>`,
-                complexity: []
-              },
-              {
-                title: "רציפות ומשפטים",
-                tags: [{ label: "הגדרה", color: "blue" }, { label: "חשוב", color: "amber" }],
-                text: `<p>f <strong>רציפה</strong> בנקודה a אם lim<sub>x→a</sub> f(x) = f(a).</p>
-                <p><strong>IVT:</strong> f רציפה על [a,b], f(a)&lt;0&lt;f(b) → קיים c∈(a,b): f(c)=0.</p>
-                <p><strong>קנטור (EVT):</strong> f רציפה על [a,b] → חסומה ומגיעה למקסימום ומינימום.</p>`,
-                complexity: []
-              },
-              {
-                title: "נקודות אי-רציפות",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p><strong>סילוק:</strong> הגבול קיים אך ≠ f(a) (ניתן לתקן).</p>
-                <p><strong>קפיצה:</strong> הגבולות החד-צדדיים קיימים אך שונים זה מזה.</p>
-                <p><strong>מהותית:</strong> לפחות גבול אחד לא קיים סופי.</p>`,
-                complexity: []
-              },
-            ]
-          },
-          "נגזרות": {
-            content: [
-              {
-                title: "הגדרת הנגזרת",
-                tags: [{ label: "הגדרה", color: "blue" }],
-                text: `<p class="formula">f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</p>
-                <p>גזירות → רציפות (לא ההיפך: |x| רציף ב-0 אך לא גזיר).</p>`,
-                complexity: []
-              },
-              {
-                title: "כללי נגזרות",
-                tags: [{ label: "מבחן", color: "green" }],
-                text: `<p class="formula">(fg)' = f'g + fg' &nbsp;&nbsp; (f/g)' = (f'g − fg') / g<sup>2</sup></p>
-                <p class="formula">(f∘g)'(x) = f'(g(x))·g'(x) &nbsp; (כלל השרשרת)</p>
-                <p><strong>פונקציה הפוכה:</strong> (f<sup>-1</sup>)'(y) = 1 / f'(f<sup>-1</sup>(y))</p>`,
-                complexity: []
-              },
-              {
-                title: "נגזרות בסיסיות",
-                tags: [{ label: "חשוב", color: "amber" }],
-                text: `<p>(x<sup>n</sup>)' = nx<sup>n-1</sup> &nbsp;·&nbsp; (e<sup>x</sup>)' = e<sup>x</sup> &nbsp;·&nbsp; (ln x)' = 1/x</p>
-                <p>(sin x)' = cos x &nbsp;·&nbsp; (cos x)' = −sin x &nbsp;·&nbsp; (tan x)' = 1/cos<sup>2</sup>x</p>
-                <p>(arcsin x)' = 1/√(1−x<sup>2</sup>) &nbsp;·&nbsp; (arctan x)' = 1/(1+x<sup>2</sup>)</p>`,
-                complexity: []
-              },
-              {
-                title: "לגראנז' ולופיטל",
-                tags: [{ label: "מבחן", color: "green" }, { label: "חשוב", color: "amber" }],
-                text: `<p><strong>MVT (לגראנז'):</strong> f רציפה על [a,b], גזירה על (a,b) → קיים c:</p>
-                <p class="formula">f'(c) = [f(b) − f(a)] / (b−a)</p>
-                <p><strong>לופיטל:</strong> אם lim f = lim g = 0 (או ±∞) → lim f/g = lim f'/g'.</p>
-                <p><strong>סדר גודל:</strong> ln x ≪ x<sup>a</sup> ≪ e<sup>x</sup> לכל a>0 כאשר x→∞.</p>`,
-                complexity: []
-              },
-            ]
-          }
-        }
-      },
-
-    };
-    // ================================================================
-    // STATE
-    // ================================================================
-    let activeCourse = null;
-    let activeTopic = null;
-    let searchQuery = '';
-    let viewMode = 'cards'; // 'cards' | 'pdf'
-    let activePdfIndex = 0;
-    const pdfBlobUrls = {}; // "courseId:index" → blob URL
-
-    // ================================================================
-    // TAG COLOR MAP
-    // ================================================================
-    const tagColorMap = {
-      "בסיסי": "blue", "חשוב": "amber", "מבחן": "green",
-      "מתקדם": "purple", "יעיל": "blue", "LIFO": "blue",
-      "FIFO": "blue", "D&C": "purple", "לינארי": "red",
-      "קלאסי": "blue", "מאוזן": "purple", "מהיר": "blue",
-      "אמין": "green",
-    };
-
-    // ================================================================
-    // RENDER HELPERS
-    // ================================================================
-    function renderTag(tag) {
-      const color = tag.color || tagColorMap[tag.label] || 'blue';
-      return `<span class="tag tag-${color}">${tag.label}</span>`;
-    }
-
-    function renderCard(card) {
-      const tags = (card.tags || []).map(renderTag).join('');
-      const pills = (card.complexity || [])
-        .map(c => `<span class="complexity-pill">${c}</span>`).join('');
-      const body = card.text || '';
-      return `
-        <div class="content-card">
-          <div class="card-header">
-            <div class="card-title">${highlight(card.title)}</div>
-            <div class="card-tags">${tags}</div>
-          </div>
-          <div class="card-body">${searchQuery ? highlightBody(body) : body}</div>
-          ${pills ? `<div class="card-divider"></div><div class="complexity-row">${pills}</div>` : ''}
-        </div>`;
-    }
-
-    function highlight(text) {
-      if (!searchQuery) return text;
-      const re = new RegExp(`(${escapeRe(searchQuery)})`, 'gi');
-      return text.replace(re, '<mark>$1</mark>');
-    }
-
-    function highlightBody(html) {
-      if (!searchQuery) return html;
-      // Only highlight text nodes, not tags
-      const tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      highlightNode(tmp);
-      return tmp.innerHTML;
-    }
-
-    function highlightNode(node) {
-      if (node.nodeType === 3) {
-        const re = new RegExp(`(${escapeRe(searchQuery)})`, 'gi');
-        if (re.test(node.textContent)) {
-          const span = document.createElement('span');
-          span.innerHTML = node.textContent.replace(re, '<mark>$1</mark>');
-          node.parentNode.replaceChild(span, node);
-        }
-      } else {
-        Array.from(node.childNodes).forEach(highlightNode);
-      }
-    }
-
-    function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-
-    // ================================================================
-    // RENDER SIDEBAR
-    // ================================================================
-    function renderSidebar() {
-      const list = document.getElementById('course-list');
-      list.innerHTML = '';
-      let courseCount = 0;
-      let topicCount = 0;
-
-      Object.entries(COURSES).forEach(([id, course]) => {
-        if (searchQuery) {
-          // check if query matches course name or any topic/content
-          const match = courseMatches(id, course);
-          if (!match) return;
-        }
-
-        courseCount++;
-        topicCount += Object.keys(course.topics).length;
-
-        const item = document.createElement('div');
-        item.className = 'course-item' + (activeCourse === id ? ' active' : '');
-        const topicNum = Object.keys(course.topics).length;
-        item.innerHTML = `<span class="course-icon">${course.icon}</span>${course.name}<span class="course-count">${topicNum}</span>`;
-        item.onclick = () => selectCourse(id);
-        list.appendChild(item);
-      });
-
-      document.getElementById('stat-courses').textContent = `${courseCount} קורסים`;
-      document.getElementById('stat-topics').textContent = `${topicCount} נושאים`;
-    }
-
-    function courseMatches(id, course) {
-      if (course.name.includes(searchQuery)) return true;
-      for (const [topic, data] of Object.entries(course.topics)) {
-        if (topic.includes(searchQuery)) return true;
-        for (const card of (data.content || [])) {
-          if (card.title.includes(searchQuery)) return true;
-          if ((card.text || '').includes(searchQuery)) return true;
-        }
-      }
-      return false;
-    }
-
-    // ================================================================
-    // SELECT COURSE
-    // ================================================================
-    function selectCourse(id) {
-      activeCourse = id;
-      activeTopic = Object.keys(COURSES[id].topics)[0];
-      activePdfIndex = 0;
-      const c = COURSES[id];
-      viewMode = (c.pdfs || c.pdf) ? 'pdf' : 'cards';
-      render();
-    }
-
-    // ================================================================
-    // RENDER MAIN
-    // ================================================================
-    function renderMain() {
-      const titleEl = document.getElementById('course-title');
-      const subtitleEl = document.getElementById('course-subtitle');
-      const tabsEl = document.getElementById('topic-tabs');
-      const contentEl = document.getElementById('content-area');
-
-      if (!activeCourse) {
-        titleEl.textContent = 'בחר קורס';
-        subtitleEl.textContent = '';
-        tabsEl.innerHTML = '';
-        contentEl.innerHTML = `<div id="empty-state">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
-          </svg>
-          <p>בחר קורס מהתפריט הצדדי</p>
-        </div>`;
-        return;
-      }
-
-      const course = COURSES[activeCourse];
-      titleEl.textContent = `${course.icon} ${course.name}`;
-      subtitleEl.textContent = `${Object.keys(course.topics).length} נושאים`;
-
-      // Build header: toggle (if pdf/pdfs exists) + tabs/pdf-subtabs
-      tabsEl.innerHTML = '';
-      const hasPdfs = course.pdfs || course.pdf;
-
-      if (hasPdfs) {
-        const toggle = document.createElement('div');
-        toggle.className = 'view-toggle';
-        toggle.innerHTML = `
-          <button class="view-toggle-btn ${viewMode === 'pdf' ? 'active' : ''}" id="btn-pdf">📄 PDF</button>
-          <button class="view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}" id="btn-cards">🗂 סיכומים</button>
-          <button class="view-toggle-btn ${viewMode === 'flashcards' ? 'active' : ''}" id="btn-flashcards">🔁 Flashcards</button>
-        `;
-        toggle.querySelector('#btn-pdf').onclick = () => { viewMode = 'pdf'; renderMain(); };
-        toggle.querySelector('#btn-cards').onclick = () => { viewMode = 'cards'; renderMain(); };
-        toggle.querySelector('#btn-flashcards').onclick = () => { viewMode = 'flashcards'; renderMain(); };
-        tabsEl.appendChild(toggle);
-      }
-
-      if (viewMode === 'pdf' && course.pdfs && course.pdfs.length > 1) {
-        // Sub-tabs for multiple PDFs
-        course.pdfs.forEach((p, i) => {
-          const tab = document.createElement('button');
-          tab.className = 'topic-tab' + (activePdfIndex === i ? ' active' : '');
-          tab.textContent = p.label;
-          tab.onclick = () => { activePdfIndex = i; renderContent(); updatePdfTabs(); };
-          tabsEl.appendChild(tab);
-        });
-      } else if (viewMode === 'cards' || viewMode === 'flashcards') {
-        Object.keys(course.topics).forEach(topic => {
-          const tab = document.createElement('button');
-          tab.className = 'topic-tab' + (activeTopic === topic ? ' active' : '');
-          tab.textContent = topic;
-          tab.onclick = () => { activeTopic = topic; renderContent(); updateTabs(); };
-          tabsEl.appendChild(tab);
-        });
-      }
-
-      renderContent();
-    }
-
-    function hideTabs() {
-      document.querySelectorAll('.topic-tab').forEach(t => t.remove());
-    }
-
-    function updateTabs() {
-      document.querySelectorAll('.topic-tab').forEach((tab, i) => {
-        const topics = Object.keys(COURSES[activeCourse].topics);
-        tab.className = 'topic-tab' + (topics[i] === activeTopic ? ' active' : '');
-      });
-    }
-
-    function updatePdfTabs() {
-      document.querySelectorAll('.topic-tab').forEach((tab, i) => {
-        tab.className = 'topic-tab' + (activePdfIndex === i ? ' active' : '');
-      });
-    }
-
-    function getPdfEntry() {
-      const course = COURSES[activeCourse];
-      if (course.pdfs) return course.pdfs[activePdfIndex];
-      if (course.pdf) return { label: 'PDF', file: course.pdf };
-      return null;
-    }
-
-    function renderContent() {
-      const contentEl = document.getElementById('content-area');
-      const course = COURSES[activeCourse];
-
-      // PDF mode
-      if (viewMode === 'pdf') {
-        const entry = getPdfEntry();
-        if (!entry) return;
-        contentEl.style.padding = '0';
-        const key = `${activeCourse}:${activePdfIndex}`;
-
-        if (pdfBlobUrls[key]) {
-          contentEl.innerHTML = `<iframe id="pdf-frame" src="${pdfBlobUrls[key]}" title="${entry.label}"></iframe>`;
-        } else if (location.protocol !== 'file:') {
-          contentEl.innerHTML = `<iframe id="pdf-frame" src="${entry.file}" title="${entry.label}"></iframe>`;
-        } else {
-          contentEl.innerHTML = `
-            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="1.3">
-                <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
-              </svg>
-              <p style="font-size:14px;color:var(--text-muted);">${entry.label}</p>
-              <button id="pick-pdf-btn" style="padding:9px 20px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-family:var(--font-ui);font-size:13px;cursor:pointer;">
-                📂 בחר קובץ PDF
-              </button>
-              <input type="file" id="pdf-file-input" accept=".pdf" style="display:none" />
-              <p style="font-size:11px;color:var(--text-dim);">הקובץ לא עולה לשום מקום — נטען מקומית בלבד</p>
-            </div>`;
-          document.getElementById('pick-pdf-btn').onclick = () => document.getElementById('pdf-file-input').click();
-          document.getElementById('pdf-file-input').onchange = (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const url = URL.createObjectURL(file);
-            pdfBlobUrls[key] = url;
-            contentEl.innerHTML = `<iframe id="pdf-frame" src="${url}" title="${entry.label}"></iframe>`;
-          };
-        }
-        return;
-      }
-      // Flashcards mode
-      if (viewMode === 'flashcards') {
-        contentEl.style.padding = '24px';
-        const topicData = course.topics[activeTopic] || {};
-        const cards = (topicData.content || []);
-
-        if (cards.length === 0) {
-          contentEl.innerHTML = `<div id="empty-state"><p>אין עדיין פלאשקארדס בנושא זה</p></div>`;
-          return;
-        }
-
-        contentEl.innerHTML = `<div class="flashcards-container">` + cards.map(card => `
-          <div class="flashcard" onclick="this.classList.toggle('flipped')">
-            <div class="flashcard-inner">
-              <div class="flashcard-front">${highlight(card.title)}</div>
-              <div class="flashcard-back">
-                <div style="padding-top: 10px;">${searchQuery ? highlightBody(card.text) : card.text}</div>
-              </div>
-            </div>
-          </div>
-        `).join('') + `</div>`;
-        return;
-      }
-      contentEl.style.padding = '24px';
-      const topicData = course.topics[activeTopic] || {};
-      const cards = (topicData.content || []);
-
-      if (cards.length === 0) {
-        contentEl.innerHTML = `<div id="empty-state"><p>אין עדיין תוכן בנושא זה</p></div>`;
-        return;
-      }
-
-      contentEl.innerHTML = cards.map(renderCard).join('');
-    }
-
-    // ================================================================
-    // GLOBAL SEARCH
-    // ================================================================
-    function handleSearch(q) {
-      searchQuery = q.trim();
-      if (!activeCourse && searchQuery) {
-        // auto-show first matching
-      }
-      render();
-    }
-
-    // ================================================================
-    // MAIN RENDER
-    // ================================================================
-    function render() {
-      renderSidebar();
-      renderMain();
-    }
-
-    // ================================================================
-    // INIT
-    // ================================================================
-    document.getElementById('search-input').addEventListener('input', e => handleSearch(e.target.value));
-    render();
 
     /* ========== FLASHCARDS ========== */
     .flashcards-container {
@@ -1078,6 +454,87 @@
     
     .flashcard-back::-webkit-scrollbar { width: 4px; }
     .flashcard-back::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-  </script>
-</body>
-</html>
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+    <div class="logo">CS Summaries<small>by Yuli Ittah</small></div>
+    <div id="topbar-search">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
+    </div>
+    <div class="topbar-stats">
+      <span id="stat-courses"></span>
+      <span id="stat-topics"></span>
+    </div>
+  </div>
+
+  <div id="layout">
+
+    <div id="sidebar">
+      <div class="sidebar-section-label">קורסים</div>
+      <div id="course-list"></div>
+    </div>
+
+    <div id="main">
+      <div id="course-header">
+        <div id="course-title-bar">
+          <div id="course-title">בחר קורס</div>
+          <div id="course-subtitle"></div>
+        </div>
+        <div id="topic-tabs"></div>
+      </div>
+      <div id="content-area">
+        <div id="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+          <p>בחר קורס מהתפריט הצדדי</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ================================================================
+    // DATA — ערוך כאן את הקורסים והסיכומים שלך
+    // כל קורס מכיל: name, icon (emoji), topics
+    // כל נושא מכיל מערך של content cards
+    // כל card: title, tags, text, complexity (אופציונלי)
+    // ================================================================
+
+    const COURSES = {
+      linear1: {
+        name: "אלגברה לינארית 1",
+        icon: "📐",
+        pdfs: [
+          { label: "סיכום 1", file: "linear-note1.pdf" },
+          { label: "סיכום 2", file: "linear-note2.pdf" },
+        ],
+        topics: {
+          "מרחב וקטורי ובסיס": {
+            content: [
+              {
+                title: "בסיס וקואורדינטות",
+                tags: [{ label: "הגדרה", color: "blue" }],
+                text: `<p>קבוצה <strong>B = {v<sub>1</sub>,...,v<sub>n</sub>}</strong> היא בסיס של V אם היא פורשת ובלתי תלויה לינארית. לכל v∈V קיימים סקלרים <strong>יחידים</strong> a<sub>1</sub>,...,a<sub>n</sub> כך ש v = a<sub>1</sub>v<sub>1</sub>+...+a<sub>n</sub>v<sub>n</sub>.</p>
+                <p class="formula">[v]<sub>B</sub> = (a<sub>1</sub>,...,a<sub>n</sub>)<sup>T</sup></p>`,
+                complexity: []
+              },
+              {
+                title: "תכונות ייצוג בבסיס",
+                tags: [{ label: "חשוב", color: "amber" }],
+                text: `<p>לכל u,v∈V וסקלר λ:</p>
+                <p class="formula">[u+v]<sub>B</sub> = [u]<sub>B</sub> + [v]<sub>B</sub></p>
+                <p class="formula">[λv]<sub>B</sub> = λ·[v]<sub>B</sub></p>
+                <p class="formula">v = 0 ↔ [v]<sub>B</sub> = 0</p>
+                <p class="formula">v = u ↔ [v]<sub>B</sub> = [u]<sub>B</sub></p>`,
+                complexity: []
+              },
+              {
+                title: "שינוי בסיס — מטריצת המעבר",
+                tags: [{ label: "מבחן", color: "green" }],
+                text: `<p>אם B וC הם שני בסיסים ל-V, מטריצת המעבר [I]<sub>B</sub><sup>C</sup> ממירה קואורדינטות מ-B ל-C:</p>
+                <p class="formula">[v]<sub>C</sub> = [I]<sub>B</sub><sup>C</sup> · [v]<sub>B</sub></p>

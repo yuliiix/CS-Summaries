@@ -630,6 +630,316 @@ const COURSES = {
       },
     ]
   }
+    bdida: {
+    name: "מתמטיקה בדידה", icon: "🔢",
+    pdfs: [
+      { label: "סיכום גרפים", file: "bdida-graphs.pdf" },
+      { label: "סיכום מלא", file: "bdida-summary.pdf" },
+    ],
+    cards: [
+      {
+        title: "קשרים לוגיים בסיסיים",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>∧ (וגם / AND):</strong> אמת רק כאשר שני הצדדים אמת.</p>
+        <p><strong>∨ (או / OR):</strong> אמת כאשר לפחות צד אחד אמת.</p>
+        <p><strong>¬ (שלילה / NOT):</strong> הופכת אמת לשקר ולהיפך.</p>
+        <p><strong>→ (גרירה / Implication):</strong> p→q שקרי <strong>רק</strong> כאשר p אמת ו-q שקר.</p>
+        <p><strong>↔ (אם ורק אם / Biconditional):</strong> אמת כאשר לשני הצדדים אותו ערך אמת.</p>
+        <p><strong>⊕ (XOR):</strong> אמת כאשר לשני הצדדים ערכי אמת <strong>שונים</strong>.</p>
+        <p class="principle">⚡ p→q ≡ ¬p∨q. גרירה שקרית רק כשהתנאי אמת והמסקנה שקר!</p>`
+      },
+      {
+        title: "טאוטולוגיה, סתירה ושקילות",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>טאוטולוגיה:</strong> פסוק שהוא <strong>תמיד אמת</strong> בכל השמה אפשרית. דוגמה: p∨¬p ≡ T</p>
+        <p><strong>סתירה (Contradiction):</strong> פסוק שהוא <strong>תמיד שקר</strong>. דוגמה: p∧¬p ≡ F</p>
+        <p><strong>שקילות לוגית (≡):</strong> שני פסוקים שקולים אם יש להם אותו ערך אמת בכל השמה.</p>
+        <p class="principle">⚡ כדי להוכיח שקילות — בנה טבלת אמת ובדוק שהעמודות זהות.</p>`
+      },
+      {
+        title: "זהויות לוגיות חשובות",
+        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>כללי דה-מורגן:</strong></p>
+        <p class="formula">¬(p ∨ q) ≡ ¬p ∧ ¬q</p>
+        <p class="formula">¬(p ∧ q) ≡ ¬p ∨ ¬q</p>
+        <p><strong>גרירה ושקילות:</strong></p>
+        <p class="formula">p → q  ≡  ¬p ∨ q  ≡  ¬q → ¬p  (קונטרה-פוזיטיב)</p>
+        <p class="formula">p ↔ q  ≡  (p→q) ∧ (q→p)</p>
+        <p class="formula">p ⊕ q  ≡  ¬(p↔q)</p>
+        <p><strong>חוקי פילוג:</strong></p>
+        <p class="formula">p ∨ (q∧r) ≡ (p∨q) ∧ (p∨r)</p>
+        <p class="formula">p ∧ (q∨r) ≡ (p∧q) ∨ (p∧r)</p>
+        <p class="principle">⚡ שלילה כפולה: ¬(¬p) ≡ p. אידמפוטנציה: p∧p ≡ p∨p ≡ p</p>`
+      },
+      {
+        title: "פרדיקטים וכמתים",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>פרדיקט P(x):</strong> פונקציה שמקבלת משתנים ומחזירה פסוק לוגי. תחום הדיון: A.</p>
+        <p><strong>∀ (כמת כולל):</strong> "לכל x מתקיים P(x)" — חייב להיות נכון לכל האיברים.</p>
+        <p><strong>∃ (כמת ישי):</strong> "קיים x כך שP(x)" — מספיק איבר אחד.</p>
+        <p><strong>∃! (כמת יחידות):</strong> "קיים x יחיד כך שP(x)".</p>
+        <p><strong>שלילת פסוקים עם כמתים (דה-מורגן לכמתים):</strong></p>
+        <p class="formula">¬(∀x P(x))  ≡  ∃x ¬P(x)</p>
+        <p class="formula">¬(∃x P(x))  ≡  ∀x ¬P(x)</p>
+        <p class="principle">⚡ שלילת "לכל" = "קיים שלא". שלילת "קיים" = "לכל לא".</p>`
+      },
+      {
+        title: "כללי היסק חשובים",
+        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>Modus Ponens:</strong> מ-p ומ-p→q — מסיקים q.</p>
+        <p class="formula">p ∧ (p→q) → q   (טאוטולוגיה)</p>
+        <p><strong>Simplification:</strong> מ-p∧q — מסיקים p.</p>
+        <p class="formula">p ∧ q → p   (טאוטולוגיה)</p>
+        <p><strong>Addition:</strong> מ-p — מסיקים p∨q.</p>
+        <p class="formula">p → p ∨ q   (טאוטולוגיה)</p>
+        <p class="principle">⚡ Modus Tollens: מ-¬q ומ-p→q — מסיקים ¬p (קונטרה-פוזיטיב).</p>`
+      },
+      {
+        title: "הגדרות בסיסיות — קבוצות",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>קבוצה:</strong> אוסף איברים. סימון: {}. הקבוצה הריקה: ∅.</p>
+        <p><strong>שייכות (∈):</strong> x∈A פירושו ש-x הוא אחד מאיברי A.</p>
+        <p><strong>הכלה (⊆):</strong> A⊆B פירושו שכל איבר ב-A נמצא גם ב-B.</p>
+        <p class="formula">A = B  ⟺  (A ⊆ B) ∧ (B ⊆ A)</p>
+        <p><strong>הכלה ממש (⊊):</strong> A⊊B אם A⊆B אך A≠B.</p>
+        <p><strong>דגשים:</strong> לא חשוב סדר האיברים: {1,2}={2,1}. לא חשובות חזרות: {1,1,2}={1,2}.</p>
+        <p class="principle">⚡ הבדיל: 1∈{1,2} אבל {1}⊆{1,2}. איבר מול קבוצה!</p>`
+      },
+      {
+        title: "פעולות על קבוצות",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>חיתוך (∩):</strong> A∩B = {x | x∈A ∧ x∈B}</p>
+        <p><strong>איחוד (∪):</strong> A∪B = {x | x∈A ∨ x∈B}</p>
+        <p><strong>הפרש (\\):</strong> A\\B = {x | x∈A ∧ x∉B}</p>
+        <p><strong>הפרש סימטרי (Δ):</strong> AΔB = (A\\B) ∪ (B\\A) — איברים שנמצאים בדיוק באחת.</p>
+        <p><strong>משלים (Aᶜ):</strong> Aᶜ = {x∈U | x∉A}</p>
+        <p class="formula">A \\ B = A ∩ Bᶜ</p>
+        <p class="formula">AΔB = (A∪B) \\ (A∩B)</p>
+        <p class="principle">⚡ ניתן לדמיין את כל הפעולות עם דיאגרמות ון!</p>`
+      },
+      {
+        title: "זהויות חשובות — קבוצות",
+        tags: [{ label: "חשוב", color: "amber" }],
+        text: `<p><strong>כללי דה-מורגן לקבוצות:</strong></p>
+        <p class="formula">(A ∩ B)ᶜ = Aᶜ ∪ Bᶜ</p>
+        <p class="formula">(A ∪ B)ᶜ = Aᶜ ∩ Bᶜ</p>
+        <p><strong>קשר בין הכלה לפעולות:</strong></p>
+        <p class="formula">A ⊆ B  ⟺  A∩B = A  ⟺  A∪B = B</p>
+        <p><strong>חסמים:</strong> A∩B ⊆ A ⊆ A∪B</p>
+        <p><strong>משלים כפול:</strong> (Aᶜ)ᶜ = A</p>
+        <p><strong>משלימים מיוחדים:</strong> Uᶜ = ∅ , ∅ᶜ = U , A∩Aᶜ = ∅ , A∪Aᶜ = U</p>`
+      },
+      {
+        title: "קבוצת החזקה ומכפלה קרטזית",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>קבוצת החזקה P(A):</strong> אוסף כל תתי-הקבוצות של A.</p>
+        <p class="formula">P(A) = {B | B ⊆ A}</p>
+        <p>אם |A|=n, אז |P(A)| = 2<sup>n</sup>.</p>
+        <p class="formula">B ∈ P(A)  ⟺  B ⊆ A</p>
+        <p><strong>מכפלה קרטזית:</strong> A×B = {(a,b) | a∈A ∧ b∈B}</p>
+        <p>בדרך כלל A×B ≠ B×A! A×B = ∅ ⟺ A=∅ ∨ B=∅.</p>
+        <p class="formula">A × (B∩C) = (A×B) ∩ (A×C)</p>
+        <p class="principle">⚡ A⊆B ⟺ P(A)⊆P(B) — ההכלה עוברת גם לקבוצת החזקה.</p>`
+      },
+      {
+        title: "עקרון האינדוקציה (הרגיל)",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p>תהי P(n) טענה על מספרים טבעיים. הטענה נכונה לכל n∈ℕ אם:</p>
+        <p><strong>1. בסיס:</strong> P(1) נכונה.</p>
+        <p><strong>2. צעד:</strong> לכל n∈ℕ, P(n) → P(n+1).</p>
+        <p><strong>הכללה ראשונה (הזזה):</strong> הבסיס הוא m (לאו דווקא 1), ומוכיחים לכל n≥m.</p>
+        <p class="principle">⚡ טעות נפוצה: לשכוח להוכיח את הבסיס, או להניח בצעד רק P(n) ולא P(n-1).</p>`
+      },
+      {
+        title: "אינדוקציה חזקה (שלמה)",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "חשוב", color: "amber" }],
+        text: `<p>עקרון האינדוקציה השלמה: הטענה נכונה לכל n אם:</p>
+        <p><strong>1. בסיס:</strong> P(1) נכונה.</p>
+        <p><strong>2. צעד:</strong> לכל n∈ℕ, <strong>אם P(k) נכונה לכל k≤n</strong>, אז P(n+1) נכונה.</p>
+        <p class="formula">∀n∈ℕ : [∀k≤n : P(k)] → P(n+1)</p>
+        <p><strong>הבדל מהרגיל:</strong> באינדוקציה חזקה מניחים שהטענה נכונה לכל k≤n (לא רק k=n).</p>
+        <p class="principle">⚡ שימוש: כשההוכחה דורשת להשתמש ביותר משלב אחד אחורה (כמו פיבונאצ'י).</p>`
+      },
+      {
+        title: "יחסים — הגדרה ותכונות",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>יחס R על A:</strong> תת-קבוצה של A×A. אם (a,b)∈R כותבים aRb.</p>
+        <p><strong>תכונות:</strong></p>
+        <p><strong>רפלקסיביות:</strong> ∀a∈A : (a,a)∈R</p>
+        <p><strong>סימטריות:</strong> (a,b)∈R ⟹ (b,a)∈R</p>
+        <p><strong>טרנזיטיביות:</strong> (a,b)∈R ∧ (b,c)∈R ⟹ (a,c)∈R</p>
+        <p><strong>אנטי-סימטריות:</strong> (a,b)∈R ∧ (b,a)∈R ⟹ a=b</p>
+        <p class="principle">⚡ סימטריות ≠ אנטי-סימטריות! שתיהן יכולות להתקיים יחד (כשכל קשר הוא רפלקסיבי בלבד).</p>`
+      },
+      {
+        title: "יחס שקילות ומחלקות שקילות",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>יחס שקילות:</strong> יחס שהוא <strong>רפלקסיבי + סימטרי + טרנזיטיבי</strong>.</p>
+        <p><strong>מחלקת שקילות:</strong> לכל a∈A:</p>
+        <p class="formula">[a]<sub>R</sub> = {x∈A | (x,a)∈R}</p>
+        <p><strong>קבוצת המנה:</strong> A/R = {[a]<sub>R</sub> | a∈A}</p>
+        <p><strong>תכונות חשובות:</strong></p>
+        <p>1. [x]<sub>R</sub> = [y]<sub>R</sub> ⟺ (x,y)∈R</p>
+        <p>2. שתי מחלקות הן או זרות לחלוטין או שוות לחלוטין.</p>
+        <p>3. מחלקות השקילות מהוות <strong>חלוקה (Partition)</strong> של A.</p>
+        <p class="principle">⚡ מספר יחסי השקילות = מספר החלוקות האפשריות של A.</p>`
+      },
+      {
+        title: "יחס סדר חלקי ומלא",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>סדר חלקי (Partial Order):</strong> יחס שהוא רפלקסיבי + אנטי-סימטרי + טרנזיטיבי.</p>
+        <p><strong>סדר מלא (Total Order):</strong> סדר חלקי שבו כל שני איברים ניתנים להשוואה:</p>
+        <p class="formula">∀x,y∈A : (x,y)∈R ∨ (y,x)∈R</p>
+        <p><strong>מקסימלי vs מקסימום:</strong></p>
+        <p>מקסימום (Greatest): גדול או שווה לכל האיברים — <strong>יחיד אם קיים</strong>.</p>
+        <p>מקסימלי (Maximal): אין איבר גדול ממנו ממש — <strong>יכולים להיות כמה</strong>.</p>
+        <p class="formula">Maximum ⟹ Maximal   (לא להיפך!)</p>
+        <p class="principle">⚡ בסדר מלא: מקסימלי = מקסימום. בסדר חלקי — לא בהכרח!</p>`
+      },
+      {
+        title: "חסמים: sup ו-inf",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p>יהי R יחס סדר על A, ותהי B⊆A.</p>
+        <p><strong>חסם מלעיל (Upper Bound):</strong> a∈A כך שלכל b∈B מתקיים (b,a)∈R.</p>
+        <p><strong>חסם מלרע (Lower Bound):</strong> a∈A כך שלכל b∈B מתקיים (a,b)∈R.</p>
+        <p><strong>סופרמום (sup B):</strong> החסם המלעיל הקטן ביותר.</p>
+        <p><strong>אינפימום (inf B):</strong> החסם המלרע הגדול ביותר.</p>
+        <p class="principle">⚡ ה-sup וה-inf לא חייבים להיות שייכים לקבוצה B עצמה!</p>`
+      },
+      {
+        title: "פונקציה — הגדרה ותכונות",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>פונקציה f:A→B:</strong> יחס מ-A ל-B שהוא חד-ערכי ושלם.</p>
+        <p><strong>חד-ערכי (Single-valued):</strong> לכל a∈A יש לכל היותר תמונה אחת ב-B.</p>
+        <p><strong>שלם (Total):</strong> לכל a∈A קיים b∈B כך ש-aRb.</p>
+        <p><strong>חח"ע (Injective):</strong> f(a₁)=f(a₂) ⟹ a₁=a₂. שני איברים שונים נשלחים לתמונות שונות.</p>
+        <p><strong>על (Surjective):</strong> לכל b∈B קיים a∈A כך ש-f(a)=b.</p>
+        <p><strong>הפיכה (Bijection):</strong> חח"ע + על. f הפיכה ⟺ קיים f⁻¹.</p>
+        <p class="principle">⚡ f הפיכה ⟺ f חח"ע ועל. ו-f⁻¹ היא גם הפיכה.</p>`
+      },
+      {
+        title: "עוצמות קבוצות והרכבת פונקציות",
+        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>עוצמות (Cardinality) לקבוצות סופיות:</strong></p>
+        <p class="formula">|A| ≤ |B|  ⟺  קיימת f:A→B חח"ע</p>
+        <p class="formula">|A| ≥ |B|  ⟺  קיימת f:A→B על</p>
+        <p class="formula">|A| = |B|  ⟺  קיימת f:A→B חח"ע ועל (הפיכה)</p>
+        <p>אם |A|=|B| אז: f חח"ע ⟺ f על.</p>
+        <p><strong>הרכבה:</strong> (g∘f)(a) = g(f(a)). אסוציאטיבית: h∘(g∘f) = (h∘g)∘f.</p>
+        <p>f וg חח"ע ⟹ g∘f חח"ע. &nbsp; f וg על ⟹ g∘f על.</p>
+        <p class="formula">(g∘f)⁻¹ = f⁻¹ ∘ g⁻¹</p>`
+      },
+      {
+        title: "עקרונות ספירה בסיסיים",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>עקרון החיבור (קבוצות זרות):</strong> |A₁∪...∪Aₙ| = |A₁|+...+|Aₙ|</p>
+        <p><strong>הכלה והפרדה (2 קבוצות):</strong></p>
+        <p class="formula">|A ∪ B| = |A| + |B| - |A ∩ B|</p>
+        <p><strong>עקרון הכפל:</strong> |A₁×A₂×...×Aₙ| = |A₁|·|A₂|·...·|Aₙ|</p>
+        <p><strong>עקרון שובך היונים (PHP):</strong> אם f:A→B ו-|A|>|B|, אז f אינה חח"ע. (כלומר לפחות שני איברים ב-A נשלחים לאותו איבר ב-B).</p>
+        <p class="principle">⚡ PHP מוכלל: אם |A|>k·|B|, אז קיים b∈B עם לפחות k+1 מקורות.</p>`
+      },
+      {
+        title: "טבלת בחירות — n איברים, בחירת k",
+        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
+        text: `<p>שתי שאלות מפתח: 1. יש חשיבות לסדר? &nbsp; 2. מותרת חזרה?</p>
+        <p><strong>סדר חשוב + בלי חזרה (פרמוטציה):</strong></p>
+        <p class="formula">n! / (n-k)!</p>
+        <p><strong>סדר חשוב + עם חזרה:</strong></p>
+        <p class="formula">n<sup>k</sup></p>
+        <p><strong>סדר לא חשוב + בלי חזרה (צירוף):</strong></p>
+        <p class="formula">C(n,k) = n! / (k!(n-k)!)</p>
+        <p><strong>סדר לא חשוב + עם חזרה:</strong></p>
+        <p class="formula">C(n+k-1, k)</p>
+        <p class="principle">⚡ מילות מפתח: קוד/רצף→עם סדר. קבוצה/ועד→בלי סדר. גלידה→עם חזרה.</p>`,
+        complexity: ["n<sup>k</sup> ≥ n!/(n-k)! ≥ C(n+k-1,k) ≥ C(n,k)"]
+      },
+      {
+        title: "זהויות בינומיות",
+        tags: [{ label: "חשוב", color: "amber" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>סימטריה:</strong></p>
+        <p class="formula">C(n,k) = C(n, n-k)</p>
+        <p><strong>זהות פסקל:</strong></p>
+        <p class="formula">C(n,k) + C(n,k-1) = C(n+1,k)</p>
+        <p><strong>בינום של ניוטון:</strong></p>
+        <p class="formula">(x+y)<sup>n</sup> = Σ<sub>k=0</sub><sup>n</sup> C(n,k)·x<sup>k</sup>·y<sup>n-k</sup></p>
+        <p><strong>סכום המקדמים הבינומיים:</strong></p>
+        <p class="formula">Σ<sub>k=0</sub><sup>n</sup> C(n,k) = 2<sup>n</sup></p>
+        <p><strong>זהות הקפטן:</strong></p>
+        <p class="formula">Σ<sub>k=1</sub><sup>n</sup> k·C(n,k) = n·2<sup>n-1</sup></p>`
+      },
+      {
+        title: "הכלה והפרדה — המקרה הכללי",
+        tags: [{ label: "חשוב", color: "amber" }],
+        text: `<p>לקבוצות A₁,...,Aₙ:</p>
+        <p class="formula">|A₁∪...∪Aₙ| = Σ<sub>k=1</sub><sup>n</sup> (-1)<sup>k-1</sup> Σ<sub>1≤i₁<...<iₖ≤n</sub> |A<sub>i₁</sub>∩...∩A<sub>iₖ</sub>|</p>
+        <p><strong>מקרה סימטרי:</strong> אם כל k קבוצות הן בגודל αₖ:</p>
+        <p class="formula">|A₁∪...∪Aₙ| = Σ<sub>k=1</sub><sup>n</sup> (-1)<sup>k-1</sup> C(n,k)·αₖ</p>
+        <p class="principle">⚡ עבור n=2: |A∪B| = |A|+|B|-|A∩B|. עבור n=3 יש 3 זוגות ו-1 שלישייה.</p>`
+      },
+ 
+      {
+        title: "גרפים — הגדרות יסוד",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>גרף G=(V,E):</strong> V קבוצת קודקודים, E קבוצת קשתות (זוגות מ-V).</p>
+        <p><strong>גרף מכוון:</strong> E מכיל זוגות סדורים. <strong>לא מכוון:</strong> זוגות לא סדורים.</p>
+        <p><strong>גרף פשוט:</strong> ללא לולאות עצמיות וללא קשתות כפולות.</p>
+        <p><strong>שכנים:</strong> u,v שכנים אם {u,v}∈E. Γ(v) = קבוצת שכני v.</p>
+        <p><strong>דרגה:</strong> deg(v) = |Γ(v)| (מספר השכנים של v).</p>
+        <p><strong>למת לחיצת הידיים:</strong></p>
+        <p class="formula">Σ<sub>v∈V</sub> deg(v) = 2|E|</p>
+        <p class="principle">⚡ סכום כל הדרגות תמיד זוגי! נובע שמספר קודקודים עם דרגה אי-זוגית הוא זוגי.</p>`
+      },
+      {
+        title: "מסלולים, מעגלים, קשירות",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>מסלול באורך k:</strong> סדרת קודקודים (v₀,v₁,...,vₖ) כך שלכל j מתקיים {vⱼ,vⱼ₊₁}∈E.</p>
+        <p><strong>מסילה:</strong> מסלול ללא קשת חוזרת פעמיים.</p>
+        <p><strong>מסלול פשוט:</strong> מסלול ללא קודקוד חוזר.</p>
+        <p><strong>מעגל:</strong> מסלול באורך k≥3 כך ש-v₀=vₖ.</p>
+        <p><strong>מעגל פשוט:</strong> מעגל שכל הקודקודים (מלבד הראשון=אחרון) שונים.</p>
+        <p><strong>גרף קשיר:</strong> לכל זוג קודקודים u,v קיים מסלול ביניהם. שקול ל-diam(G)&lt;∞.</p>
+        <p class="formula">G קשיר  ⟹  |E| ≥ |V| - 1</p>`
+      },
+      {
+        title: "עצים (Trees)",
+        tags: [{ label: "הגדרה", color: "blue" }, { label: "מבחן", color: "green" }],
+        text: `<p><strong>יער (Forest):</strong> גרף פשוט ללא מעגלים.</p>
+        <p><strong>עץ (Tree):</strong> יער קשיר — גרף קשיר וללא מעגלים.</p>
+        <p><strong>עלה (Leaf):</strong> קודקוד v עם deg(v)=1.</p>
+        <p><strong>משפטים שקולים לעץ T=(V,E):</strong></p>
+        <p class="formula">|E| = |V| - 1</p>
+        <p>כמו כן: G עץ ⟺ G קשיר מינימלי (הסרת קשת = לא קשיר).</p>
+        <p>G עץ ⟺ G ללא מעגלים מקסימלי (הוספת קשת = נוצר מעגל).</p>
+        <p>עץ עם |V|≥2 — יש לפחות <strong>2 עלים</strong>.</p>
+        <p class="principle">⚡ |E|=|V|-1 נכון לכל עץ. אם גרף קשיר עם |E|=|V|-1 → הוא עץ!</p>`
+      },
+      {
+        title: "גרפים מיוחדים וקביליות",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>גרף קבוע k (k-regular):</strong> לכל v מתקיים deg(v)=k.</p>
+        <p>בגרף קבוע k עם n קודקודים: |E| = n·k/2.</p>
+        <p><strong>גרף שלם Kₙ:</strong> כל שני קודקודים מחוברים. |E| = C(n,2) = n(n-1)/2. קבוע n-1.</p>
+        <p><strong>גרף דו-צדדי (Bipartite):</strong> V מתחלק ל-A∪B כך שכל קשת בין A לB.</p>
+        <p><strong>קוטר הגרף:</strong></p>
+        <p class="formula">diam(G) = max{d(u,v) | u,v∈V}</p>
+        <p><strong>רכיב קשירות:</strong> תת-גרף קשיר מקסימלי.</p>
+        <p class="formula">G ללא מעגלים ⟹  |E| ≤ |V| - 1</p>`
+      },
+      {
+        title: "צורות נורמליות — DNF ו-CNF",
+        tags: [{ label: "הגדרה", color: "blue" }],
+        text: `<p><strong>ליטרל (Literal):</strong> משתנה xᵢ או שלילתו ¬xᵢ.</p>
+        <p><strong>DNF (Disjunctive Normal Form):</strong> OR של ביטויי AND — "סכום מכפלות".</p>
+        <p><strong>CNF (Conjunctive Normal Form):</strong> AND של ביטויי OR — "מכפלת סכומים".</p>
+        <p><strong>משפט:</strong> לכל פסוק P שאינו סתירה — קיים פסוק שקול בDNF.</p>
+        <p><strong>טענה:</strong> לכל פסוק P שאינו טאוטולוגיה — קיים פסוק שקול בCNF.</p>
+        <p><strong>קבוצה שלמה:</strong> קבוצת קשרים שניתן לבטא באמצעותה כל פונקציה בוליאנית.</p>
+        <p>הקבוצות {¬,∧} ו-{¬,∨} הן שתיהן <strong>שלמות</strong>.</p>`
+      },
+
+    ]
+  },
 };
 
 // ═══════════════════════════════════════

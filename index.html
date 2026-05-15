@@ -136,11 +136,12 @@ mark { background: rgba(180,83,9,.2); color: var(--amber); border-radius: 2px; }
   body { padding-bottom: 64px; }
 
   /* topbar */
-  #topbar { padding: 0 12px; gap: 10px; }
+  #topbar { padding: 0 12px; gap: 8px; flex-wrap: nowrap; align-items: center; }
   #hamburger { display: none; }
-  #topbar-search { max-width: none; flex: 1; }
+  #topbar-search { flex: 1; min-width: 0; max-width: none; }
   #search-input { font-size: 14px; padding: 6px 10px; }
   #live-clock { display: none; }
+  .logo small { display: none; }
   #github-btn { padding: 6px 8px; }
   #github-btn .gh-text { display: none; }
 

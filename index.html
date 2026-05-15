@@ -34,7 +34,7 @@
 .logo { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: var(--text); white-space: nowrap; display: flex; flex-direction: column; gap: 1px; }
 .logo small { font-family: var(--font-ui); font-size: 10px; font-weight: 400; color: var(--text-dim); }
 #topbar-search { flex: 1; max-width: 360px; }
-#live-clock { margin-left: auto; }
+#live-clock { margin-left: auto; padding-left: 60px; }
 #search-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 14px; color: var(--text); font-family: var(--font-ui); font-size: 13px; outline: none; transition: border-color .15s; }
 #search-input:focus { border-color: var(--accent); }
 #search-input::placeholder { color: var(--text-dim); }
@@ -546,7 +546,7 @@ const COURSES = {
 
   oop: {
     name: "מונחי עצמים", icon: "☕",
-    pdfs: [{ label: "סיכום", file: "oop-summary.pdf" }],
+    pdfs: [{ label: "סיכום", file: "oop-summary-compressed.pdf" }],
     cards: [
       {
         title: "4 עמודי OOP",

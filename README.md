@@ -23,10 +23,10 @@
 |Course                       |Cards|PDFs|
 |-----------------------------|-----|----|
 |📐 Linear Algebra 1           |10   |2   |
-|∞ Calculus 1                 |12   |1   |
+|∞ Calculus 1                 |13   |1   |
 |🌳 Data Structures            |13   |1   |
 |☕ Object-Oriented Programming|13   |1   |
-|🔢 Discrete Mathematics       |22   |1   |
+|🔢 Discrete Mathematics       |25   |1   |
 
 -----
 

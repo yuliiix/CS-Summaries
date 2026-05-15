@@ -19,7 +19,7 @@
       --amber: #b45309; --amber-bg: rgba(180,83,9,0.08);
       --red: #b91c1c; --red-bg: rgba(185,28,28,0.08);
       --purple: #6d28d9; --purple-bg: rgba(109,40,217,0.08);
-      --sidebar-w: 240px; --topbar-h: 60px;
+      --sidebar-w: 240px; --topbar-h: 48px;
       --radius: 8px; --radius-lg: 12px;
       --font-ui: 'Assistant', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -30,11 +30,11 @@
 
 ```
 /* TOPBAR */
-#topbar { height: var(--topbar-h); background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px 0 60px; gap: 16px; flex-shrink: 0; z-index: 10; }
-.logo { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: var(--text); white-space: nowrap; display: flex; flex-direction: column; gap: 1px; order: 10; }
-.logo small { font-family: var(--font-ui); font-size: 10px; font-weight: 400; color: var(--text-dim); }
-#topbar-search { flex: 1; max-width: 360px; order: 5; margin-right: auto; }
-#live-clock { order: 1; }
+#topbar { height: var(--topbar-h); background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px 0 56px; gap: 16px; flex-shrink: 0; z-index: 10; }
+.logo { font-family: var(--font-serif); font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; display: flex; flex-direction: column; gap: 1px; }
+.logo small { font-family: var(--font-ui); font-size: 9px; font-weight: 400; color: var(--text-dim); }
+#topbar-search { flex: 1; max-width: 300px; }
+#live-clock { display: none; }
 #search-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 14px; color: var(--text); font-family: var(--font-ui); font-size: 13px; outline: none; transition: border-color .15s; }
 #search-input:focus { border-color: var(--accent); }
 #search-input::placeholder { color: var(--text-dim); }
@@ -209,7 +209,7 @@ mark { background: rgba(180,83,9,.2); color: var(--amber); border-radius: 2px; }
 <body>
 
 <div id="topbar">
-  <div class="logo">🧮 CS Summaries<small>by Yuli Ittah</small></div>
+  <div class="logo">📖 CS Summaries<small>by Yuli Ittah</small></div>
   <div id="topbar-search">
     <input type="text" id="search-input" placeholder="חיפוש בכל הסיכומים..." />
   </div>

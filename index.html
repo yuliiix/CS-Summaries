@@ -34,13 +34,14 @@
 .logo { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: var(--text); white-space: nowrap; display: flex; flex-direction: column; gap: 1px; }
 .logo small { font-family: var(--font-ui); font-size: 10px; font-weight: 400; color: var(--text-dim); }
 #topbar-search { flex: 1; max-width: 360px; }
+#live-clock { margin-left: auto; }
 #search-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 14px; color: var(--text); font-family: var(--font-ui); font-size: 13px; outline: none; transition: border-color .15s; }
 #search-input:focus { border-color: var(--accent); }
 #search-input::placeholder { color: var(--text-dim); }
 .topbar-stats { margin-right: auto; font-size: 12px; color: var(--text-muted); display: flex; gap: 16px; }
-#github-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-family: var(--font-ui); text-decoration: none; background: var(--bg-card); white-space: nowrap; transition: all .15s; flex-shrink: 0; }
-#github-btn:hover { color: var(--accent); border-color: var(--accent); }
-#github-btn .gh-text { display: inline; }
+#github-btn { position: fixed; top: 12px; left: 12px; z-index: 200; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; background: var(--bg-card); transition: all .15s; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+#github-btn:hover { color: var(--accent); border-color: var(--accent); box-shadow: 0 2px 8px rgba(29,78,216,.15); }
+#github-btn .gh-text { display: none; }
 
 /* LAYOUT */
 #layout { display: flex; flex: 1; overflow: hidden; }
@@ -142,8 +143,6 @@ mark { background: rgba(180,83,9,.2); color: var(--amber); border-radius: 2px; }
   #search-input { font-size: 14px; padding: 6px 10px; }
   #live-clock { display: none; }
   .logo small { display: none; }
-  #github-btn { padding: 6px 8px; }
-  #github-btn .gh-text { display: none; }
 
 
   /* sidebar — hidden on mobile, replaced by bottom nav */
@@ -221,7 +220,7 @@ mark { background: rgba(180,83,9,.2); color: var(--amber); border-radius: 2px; }
   <span class="gh-text">GitHub</span>
 </a>
 
-  <div id="live-clock" style="font-size:13px;color:var(--text-muted);text-align:left;line-height:1.4;margin-right:auto;"></div>
+  <div id="live-clock" style="font-size:13px;color:var(--text-muted);text-align:left;line-height:1.4;margin-left:0;"></div>
 </div>
 
 <div id="bottom-nav"></div>

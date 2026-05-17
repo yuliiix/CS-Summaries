@@ -1150,7 +1150,7 @@ function renderContent() {
   if (viewMode === 'flashcards') {
     contentEl.innerHTML = `
       <div style="text-align:center;margin-bottom:20px;color:var(--text-dim);font-size:13px">
-        🔁 לחצי על כרטיס לגילוי ההגדרה · ${cards.length} מושגים
+        🔁 לחץ על כרטיס לגילוי ההגדרה · ${cards.length} מושגים
       </div>
       <div class="flashcards-grid">` + cards.map(card => `
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1158,7 +1158,7 @@ function renderContent() {
           <div class="flashcard-front">
             <div style="font-size:28px;margin-bottom:8px">${COURSES[activeCourse].icon}</div>
             <div class="fc-term">${highlight(card.title)}</div>
-            <div class="fc-hint">לחצי לגילוי ההגדרה 🔄</div>
+            <div class="fc-hint">לחץ לגילוי ההגדרה 🔄</div>
           </div>
           <div class="flashcard-back">
             <div class="fc-body">${highlight(card.text)}</div>
